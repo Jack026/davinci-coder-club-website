@@ -1340,6 +1340,155 @@ section {
 }
 
 /* ========================================
+   PREVIEW SECTION CARDS
+======================================== */
+.preview-section {
+    padding: var(--spacing-4xl) 0;
+    background: var(--bg-secondary);
+    position: relative;
+}
+
+.preview-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.preview-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-2xl);
+    text-align: center;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transform: translateY(0);
+}
+
+.preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+    transition: var(--transition-slow);
+}
+
+.preview-card:hover::before {
+    left: 100%;
+}
+
+.preview-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+}
+
+.preview-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    font-size: 2rem;
+    color: var(--text-primary);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.preview-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+}
+
+.preview-card:hover .preview-icon {
+    transform: scale(1.1);
+}
+
+.preview-card:hover .preview-icon::before {
+    opacity: 1;
+}
+
+.preview-icon i {
+    position: relative;
+    z-index: 1;
+}
+
+.preview-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    transition: var(--transition-normal);
+}
+
+.preview-card:hover h3 {
+    color: var(--primary-light);
+}
+
+.preview-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
+}
+
+.preview-card > i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: var(--transition-normal);
+}
+
+.preview-card:hover > i {
+    transform: translateX(5px);
+    color: var(--primary-light);
+}
+
+@media (max-width: 768px) {
+    .preview-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    
+    .preview-card {
+        padding: var(--spacing-xl);
+    }
+    
+    .preview-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+}
+
+/* ========================================
    CONTACT SECTION
 ======================================== */
 .contact {
