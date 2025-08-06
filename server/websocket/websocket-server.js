@@ -14,7 +14,7 @@ class Jack026WebSocketServer {
         this.clients = new Map(); // Map of userId -> WebSocket connection
         this.rooms = new Map(); // Map of roomId -> Set of userIds
         this.heartbeatInterval = 30000; // 30 seconds
-        this.jack026UserId = null;
+        this.Jack026UserId = null;
         
         this.init();
     }
@@ -37,10 +37,10 @@ class Jack026WebSocketServer {
     
     async loadJack026UserId() {
         try {
-            const jack026 = await User.findOne({ username: 'Jack026' });
-            if (jack026) {
-                this.jack026UserId = jack026._id.toString();
-                console.log(`👤 Jack026 user ID loaded: ${this.jack026UserId}`);
+            const Jack026 = await User.findOne({ username: 'Jack026' });
+            if (Jack026) {
+                this.Jack026UserId = Jack026._id.toString();
+                console.log(`👤 Jack026 user ID loaded: ${this.Jack026UserId}`);
             }
         } catch (error) {
             console.error('Failed to load Jack026 user ID:', error);
@@ -113,8 +113,8 @@ class Jack026WebSocketServer {
                     this.handleTypingStatus(ws, data, false);
                     break;
                     
-                case 'jack026_command':
-                    if (ws.userId === this.jack026UserId) {
+                case 'Jack026_command':
+                    if (ws.userId === this.Jack026UserId) {
                         await this.handleJack026Command(ws, data);
                     }
                     break;
@@ -171,7 +171,7 @@ class Jack026WebSocketServer {
             
             // Special handling for Jack026
             if (user.username === 'Jack026') {
-                this.joinRoom(ws, 'jack026_admin');
+                this.joinRoom(ws, 'Jack026_admin');
                 console.log(`👑 Jack026 connected with admin privileges at 2025-08-06 14:13:14`);
             }
             
@@ -395,7 +395,7 @@ class Jack026WebSocketServer {
         try {
             const notification = new Notification({
                 recipientId: userId,
-                senderId: this.jack026UserId,
+                senderId: this.Jack026UserId,
                 type,
                 title,
                 message,
@@ -514,9 +514,9 @@ class Jack026WebSocketServer {
         });
         
         // Also broadcast to general room for Jack026
-        if (userId === this.jack026UserId) {
+        if (userId === this.Jack026UserId) {
             this.broadcastToRoom('general', {
-                type: 'jack026_achievement',
+                type: 'Jack026_achievement',
                 achievement,
                 timestamp: '2025-08-06 14:13:14'
             }, userId);
@@ -551,7 +551,7 @@ class Jack026WebSocketServer {
         return {
             connectedClients: this.clients.size,
             activeRooms: this.rooms.size,
-            jack026Online: this.clients.has(this.jack026UserId),
+            Jack026Online: this.clients.has(this.Jack026UserId),
             uptime: process.uptime(),
             timestamp: '2025-08-06 14:13:14'
         };

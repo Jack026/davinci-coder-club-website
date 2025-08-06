@@ -13,7 +13,7 @@ class ResourcesPage {
         this.currentView = 'grid';
         this.currentPage = 1;
         this.itemsPerPage = 12;
-        this.jack026Progress = {
+        this.Jack026Progress = {
             tutorials: 65,
             documentation: 45,
             tools: 80,
@@ -355,7 +355,7 @@ class ResourcesPage {
             alphabetical: (a, b) => a.title.localeCompare(b.title),
             recommended: (a, b) => {
                 // Personalized sorting for Jack026
-                const jack026Boost = (resource) => {
+                const Jack026Boost = (resource) => {
                     let score = 0;
                     if (resource.author === 'Jack026') score += 10;
                     if (resource.bookmarked) score += 5;
@@ -363,7 +363,7 @@ class ResourcesPage {
                     if (resource.featured) score += 2;
                     return score;
                 };
-                return jack026Boost(b) - jack026Boost(a);
+                return Jack026Boost(b) - Jack026Boost(a);
             },
             bookmarked: (a, b) => {
                 if (a.bookmarked && !b.bookmarked) return -1;
@@ -668,11 +668,11 @@ class ResourcesPage {
     }
     
     createResourceCard(resource, isFeatured = false) {
-        const jack026Classes = this.getJack026Classes(resource);
+        const Jack026Classes = this.getJack026Classes(resource);
         const progressInfo = this.getProgressInfo(resource);
         
         return `
-            <div class="resource-card ${jack026Classes}" data-id="${resource.id}">
+            <div class="resource-card ${Jack026Classes}" data-id="${resource.id}">
                 <div class="resource-card-header">
                     <i class="resource-icon ${this.getCategoryIcon(resource.category)}"></i>
                     <div class="resource-difficulty ${resource.difficulty}">${resource.difficulty}</div>
@@ -729,10 +729,10 @@ class ResourcesPage {
     getJack026Classes(resource) {
         let classes = [];
         
-        if (resource.bookmarked) classes.push('jack026-bookmarked');
-        if (resource.completed) classes.push('jack026-completed');
-        if (resource.progress > 0 && resource.progress < 100) classes.push('jack026-in-progress');
-        if (resource.author === 'Jack026') classes.push('jack026-authored');
+        if (resource.bookmarked) classes.push('Jack026-bookmarked');
+        if (resource.completed) classes.push('Jack026-completed');
+        if (resource.progress > 0 && resource.progress < 100) classes.push('Jack026-in-progress');
+        if (resource.author === 'Jack026') classes.push('Jack026-authored');
         
         return classes.join(' ');
     }
@@ -897,7 +897,7 @@ class ResourcesPage {
     
     updateUserProgress() {
         // Update category progress indicators
-        Object.entries(this.jack026Progress).forEach(([category, progress]) => {
+        Object.entries(this.Jack026Progress).forEach(([category, progress]) => {
             const progressElements = DOMUtils.$$(`.${category}-progress`);
             progressElements.forEach(element => {
                 element.style.width = `${progress}%`;
@@ -910,7 +910,7 @@ class ResourcesPage {
         });
         
         // Update overall progress in navigation
-        const overallProgress = Object.values(this.jack026Progress).reduce((a, b) => a + b, 0) / Object.keys(this.jack026Progress).length;
+        const overallProgress = Object.values(this.Jack026Progress).reduce((a, b) => a + b, 0) / Object.keys(this.Jack026Progress).length;
         const navProgressElements = DOMUtils.$$('.progress-fill');
         navProgressElements.forEach(element => {
             if (element.closest('.nav-user')) {
@@ -959,7 +959,7 @@ class ResourcesPage {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `jack026-resources-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `Jack026-resources-${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1363,7 +1363,7 @@ class ResourcesRealTime {
                 case 'resource_updated':
                     this.handleResourceUpdate(data);
                     break;
-                case 'jack026_progress':
+                case 'Jack026_progress':
                     this.handleProgressUpdate(data);
                     break;
                 case 'new_bookmark':
@@ -1403,7 +1403,7 @@ class ResourcesRealTime {
 // Resources Personalization Engine
 class ResourcesPersonalization {
     constructor() {
-        this.jack026Preferences = {
+        this.Jack026Preferences = {
             favoriteCategories: ['tutorials', 'tools', 'challenges'],
             skillLevel: 'advanced',
             preferredAuthors: ['Jack026', 'Tech Team'],
@@ -1421,11 +1421,11 @@ class ResourcesPersonalization {
     
     loadPersonalizedData() {
         // Load Jack026's personalized data from localStorage
-        const savedPrefs = localStorage.getItem('jack026_resource_preferences');
+        const savedPrefs = localStorage.getItem('Jack026_resource_preferences');
         if (savedPrefs) {
             try {
                 const parsed = JSON.parse(savedPrefs);
-                this.jack026Preferences = { ...this.jack026Preferences, ...parsed };
+                this.Jack026Preferences = { ...this.Jack026Preferences, ...parsed };
             } catch (error) {
                 console.warn('Failed to load saved preferences:', error);
             }
@@ -1433,8 +1433,8 @@ class ResourcesPersonalization {
     }
     
     savePersonalizedData() {
-        localStorage.setItem('jack026_resource_preferences', 
-            JSON.stringify(this.jack026Preferences));
+        localStorage.setItem('Jack026_resource_preferences', 
+            JSON.stringify(this.Jack026Preferences));
     }
     
     setupPersonalizationFeatures() {
@@ -1452,7 +1452,7 @@ class ResourcesPersonalization {
         const recommendations = [];
         
         // Based on recent activity
-        this.jack026Preferences.recentTopics.forEach(topic => {
+        this.Jack026Preferences.recentTopics.forEach(topic => {
             if (window.resourcesPage) {
                 const relatedResources = resourcesPage.resources.filter(r => 
                     r.tags && r.tags.includes(topic) && !r.completed
@@ -1487,7 +1487,7 @@ class ResourcesPersonalization {
         
         // Find resources slightly above Jack026's current level
         return resourcesPage.resources.filter(r => {
-            const currentSkill = this.jack026Preferences.skillLevel;
+            const currentSkill = this.Jack026Preferences.skillLevel;
             const resourceDifficulty = r.difficulty;
             
             if (currentSkill === 'intermediate' && resourceDifficulty === 'advanced') return true;
@@ -1502,7 +1502,7 @@ class ResourcesPersonalization {
         
         // Add Jack026's personalized scoring to resources
         resourcesPage.resources.forEach(resource => {
-            resource.jack026Score = this.calculatePersonalizedScore(resource);
+            resource.Jack026Score = this.calculatePersonalizedScore(resource);
         });
     }
     
@@ -1510,23 +1510,23 @@ class ResourcesPersonalization {
         let score = 0;
         
         // Favorite categories bonus
-        if (this.jack026Preferences.favoriteCategories.includes(resource.category)) {
+        if (this.Jack026Preferences.favoriteCategories.includes(resource.category)) {
             score += 10;
         }
         
         // Preferred authors bonus
-        if (this.jack026Preferences.preferredAuthors.includes(resource.author)) {
+        if (this.Jack026Preferences.preferredAuthors.includes(resource.author)) {
             score += 15;
         }
         
         // Recent topics relevance
         const topicMatches = resource.tags?.filter(tag => 
-            this.jack026Preferences.recentTopics.includes(tag)
+            this.Jack026Preferences.recentTopics.includes(tag)
         ).length || 0;
         score += topicMatches * 5;
         
         // Skill level appropriateness
-        if (resource.difficulty === this.jack026Preferences.skillLevel) {
+        if (resource.difficulty === this.Jack026Preferences.skillLevel) {
             score += 8;
         }
         
@@ -1549,7 +1549,7 @@ class ResourcesPersonalization {
     setupCustomDashboard() {
         // Create Jack026's custom learning dashboard
         const dashboardHTML = `
-            <div class="jack026-custom-dashboard">
+            <div class="Jack026-custom-dashboard">
                 <div class="dashboard-header">
                     <h3>Welcome back, Jack026! 👋</h3>
                     <p>Continue your learning journey • ${new Date().toLocaleDateString()}</p>
@@ -1579,7 +1579,7 @@ class ResourcesPersonalization {
                 
                 <div class="achievement-showcase">
                     <h4>Recent Achievements</h4>
-                    <div class="jack026-achievements">
+                    <div class="Jack026-achievements">
                         <div class="achievement-badge">
                             <i class="fas fa-trophy"></i>
                             <span>React Master</span>
@@ -1598,7 +1598,7 @@ class ResourcesPersonalization {
         `;
         
         // Insert dashboard if container exists
-        const dashboardContainer = DOMUtils.$('#jack026Dashboard');
+        const dashboardContainer = DOMUtils.$('#Jack026Dashboard');
         if (dashboardContainer) {
             dashboardContainer.innerHTML = dashboardHTML;
         }
@@ -1625,28 +1625,28 @@ class ResourcesPersonalization {
         if (!tags) return;
         
         tags.forEach(tag => {
-            const index = this.jack026Preferences.recentTopics.indexOf(tag);
+            const index = this.Jack026Preferences.recentTopics.indexOf(tag);
             if (index > -1) {
                 // Move to front if already exists
-                this.jack026Preferences.recentTopics.splice(index, 1);
+                this.Jack026Preferences.recentTopics.splice(index, 1);
             }
-            this.jack026Preferences.recentTopics.unshift(tag);
+            this.Jack026Preferences.recentTopics.unshift(tag);
         });
         
         // Keep only top 10 recent topics
-        this.jack026Preferences.recentTopics = this.jack026Preferences.recentTopics.slice(0, 10);
+        this.Jack026Preferences.recentTopics = this.Jack026Preferences.recentTopics.slice(0, 10);
     }
     
     updateCategoryPreference(category) {
-        const index = this.jack026Preferences.favoriteCategories.indexOf(category);
+        const index = this.Jack026Preferences.favoriteCategories.indexOf(category);
         if (index > -1) {
             // Move to front
-            this.jack026Preferences.favoriteCategories.splice(index, 1);
+            this.Jack026Preferences.favoriteCategories.splice(index, 1);
         }
-        this.jack026Preferences.favoriteCategories.unshift(category);
+        this.Jack026Preferences.favoriteCategories.unshift(category);
         
         // Keep only top 5 categories
-        this.jack026Preferences.favoriteCategories = this.jack026Preferences.favoriteCategories.slice(0, 5);
+        this.Jack026Preferences.favoriteCategories = this.Jack026Preferences.favoriteCategories.slice(0, 5);
     }
     
     updateBookmarkPatterns(data) {
@@ -1654,12 +1654,12 @@ class ResourcesPersonalization {
         const { category, difficulty, author, tags } = data;
         
         // Update preferences based on bookmarked content
-        if (category && !this.jack026Preferences.favoriteCategories.includes(category)) {
-            this.jack026Preferences.favoriteCategories.push(category);
+        if (category && !this.Jack026Preferences.favoriteCategories.includes(category)) {
+            this.Jack026Preferences.favoriteCategories.push(category);
         }
         
-        if (author && !this.jack026Preferences.preferredAuthors.includes(author)) {
-            this.jack026Preferences.preferredAuthors.push(author);
+        if (author && !this.Jack026Preferences.preferredAuthors.includes(author)) {
+            this.Jack026Preferences.preferredAuthors.push(author);
         }
         
         if (tags) {
@@ -1712,7 +1712,7 @@ document.addEventListener('DOMContentLoaded', () => {
         daVinciState.analytics.track('resources_page_initialized', {
             user: 'Jack026',
             timestamp: '2025-08-06 13:15:22',
-            userPreferences: resourcesPersonalization.jack026Preferences
+            userPreferences: resourcesPersonalization.Jack026Preferences
         });
     }
 });

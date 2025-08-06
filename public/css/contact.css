@@ -512,10 +512,10 @@
     margin-bottom: var(--spacing-10);
     position: relative;
     overflow: hidden;
-    animation: jack026ContactGlow 4s ease-in-out infinite;
+    animation: Jack026ContactGlow 4s ease-in-out infinite;
 }
 
-@keyframes jack026ContactGlow {
+@keyframes Jack026ContactGlow {
     0%, 100% {
         box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
     }
@@ -3044,7 +3044,7 @@
         transform: none;
     }
     
-    .jack026ContactGlow,
+    .Jack026ContactGlow,
     .statusPulse,
     .chatBounce,
     .emergencyPulse {
@@ -3066,7 +3066,7 @@
 }
 
 /* Jack026's Contact Page Signature */
-.jack026-contact-signature {
+.Jack026-contact-signature {
     position: fixed;
     bottom: var(--spacing-2);
     right: var(--spacing-2);
@@ -3082,7 +3082,7 @@
     transition: var(--transition-normal);
 }
 
-.jack026-contact-signature:hover {
+.Jack026-contact-signature:hover {
     opacity: 1;
     background: var(--bg-glass-strong);
 }

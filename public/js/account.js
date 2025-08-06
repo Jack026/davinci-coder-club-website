@@ -18,7 +18,7 @@ const ACCOUNT_CONFIG = {
         aiAssistant: true,
         socialIntegration: true
     },
-    jack026Profile: {
+    Jack026Profile: {
         id: 1,
         username: 'Jack026',
         name: 'Jack Anderson',
@@ -39,7 +39,7 @@ const ACCOUNT_CONFIG = {
 class AccountPage {
     constructor() {
         this.currentTab = 'overview';
-        this.jack026Data = ACCOUNT_CONFIG.jack026Profile;
+        this.Jack026Data = ACCOUNT_CONFIG.Jack026Profile;
         this.sessionStartTime = Date.now();
         this.realTimeUpdates = [];
         this.notifications = [];
@@ -293,8 +293,8 @@ class AccountPage {
         });
         
         // Update Jack026's profile data
-        this.jack026Data.isOnline = isOnline;
-        this.jack026Data.lastSeen = isOnline ? 'now' : 'just now';
+        this.Jack026Data.isOnline = isOnline;
+        this.Jack026Data.lastSeen = isOnline ? 'now' : 'just now';
     }
     
     initializePersonalAssistant() {
@@ -368,7 +368,7 @@ class AccountPage {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve({
-                    profile: this.jack026Data,
+                    profile: this.Jack026Data,
                     stats: {
                         thisMonth: {
                             commits: 127,
@@ -445,7 +445,7 @@ class AccountPage {
     updateStreakDisplay(streak) {
         const streakNumber = DOMUtils.$('.streak-number');
         if (streakNumber) {
-            streakNumber.textContent = streak?.current || this.jack026Data.streakDays;
+            streakNumber.textContent = streak?.current || this.Jack026Data.streakDays;
         }
         
         // Update streak calendar
@@ -1141,7 +1141,7 @@ class AccountPage {
         
         if (deleteConfirmation && confirmDeleteBtn) {
             deleteConfirmation.addEventListener('input', (e) => {
-                const isValid = e.target.value === 'DELETE JACK026';
+                const isValid = e.target.value === 'DELETE Jack026';
                 confirmDeleteBtn.disabled = !isValid;
             });
         }
@@ -1155,7 +1155,7 @@ class AccountPage {
         const formFields = {
             fullName: 'Jack Anderson',
             username: 'Jack026',
-            email: 'jack026@davincicoders.adtu.ac.in',
+            email: 'Jack026@davincicoders.adtu.ac.in',
             bio: 'Lead Developer and President of Da-Vinci Coder Club. Passionate about full-stack development and mentoring the next generation of coders.'
         };
         
@@ -1192,7 +1192,7 @@ class AccountPage {
     }
     
     getStoredSettings() {
-        const stored = localStorage.getItem('jack026_account_settings');
+        const stored = localStorage.getItem('Jack026_account_settings');
         return stored ? JSON.parse(stored) : {
             theme: 'dark',
             notifications: true,
@@ -1201,7 +1201,7 @@ class AccountPage {
     }
     
     saveSettings(settings) {
-        localStorage.setItem('jack026_account_settings', JSON.stringify(settings));
+        localStorage.setItem('Jack026_account_settings', JSON.stringify(settings));
     }
     
     // Account Action Methods
@@ -1219,7 +1219,7 @@ class AccountPage {
         const exportData = {
             user: 'Jack026',
             exportDate: '2025-08-06T13:46:09Z',
-            profile: this.jack026Data,
+            profile: this.Jack026Data,
             projects: this.generateMockProjectsData(),
             achievements: this.generateMockAchievementsData(),
             settings: this.getStoredSettings(),
@@ -1238,7 +1238,7 @@ class AccountPage {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `jack026-account-data-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `Jack026-account-data-${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1376,7 +1376,7 @@ class AccountPage {
     
     shareOnTwitter() {
         const text = encodeURIComponent("Check out Jack026's profile at Da-Vinci Coder Club! 🚀 #DaVinciCoders #LeadDeveloper");
-        const url = encodeURIComponent('https://davincicoders.adtu.ac.in/profile/jack026');
+        const url = encodeURIComponent('https://davincicoders.adtu.ac.in/profile/Jack026');
         window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         
         this.analytics.track('profile_shared_twitter', {
@@ -1386,7 +1386,7 @@ class AccountPage {
     }
     
     shareOnLinkedIn() {
-        const url = encodeURIComponent('https://davincicoders.adtu.ac.in/profile/jack026');
+        const url = encodeURIComponent('https://davincicoders.adtu.ac.in/profile/Jack026');
         const title = encodeURIComponent('Jack026 - Lead Developer at Da-Vinci Coder Club');
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}`, '_blank');
         
@@ -1397,7 +1397,7 @@ class AccountPage {
     }
     
     shareOnFacebook() {
-        const url = encodeURIComponent('https://davincicoders.adtu.ac.in/profile/jack026');
+        const url = encodeURIComponent('https://davincicoders.adtu.ac.in/profile/Jack026');
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
         
         this.analytics.track('profile_shared_facebook', {
@@ -1407,7 +1407,7 @@ class AccountPage {
     }
     
     shareOnWhatsApp() {
-        const text = encodeURIComponent("Check out Jack026's profile at Da-Vinci Coder Club! https://davincicoders.adtu.ac.in/profile/jack026");
+        const text = encodeURIComponent("Check out Jack026's profile at Da-Vinci Coder Club! https://davincicoders.adtu.ac.in/profile/Jack026");
         window.open(`https://wa.me/?text=${text}`, '_blank');
         
         this.analytics.track('profile_shared_whatsapp', {
@@ -1438,10 +1438,10 @@ class AccountPage {
     
     // Utility Methods
     getSessionId() {
-        let sessionId = sessionStorage.getItem('jack026_session_id');
+        let sessionId = sessionStorage.getItem('Jack026_session_id');
         if (!sessionId) {
-            sessionId = 'jack026_session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            sessionStorage.setItem('jack026_session_id', sessionId);
+            sessionId = 'Jack026_session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem('Jack026_session_id', sessionId);
         }
         return sessionId;
     }
@@ -2013,7 +2013,7 @@ class AccountAnalytics {
     constructor() {
         this.events = [];
         this.sessionId = this.generateSessionId();
-        this.jack026Metrics = {
+        this.Jack026Metrics = {
             pageViews: 0,
             tabSwitches: 0,
             featuresUsed: new Set(),
@@ -2032,7 +2032,7 @@ class AccountAnalytics {
     }
     
     generateSessionId() {
-        return `jack026_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        return `Jack026_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     }
     
     track(event, data = {}) {
@@ -2063,18 +2063,18 @@ class AccountAnalytics {
         // Track feature usage
         if (event.includes('_')) {
             const feature = event.split('_')[0];
-            this.jack026Metrics.featuresUsed.add(feature);
+            this.Jack026Metrics.featuresUsed.add(feature);
         }
         
         // Track tab switches
         if (event === 'account_tab_switched') {
-            this.jack026Metrics.tabSwitches++;
+            this.Jack026Metrics.tabSwitches++;
         }
         
         // Track interactions
         if (event.includes('clicked') || event.includes('opened')) {
             const interaction = event.replace(/_clicked|_opened/, '');
-            this.jack026Metrics.interactions[interaction] = (this.jack026Metrics.interactions[interaction] || 0) + 1;
+            this.Jack026Metrics.interactions[interaction] = (this.Jack026Metrics.interactions[interaction] || 0) + 1;
         }
     }
     
@@ -2089,7 +2089,7 @@ class AccountAnalytics {
         document.addEventListener('davinciUpdate', (e) => {
             if (e.detail.type === 'tab_switched') {
                 const timeSpent = Date.now() - tabStartTime;
-                this.jack026Metrics.timeSpent[currentTab] = (this.jack026Metrics.timeSpent[currentTab] || 0) + timeSpent;
+                this.Jack026Metrics.timeSpent[currentTab] = (this.Jack026Metrics.timeSpent[currentTab] || 0) + timeSpent;
                 
                 currentTab = e.detail.data.tab;
                 tabStartTime = Date.now();
@@ -2100,14 +2100,14 @@ class AccountAnalytics {
         window.addEventListener('beforeunload', () => {
             const totalSessionTime = Date.now() - startTime;
             const finalTimeSpent = Date.now() - tabStartTime;
-            this.jack026Metrics.timeSpent[currentTab] = (this.jack026Metrics.timeSpent[currentTab] || 0) + finalTimeSpent;
+            this.Jack026Metrics.timeSpent[currentTab] = (this.Jack026Metrics.timeSpent[currentTab] || 0) + finalTimeSpent;
             
-            this.track('jack026_session_analytics', {
+            this.track('Jack026_session_analytics', {
                 totalSessionTime,
-                timeSpentPerTab: this.jack026Metrics.timeSpent,
-                featuresUsed: Array.from(this.jack026Metrics.featuresUsed),
-                tabSwitches: this.jack026Metrics.tabSwitches,
-                interactions: this.jack026Metrics.interactions,
+                timeSpentPerTab: this.Jack026Metrics.timeSpent,
+                featuresUsed: Array.from(this.Jack026Metrics.featuresUsed),
+                tabSwitches: this.Jack026Metrics.tabSwitches,
+                interactions: this.Jack026Metrics.interactions,
                 eventsTracked: this.events.length
             });
         });
@@ -2118,7 +2118,7 @@ class AccountAnalytics {
             setTimeout(() => {
                 const perfData = performance.getEntriesByType('navigation')[0];
                 
-                this.track('jack026_page_performance', {
+                this.track('Jack026_page_performance', {
                     loadTime: perfData.loadEventEnd - perfData.loadEventStart,
                     domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
                     firstPaint: performance.getEntriesByType('paint')[0]?.startTime || 0,
@@ -2132,7 +2132,7 @@ class AccountAnalytics {
     setupHeatmapTracking() {
         // Track clicks with coordinates
         document.addEventListener('click', (e) => {
-            this.track('jack026_click_heatmap', {
+            this.track('Jack026_click_heatmap', {
                 x: e.clientX,
                 y: e.clientY,
                 element: e.target.tagName,
@@ -2152,7 +2152,7 @@ class AccountAnalytics {
                 
                 // Track scroll milestones
                 if ([25, 50, 75, 100].includes(scrollPercent)) {
-                    this.track('jack026_scroll_milestone', {
+                    this.track('Jack026_scroll_milestone', {
                         depth: scrollPercent,
                         timestamp: '2025-08-06 13:55:30'
                     });
@@ -2164,7 +2164,7 @@ class AccountAnalytics {
     sendToAnalytics(eventData) {
         // Send to analytics endpoint (simulated)
         if (navigator.sendBeacon) {
-            const analyticsEndpoint = `${ACCOUNT_CONFIG.apiEndpoint || ''}/analytics/jack026`;
+            const analyticsEndpoint = `${ACCOUNT_CONFIG.apiEndpoint || ''}/analytics/Jack026`;
             navigator.sendBeacon(analyticsEndpoint, JSON.stringify(eventData));
         }
     }
@@ -2176,10 +2176,10 @@ class AccountAnalytics {
             timestamp: '2025-08-06 13:55:30',
             summary: {
                 totalEvents: this.events.length,
-                featuresUsed: Array.from(this.jack026Metrics.featuresUsed),
-                tabSwitches: this.jack026Metrics.tabSwitches,
-                timeSpentPerTab: this.jack026Metrics.timeSpent,
-                topInteractions: Object.entries(this.jack026Metrics.interactions)
+                featuresUsed: Array.from(this.Jack026Metrics.featuresUsed),
+                tabSwitches: this.Jack026Metrics.tabSwitches,
+                timeSpentPerTab: this.Jack026Metrics.timeSpent,
+                topInteractions: Object.entries(this.Jack026Metrics.interactions)
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 5)
             },
@@ -2243,7 +2243,7 @@ class AccountRealTimeFeatures {
             statusElements[2].textContent = currentActivity;
         }
         
-        accountPage.analytics.track('jack026_status_updated', {
+        accountPage.analytics.track('Jack026_status_updated', {
             activity: currentActivity,
             timestamp: '2025-08-06 13:55:30'
         });
@@ -2293,17 +2293,17 @@ class AccountRealTimeFeatures {
         const streakNumber = DOMUtils.$('.streak-number');
         if (streakNumber) {
             // Increment streak if it's a new day
-            const lastUpdate = localStorage.getItem('jack026_last_streak_update');
+            const lastUpdate = localStorage.getItem('Jack026_last_streak_update');
             const today = new Date().toDateString();
             
             if (lastUpdate !== today) {
-                ACCOUNT_CONFIG.jack026Profile.streakDays++;
-                streakNumber.textContent = ACCOUNT_CONFIG.jack026Profile.streakDays;
-                localStorage.setItem('jack026_last_streak_update', today);
+                ACCOUNT_CONFIG.Jack026Profile.streakDays++;
+                streakNumber.textContent = ACCOUNT_CONFIG.Jack026Profile.streakDays;
+                localStorage.setItem('Jack026_last_streak_update', today);
                 
-                if (ACCOUNT_CONFIG.jack026Profile.streakDays % 10 === 0) {
+                if (ACCOUNT_CONFIG.Jack026Profile.streakDays % 10 === 0) {
                     daVinciState.showNotification(
-                        `🔥 Amazing! ${ACCOUNT_CONFIG.jack026Profile.streakDays}-day coding streak achieved!`,
+                        `🔥 Amazing! ${ACCOUNT_CONFIG.Jack026Profile.streakDays}-day coding streak achieved!`,
                         'success',
                         8000
                     );
@@ -2318,7 +2318,7 @@ class AccountRealTimeFeatures {
             const { type, data } = e.detail;
             
             switch (type) {
-                case 'jack026_mention':
+                case 'Jack026_mention':
                     this.handleMention(data);
                     break;
                 case 'team_achievement':
@@ -2390,7 +2390,7 @@ class AccountRealTimeFeatures {
         
         // Save activity pattern periodically
         setInterval(() => {
-            localStorage.setItem('jack026_activity_pattern', JSON.stringify(activityPattern));
+            localStorage.setItem('Jack026_activity_pattern', JSON.stringify(activityPattern));
         }, 60000); // Every minute
     }
 }
@@ -2419,7 +2419,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add Jack026's signature
         const signature = DOMUtils.create('div', {
-            className: 'jack026-account-signature',
+            className: 'Jack026-account-signature',
             innerHTML: 'Personalized for Jack026 • 2025-08-06 13:55:30 UTC'
         });
         document.body.appendChild(signature);
@@ -2427,7 +2427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`👤 Account page fully initialized for Jack026 at 2025-08-06 13:55:30`);
         console.log(`🎯 All enhanced features ready for ${ACCOUNT_CONFIG.currentUser}`);
         console.log(`📊 Real-time analytics and AI assistant active`);
-        console.log(`🔥 Current streak: ${ACCOUNT_CONFIG.jack026Profile.streakDays} days`);
+        console.log(`🔥 Current streak: ${ACCOUNT_CONFIG.Jack026Profile.streakDays} days`);
         
         // Send initialization complete event
         accountPage.analytics.track('account_page_fully_loaded', {
@@ -2435,7 +2435,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timestamp: '2025-08-06 13:55:30',
             loadTime: performance.now(),
             features: Object.keys(ACCOUNT_CONFIG.features),
-            profileData: ACCOUNT_CONFIG.jack026Profile
+            profileData: ACCOUNT_CONFIG.Jack026Profile
         });
     }
 });
@@ -2780,7 +2780,7 @@ class AccountAnalytics {
     constructor() {
         this.events = [];
         this.sessionId = this.generateSessionId();
-        this.jack026Metrics = {
+        this.Jack026Metrics = {
             pageViews: 0,
             tabSwitches: 0,
             featuresUsed: new Set(),
@@ -2799,7 +2799,7 @@ class AccountAnalytics {
     }
     
     generateSessionId() {
-        return `jack026_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        return `Jack026_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     }
     
     track(event, data = {}) {
@@ -2830,18 +2830,18 @@ class AccountAnalytics {
         // Track feature usage
         if (event.includes('_')) {
             const feature = event.split('_')[0];
-            this.jack026Metrics.featuresUsed.add(feature);
+            this.Jack026Metrics.featuresUsed.add(feature);
         }
         
         // Track tab switches
         if (event === 'account_tab_switched') {
-            this.jack026Metrics.tabSwitches++;
+            this.Jack026Metrics.tabSwitches++;
         }
         
         // Track interactions
         if (event.includes('clicked') || event.includes('opened')) {
             const interaction = event.replace(/_clicked|_opened/, '');
-            this.jack026Metrics.interactions[interaction] = (this.jack026Metrics.interactions[interaction] || 0) + 1;
+            this.Jack026Metrics.interactions[interaction] = (this.Jack026Metrics.interactions[interaction] || 0) + 1;
         }
     }
     
@@ -2856,7 +2856,7 @@ class AccountAnalytics {
         document.addEventListener('davinciUpdate', (e) => {
             if (e.detail.type === 'tab_switched') {
                 const timeSpent = Date.now() - tabStartTime;
-                this.jack026Metrics.timeSpent[currentTab] = (this.jack026Metrics.timeSpent[currentTab] || 0) + timeSpent;
+                this.Jack026Metrics.timeSpent[currentTab] = (this.Jack026Metrics.timeSpent[currentTab] || 0) + timeSpent;
                 
                 currentTab = e.detail.data.tab;
                 tabStartTime = Date.now();
@@ -2867,14 +2867,14 @@ class AccountAnalytics {
         window.addEventListener('beforeunload', () => {
             const totalSessionTime = Date.now() - startTime;
             const finalTimeSpent = Date.now() - tabStartTime;
-            this.jack026Metrics.timeSpent[currentTab] = (this.jack026Metrics.timeSpent[currentTab] || 0) + finalTimeSpent;
+            this.Jack026Metrics.timeSpent[currentTab] = (this.Jack026Metrics.timeSpent[currentTab] || 0) + finalTimeSpent;
             
-            this.track('jack026_session_analytics', {
+            this.track('Jack026_session_analytics', {
                 totalSessionTime,
-                timeSpentPerTab: this.jack026Metrics.timeSpent,
-                featuresUsed: Array.from(this.jack026Metrics.featuresUsed),
-                tabSwitches: this.jack026Metrics.tabSwitches,
-                interactions: this.jack026Metrics.interactions,
+                timeSpentPerTab: this.Jack026Metrics.timeSpent,
+                featuresUsed: Array.from(this.Jack026Metrics.featuresUsed),
+                tabSwitches: this.Jack026Metrics.tabSwitches,
+                interactions: this.Jack026Metrics.interactions,
                 eventsTracked: this.events.length
             });
         });
@@ -2885,7 +2885,7 @@ class AccountAnalytics {
             setTimeout(() => {
                 const perfData = performance.getEntriesByType('navigation')[0];
                 
-                this.track('jack026_page_performance', {
+                this.track('Jack026_page_performance', {
                     loadTime: perfData.loadEventEnd - perfData.loadEventStart,
                     domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
                     firstPaint: performance.getEntriesByType('paint')[0]?.startTime || 0,
@@ -2899,7 +2899,7 @@ class AccountAnalytics {
     setupHeatmapTracking() {
         // Track clicks with coordinates
         document.addEventListener('click', (e) => {
-            this.track('jack026_click_heatmap', {
+            this.track('Jack026_click_heatmap', {
                 x: e.clientX,
                 y: e.clientY,
                 element: e.target.tagName,
@@ -2919,7 +2919,7 @@ class AccountAnalytics {
                 
                 // Track scroll milestones
                 if ([25, 50, 75, 100].includes(scrollPercent)) {
-                    this.track('jack026_scroll_milestone', {
+                    this.track('Jack026_scroll_milestone', {
                         depth: scrollPercent,
                         timestamp: '2025-08-06 13:55:30'
                     });
@@ -2931,7 +2931,7 @@ class AccountAnalytics {
     sendToAnalytics(eventData) {
         // Send to analytics endpoint (simulated)
         if (navigator.sendBeacon) {
-            const analyticsEndpoint = `${ACCOUNT_CONFIG.apiEndpoint || ''}/analytics/jack026`;
+            const analyticsEndpoint = `${ACCOUNT_CONFIG.apiEndpoint || ''}/analytics/Jack026`;
             navigator.sendBeacon(analyticsEndpoint, JSON.stringify(eventData));
         }
     }
@@ -2943,10 +2943,10 @@ class AccountAnalytics {
             timestamp: '2025-08-06 13:55:30',
             summary: {
                 totalEvents: this.events.length,
-                featuresUsed: Array.from(this.jack026Metrics.featuresUsed),
-                tabSwitches: this.jack026Metrics.tabSwitches,
-                timeSpentPerTab: this.jack026Metrics.timeSpent,
-                topInteractions: Object.entries(this.jack026Metrics.interactions)
+                featuresUsed: Array.from(this.Jack026Metrics.featuresUsed),
+                tabSwitches: this.Jack026Metrics.tabSwitches,
+                timeSpentPerTab: this.Jack026Metrics.timeSpent,
+                topInteractions: Object.entries(this.Jack026Metrics.interactions)
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 5)
             },
@@ -3010,7 +3010,7 @@ class AccountRealTimeFeatures {
             statusElements[2].textContent = currentActivity;
         }
         
-        accountPage.analytics.track('jack026_status_updated', {
+        accountPage.analytics.track('Jack026_status_updated', {
             activity: currentActivity,
             timestamp: '2025-08-06 13:55:30'
         });
@@ -3060,17 +3060,17 @@ class AccountRealTimeFeatures {
         const streakNumber = DOMUtils.$('.streak-number');
         if (streakNumber) {
             // Increment streak if it's a new day
-            const lastUpdate = localStorage.getItem('jack026_last_streak_update');
+            const lastUpdate = localStorage.getItem('Jack026_last_streak_update');
             const today = new Date().toDateString();
             
             if (lastUpdate !== today) {
-                ACCOUNT_CONFIG.jack026Profile.streakDays++;
-                streakNumber.textContent = ACCOUNT_CONFIG.jack026Profile.streakDays;
-                localStorage.setItem('jack026_last_streak_update', today);
+                ACCOUNT_CONFIG.Jack026Profile.streakDays++;
+                streakNumber.textContent = ACCOUNT_CONFIG.Jack026Profile.streakDays;
+                localStorage.setItem('Jack026_last_streak_update', today);
                 
-                if (ACCOUNT_CONFIG.jack026Profile.streakDays % 10 === 0) {
+                if (ACCOUNT_CONFIG.Jack026Profile.streakDays % 10 === 0) {
                     daVinciState.showNotification(
-                        `🔥 Amazing! ${ACCOUNT_CONFIG.jack026Profile.streakDays}-day coding streak achieved!`,
+                        `🔥 Amazing! ${ACCOUNT_CONFIG.Jack026Profile.streakDays}-day coding streak achieved!`,
                         'success',
                         8000
                     );
@@ -3085,7 +3085,7 @@ class AccountRealTimeFeatures {
             const { type, data } = e.detail;
             
             switch (type) {
-                case 'jack026_mention':
+                case 'Jack026_mention':
                     this.handleMention(data);
                     break;
                 case 'team_achievement':
@@ -3157,7 +3157,7 @@ class AccountRealTimeFeatures {
         
         // Save activity pattern periodically
         setInterval(() => {
-            localStorage.setItem('jack026_activity_pattern', JSON.stringify(activityPattern));
+            localStorage.setItem('Jack026_activity_pattern', JSON.stringify(activityPattern));
         }, 60000); // Every minute
     }
 }
@@ -3186,7 +3186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add Jack026's signature
         const signature = DOMUtils.create('div', {
-            className: 'jack026-account-signature',
+            className: 'Jack026-account-signature',
             innerHTML: 'Personalized for Jack026 • 2025-08-06 13:55:30 UTC'
         });
         document.body.appendChild(signature);
@@ -3194,7 +3194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`👤 Account page fully initialized for Jack026 at 2025-08-06 13:55:30`);
         console.log(`🎯 All enhanced features ready for ${ACCOUNT_CONFIG.currentUser}`);
         console.log(`📊 Real-time analytics and AI assistant active`);
-        console.log(`🔥 Current streak: ${ACCOUNT_CONFIG.jack026Profile.streakDays} days`);
+        console.log(`🔥 Current streak: ${ACCOUNT_CONFIG.Jack026Profile.streakDays} days`);
         
         // Send initialization complete event
         accountPage.analytics.track('account_page_fully_loaded', {
@@ -3202,7 +3202,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timestamp: '2025-08-06 13:55:30',
             loadTime: performance.now(),
             features: Object.keys(ACCOUNT_CONFIG.features),
-            profileData: ACCOUNT_CONFIG.jack026Profile
+            profileData: ACCOUNT_CONFIG.Jack026Profile
         });
     }
 });

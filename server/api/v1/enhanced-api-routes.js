@@ -58,7 +58,7 @@ const requireJack026Admin = async (req, res, next) => {
         await Analytics.create({
             userId: req.user._id,
             sessionId: req.sessionID,
-            event: 'jack026_admin_action',
+            event: 'Jack026_admin_action',
             data: {
                 method: req.method,
                 path: req.path,
@@ -214,7 +214,7 @@ router.get('/analytics/advanced',
                 platformUsage: await getPlatformUsageStats(startDate, endDate),
                 performanceMetrics: await getPerformanceMetrics(),
                 realTimeStats: wsServer.getStats(),
-                jack026Specific: {
+                Jack026Specific: {
                     leadershipImpact: await getLeadershipImpact(req.user._id),
                     teamGrowth: await getTeamGrowthMetrics(),
                     mentorshipSuccess: await getMentorshipSuccessRate(req.user._id),

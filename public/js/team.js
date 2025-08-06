@@ -13,7 +13,7 @@ class TeamPage {
         this.currentView = 'grid';
         this.currentPage = 1;
         this.itemsPerPage = 12;
-        this.jack026Profile = null;
+        this.Jack026Profile = null;
         
         this.init();
     }
@@ -40,7 +40,7 @@ class TeamPage {
             this.filteredMembers = [...this.members];
             
             // Find Jack026's profile
-            this.jack026Profile = this.members.find(m => m.username === 'Jack026');
+            this.Jack026Profile = this.members.find(m => m.username === 'Jack026');
             
             this.renderTeamSections();
             this.updateMemberCount();
@@ -72,7 +72,7 @@ class TeamPage {
                     role: 'Lead Developer & Club President',
                     department: 'Computer Science',
                     year: '4th Year',
-                    email: 'jack026@davincicoders.adtu.ac.in',
+                    email: 'Jack026@davincicoders.adtu.ac.in',
                     phone: '+91 87654 32109',
                     avatar: this.generateAvatar('J', '#6366f1'),
                     bio: 'Passionate full-stack developer and team leader with expertise in React, Node.js, and system design. Leading Da-Vinci Coder Club towards innovation and excellence.',
@@ -84,9 +84,9 @@ class TeamPage {
                     isOnline: true,
                     lastSeen: 'now',
                     social: {
-                        github: 'https://github.com/jack026',
-                        linkedin: 'https://linkedin.com/in/jack026',
-                        twitter: 'https://twitter.com/jack026'
+                        github: 'https://github.com/Jack026',
+                        linkedin: 'https://linkedin.com/in/Jack026',
+                        twitter: 'https://twitter.com/Jack026'
                     },
                     featured: true,
                     responseTime: '2 minutes'
@@ -527,47 +527,47 @@ class TeamPage {
     }
     
     setupJack026Spotlight() {
-        if (!this.jack026Profile) return;
+        if (!this.Jack026Profile) return;
         
-        const spotlightContainer = DOMUtils.$('#jack026-spotlight');
+        const spotlightContainer = DOMUtils.$('#Jack026-spotlight');
         if (spotlightContainer) {
             this.renderJack026Spotlight();
         }
     }
     
     renderJack026Spotlight() {
-        const spotlightCard = DOMUtils.$('.jack026-featured');
-        if (!spotlightCard || !this.jack026Profile) return;
+        const spotlightCard = DOMUtils.$('.Jack026-featured');
+        if (!spotlightCard || !this.Jack026Profile) return;
         
         // Update spotlight card with real data
         const avatarImg = spotlightCard.querySelector('.spotlight-avatar img');
         if (avatarImg) {
-            avatarImg.src = this.jack026Profile.avatar;
-            avatarImg.alt = this.jack026Profile.name;
+            avatarImg.src = this.Jack026Profile.avatar;
+            avatarImg.alt = this.Jack026Profile.name;
         }
         
         const nameElement = spotlightCard.querySelector('.member-name');
         if (nameElement) {
-            nameElement.textContent = this.jack026Profile.name;
+            nameElement.textContent = this.Jack026Profile.name;
         }
         
         const titleElement = spotlightCard.querySelector('.member-title');
         if (titleElement) {
-            titleElement.textContent = this.jack026Profile.role;
+            titleElement.textContent = this.Jack026Profile.role;
         }
         
         const departmentElement = spotlightCard.querySelector('.member-department');
         if (departmentElement) {
-            departmentElement.textContent = `${this.jack026Profile.department} • ${this.jack026Profile.year}`;
+            departmentElement.textContent = `${this.Jack026Profile.department} • ${this.Jack026Profile.year}`;
         }
         
         // Update achievements
         const achievementsContainer = spotlightCard.querySelector('.member-achievements');
-        if (achievementsContainer && this.jack026Profile.achievements) {
+        if (achievementsContainer && this.Jack026Profile.achievements) {
             const achievementItems = [
-                { icon: 'fas fa-project-diagram', text: `${this.jack026Profile.projects?.length || 0}+ Projects Led` },
+                { icon: 'fas fa-project-diagram', text: `${this.Jack026Profile.projects?.length || 0}+ Projects Led` },
                 { icon: 'fas fa-users', text: '50+ Members Mentored' },
-                { icon: 'fas fa-trophy', text: `${this.jack026Profile.achievements.length}+ Awards Won` }
+                { icon: 'fas fa-trophy', text: `${this.Jack026Profile.achievements.length}+ Awards Won` }
             ];
             
             achievementsContainer.innerHTML = achievementItems.map(item => `
@@ -580,8 +580,8 @@ class TeamPage {
         
         // Update skills
         const skillsContainer = spotlightCard.querySelector('.member-skills');
-        if (skillsContainer && this.jack026Profile.skills) {
-            skillsContainer.innerHTML = this.jack026Profile.skills.slice(0, 5).map(skill => 
+        if (skillsContainer && this.Jack026Profile.skills) {
+            skillsContainer.innerHTML = this.Jack026Profile.skills.slice(0, 5).map(skill => 
                 `<span class="skill-tag">${skill}</span>`
             ).join('');
         }
@@ -648,11 +648,11 @@ class TeamPage {
     }
     
     createLeaderCard(member) {
-        const jack026Class = member.username === 'Jack026' ? 'jack026-leader' : '';
+        const Jack026Class = member.username === 'Jack026' ? 'Jack026-leader' : '';
         const onlineStatus = member.isOnline ? 'online' : 'offline';
         
         return `
-            <div class="leader-card ${jack026Class}" data-id="${member.id}">
+            <div class="leader-card ${Jack026Class}" data-id="${member.id}">
                 <div class="leader-badge">${member.position}</div>
                 <img src="${member.avatar}" alt="${member.name}" class="leader-avatar" width="100" height="100">
                 <h3 class="leader-name">${member.name}</h3>
@@ -683,11 +683,11 @@ class TeamPage {
     }
     
     createMemberCard(member) {
-        const jack026Class = member.username === 'Jack026' ? 'jack026-profile' : '';
+        const Jack026Class = member.username === 'Jack026' ? 'Jack026-profile' : '';
         const onlineStatus = member.isOnline ? 'online' : 'offline';
         
         return `
-            <div class="member-card ${jack026Class}" data-id="${member.id}">
+            <div class="member-card ${Jack026Class}" data-id="${member.id}">
                 <div class="member-card-header">
                     <img src="${member.avatar}" alt="${member.name}" class="member-avatar" width="80" height="80">
                     <div class="member-status ${onlineStatus}">${member.isOnline ? 'Online' : 'Offline'}</div>
@@ -747,7 +747,7 @@ class TeamPage {
             });
             
             // Hover effects for non-Jack026 cards
-            if (!card.classList.contains('jack026-profile') && !card.classList.contains('jack026-leader')) {
+            if (!card.classList.contains('Jack026-profile') && !card.classList.contains('Jack026-leader')) {
                 card.addEventListener('mouseenter', () => {
                     card.style.transform = 'translateY(-8px)';
                 });
@@ -896,9 +896,9 @@ class TeamPage {
         const modal = DOMUtils.$('#memberModal');
         if (modal) {
             if (member.username === 'Jack026') {
-                modal.classList.add('jack026-modal');
+                modal.classList.add('Jack026-modal');
             } else {
-                modal.classList.remove('jack026-modal');
+                modal.classList.remove('Jack026-modal');
             }
         }
     }
@@ -1041,7 +1041,7 @@ class TeamPage {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `jack026-team-export-2025-08-06.json`;
+        a.download = `Jack026-team-export-2025-08-06.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1623,15 +1623,15 @@ class TeamRealTime {
         document.addEventListener('visibilitychange', () => {
             const isOnline = !document.hidden;
             
-            if (window.teamPage && teamPage.jack026Profile) {
-                teamPage.jack026Profile.isOnline = isOnline;
-                teamPage.jack026Profile.lastSeen = isOnline ? 'now' : 'just now';
+            if (window.teamPage && teamPage.Jack026Profile) {
+                teamPage.Jack026Profile.isOnline = isOnline;
+                teamPage.Jack026Profile.lastSeen = isOnline ? 'now' : 'just now';
                 
                 // Update UI if Jack026's profile is visible
-                this.updateMemberStatusUI(teamPage.jack026Profile);
+                this.updateMemberStatusUI(teamPage.Jack026Profile);
             }
             
-            daVinciState.analytics.track('jack026_status_changed', {
+            daVinciState.analytics.track('Jack026_status_changed', {
                 isOnline,
                 timestamp: '2025-08-06 13:23:54'
             });

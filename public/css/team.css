@@ -641,13 +641,13 @@
     pointer-events: none;
 }
 
-.jack026-featured {
+.Jack026-featured {
     border-color: rgba(99, 102, 241, 0.4);
     background: rgba(99, 102, 241, 0.05);
-    animation: jack026Spotlight 4s ease-in-out infinite;
+    animation: Jack026Spotlight 4s ease-in-out infinite;
 }
 
-@keyframes jack026Spotlight {
+@keyframes Jack026Spotlight {
     0%, 100% {
         box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
     }
@@ -1846,17 +1846,17 @@
 }
 
 /* Jack026 Specific Styles */
-.jack026-featured {
+.Jack026-featured {
     border-color: var(--primary-500) !important;
 }
 
-.jack026-card {
+.Jack026-card {
     border: 2px solid var(--primary-500);
     background: rgba(99, 102, 241, 0.05);
     position: relative;
 }
 
-.jack026-card::after {
+.Jack026-card::after {
     content: '👑';
     position: absolute;
     top: var(--spacing-2);
@@ -2322,11 +2322,11 @@
 }
 
 /* Jack026 Specific Enhanced Styles */
-.jack026-spotlight-enhancement {
+.Jack026-spotlight-enhancement {
     position: relative;
 }
 
-.jack026-spotlight-enhancement::before {
+.Jack026-spotlight-enhancement::before {
     content: '';
     position: absolute;
     top: -4px;
@@ -2336,10 +2336,10 @@
     background: var(--gradient-primary);
     border-radius: var(--radius-3xl);
     z-index: -1;
-    animation: jack026SpotlightPulse 3s ease-in-out infinite;
+    animation: Jack026SpotlightPulse 3s ease-in-out infinite;
 }
 
-@keyframes jack026SpotlightPulse {
+@keyframes Jack026SpotlightPulse {
     0%, 100% {
         opacity: 0.3;
         transform: scale(1);
@@ -2350,14 +2350,14 @@
     }
 }
 
-.jack026-leader-badge {
+.Jack026-leader-badge {
     background: var(--gradient-primary);
     color: var(--text-primary);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: jack026LeaderGlow 2s ease-in-out infinite;
+    animation: Jack026LeaderGlow 2s ease-in-out infinite;
 }
 
-@keyframes jack026LeaderGlow {
+@keyframes Jack026LeaderGlow {
     0%, 100% {
         box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
     }
@@ -2366,12 +2366,12 @@
     }
 }
 
-.jack026-achievement {
+.Jack026-achievement {
     border-left: 3px solid var(--primary-500);
     background: rgba(99, 102, 241, 0.1);
 }
 
-.jack026-achievement::before {
+.Jack026-achievement::before {
     content: '🏆';
     position: absolute;
     top: var(--spacing-1);
@@ -2380,14 +2380,14 @@
 }
 
 /* Enhanced Member Card States */
-.member-card.jack026-profile {
+.member-card.Jack026-profile {
     border: 2px solid var(--primary-500);
     background: rgba(99, 102, 241, 0.08);
     position: relative;
     overflow: visible;
 }
 
-.member-card.jack026-profile::before {
+.member-card.Jack026-profile::before {
     content: 'YOU';
     position: absolute;
     top: -10px;
@@ -2400,10 +2400,10 @@
     font-weight: 700;
     letter-spacing: 0.5px;
     z-index: 3;
-    animation: jack026ProfileIndicator 2s ease-in-out infinite;
+    animation: Jack026ProfileIndicator 2s ease-in-out infinite;
 }
 
-@keyframes jack026ProfileIndicator {
+@keyframes Jack026ProfileIndicator {
     0%, 100% {
         transform: translateY(0) scale(1);
     }
@@ -2413,17 +2413,17 @@
 }
 
 /* Enhanced Modal Styles for Jack026 */
-.modal.jack026-modal .member-modal {
+.modal.Jack026-modal .member-modal {
     border: 2px solid var(--primary-500);
     box-shadow: 0 0 50px rgba(99, 102, 241, 0.3);
 }
 
-.modal.jack026-modal .modal-header {
+.modal.Jack026-modal .modal-header {
     background: var(--gradient-primary);
     position: relative;
 }
 
-.modal.jack026-modal .modal-header::after {
+.modal.Jack026-modal .modal-header::after {
     content: '👑';
     position: absolute;
     top: 50%;
@@ -2526,7 +2526,7 @@
 }
 
 /* Jack026's Achievement Showcase */
-.jack026-achievements {
+.Jack026-achievements {
     display: flex;
     gap: var(--spacing-2);
     flex-wrap: wrap;
@@ -2675,8 +2675,8 @@
         border: 2px solid var(--text-primary);
     }
     
-    .jack026-featured,
-    .jack026-card {
+    .Jack026-featured,
+    .Jack026-card {
         border: 3px solid var(--primary-500);
     }
 }
@@ -2701,8 +2701,8 @@
         transform: none;
     }
     
-    .jack026SpotlightPulse,
-    .jack026LeaderGlow,
+    .Jack026SpotlightPulse,
+    .Jack026LeaderGlow,
     .achievementGlow,
     .crownGlow,
     .avatarRingSpin {

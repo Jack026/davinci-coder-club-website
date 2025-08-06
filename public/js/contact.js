@@ -572,7 +572,7 @@ class ContactPage {
             return this.getRandomResponse(responses.greetings);
         } else if (message.includes('join') || message.includes('member')) {
             return this.getRandomResponse(responses.membership);
-        } else if (message.includes('contact') || message.includes('jack026')) {
+        } else if (message.includes('contact') || message.includes('Jack026')) {
             return this.getRandomResponse(responses.contact);
         } else if (message.includes('project')) {
             return this.getRandomResponse(responses.projects);
@@ -1112,7 +1112,7 @@ class ContactRealTime {
     }
     
     updateJack026Status() {
-        const statusElements = DOMUtils.$$('.jack026-status, .user-status');
+        const statusElements = DOMUtils.$$('.Jack026-status, .user-status');
         const availabilityElements = DOMUtils.$$('.contact-availability');
         
         // Simulate Jack026's availability (he's usually online!)
@@ -1137,7 +1137,7 @@ class ContactRealTime {
                 case 'contact_response_time':
                     this.responseTime = data.responseTime;
                     break;
-                case 'jack026_status':
+                case 'Jack026_status':
                     this.updateJack026StatusFromServer(data);
                     break;
                 case 'queue_update':
@@ -1151,7 +1151,7 @@ class ContactRealTime {
         const { isOnline, lastSeen, responseTime } = data;
         
         // Update UI elements with real data
-        const statusElements = DOMUtils.$$('.jack026-status');
+        const statusElements = DOMUtils.$$('.Jack026-status');
         statusElements.forEach(el => {
             el.textContent = isOnline ? 'Online' : `Last seen ${lastSeen}`;
             el.className = isOnline ? 'status online' : 'status offline';
