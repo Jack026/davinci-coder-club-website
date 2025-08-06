@@ -11,9 +11,11 @@
         "minify-js": "uglifyjs public/js/*.js -o public/js/script.min.js",
         "test": "jest",
         "lint": "eslint .",
-        "deploy": "docker-compose up -d",
+        "deploy": "vercel --prod",
+        "deploy-preview": "vercel",
         "backup": "mongodump --uri $MONGODB_URI --out ./backups/$(date +%Y%m%d)",
-        "restore": "mongorestore --uri $MONGODB_URI --drop"
+        "restore": "mongorestore --uri $MONGODB_URI --drop",
+        "vercel-build": "npm run build"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",

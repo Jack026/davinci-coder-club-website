@@ -1,0 +1,64 @@
+{
+    "version": 2,
+    "name": "davinci-coder-club-website",
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "public/**/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/css/(.*)",
+        "dest": "/public/css/$1"
+      },
+      {
+        "src": "/js/(.*)",
+        "dest": "/public/js/$1"
+      },
+      {
+        "src": "/images/(.*)",
+        "dest": "/public/images/$1"
+      },
+      {
+        "src": "/team",
+        "dest": "/public/team.html"
+      },
+      {
+        "src": "/about",
+        "dest": "/public/about.html"
+      },
+      {
+        "src": "/events",
+        "dest": "/public/events.html"
+      },
+      {
+        "src": "/projects",
+        "dest": "/public/projects.html"
+      },
+      {
+        "src": "/resources",
+        "dest": "/public/resources.html"
+      },
+      {
+        "src": "/contact",
+        "dest": "/public/contact.html"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/server.js"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "functions": {
+      "server.js": {
+        "maxDuration": 30
+      }
+    }
+  }

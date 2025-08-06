@@ -779,79 +779,39 @@ pages.forEach(page => {
 });
 
 // 404 error handler
-app.use('*', (req, res) => {
-    console.log(`❌ 404 Error for Jack026: ${req.originalUrl}`);
-    
-    if (req.originalUrl.startsWith('/api/')) {
-        res.status(404).json({
-            success: false,
-            error: 'API endpoint not found',
-            path: req.originalUrl,
-            timestamp: '2025-08-06 19:51:36',
-            user: 'Jack026'
-        });
-    } else {
-        res.status(404).send(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>404 - Page Not Found | Da-Vinci Coder Club</title>
-                <style>
-                    body { 
-                        font-family: Arial, sans-serif; 
-                        text-align: center; 
-                        padding: 50px;
-                        background: #0f172a;
-                        color: #f8fafc;
-                    }
-                    .error-container { max-width: 600px; margin: 0 auto; }
-                    .error-code { font-size: 6rem; font-weight: bold; color: #ef4444; margin-bottom: 1rem; }
-                    .error-message { font-size: 1.5rem; margin-bottom: 2rem; }
-                    .back-link {
-                        color: #6366f1;
-                        text-decoration: none;
-                        font-size: 1.2rem;
-                        padding: 10px 20px;
-                        border: 2px solid #6366f1;
-                        border-radius: 8px;
-                        display: inline-block;
-                        margin: 10px;
-                        transition: all 0.3s ease;
-                    }
-                    .back-link:hover { background: #6366f1; color: white; }
-                    .jack026-note {
-                        margin-top: 2rem;
-                        padding: 1rem;
-                        background: rgba(99, 102, 241, 0.1);
-                        border-radius: 8px;
-                        border: 1px solid rgba(99, 102, 241, 0.3);
-                    }
-                    kbd { 
-                        background: #6366f1; 
-                        color: white; 
-                        padding: 0.25rem 0.5rem; 
-                        border-radius: 0.25rem; 
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="error-container">
-                    <div class="error-code">404</div>
-                    <div class="error-message">
-                        Oops! The page you're looking for doesn't exist.
-                    </div>
-                    <a href="/" class="back-link">🏠 Go Home</a>
-                    <a href="/admin/" class="back-link">👑 Admin Panel</a>
-                    <div class="jack026-note">
-                        <strong>👑 Jack026:</strong> Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> for instant admin access
-                        <br>
-                        <small>Error logged at: 2025-08-06 19:51:36 UTC</small>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `);
-    }
+app.use((req, res, next) => {
+    // Serve custom 404 page if it exists
+    res.status(404).sendFile(path.join(__dirname, 'public', '404.html'), err => {
+        if (err) {
+            // Fallback: simple 404 message if file not found
+            res.status(404).send(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>404 Not Found | Da-Vinci Coder Club</title>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            background: #0f172a; 
+                            color: #f8fafc; 
+                            text-align: center; 
+                            padding: 60px;
+                        }
+                        .code { font-size: 5rem; color: #6366f1; }
+                        .msg { font-size: 2rem; margin-bottom: 2rem; }
+                        a { color: #6366f1; text-decoration: none; font-weight: bold; }
+                        a:hover { text-decoration: underline; }
+                    </style>
+                </head>
+                <body>
+                    <div class="code">404</div>
+                    <div class="msg">Page Not Found</div>
+                    <a href="/">🏠 Go Home</a>
+                </body>
+                </html>
+            `);
+        }
+    });
 });
 
 // Error handling middleware
