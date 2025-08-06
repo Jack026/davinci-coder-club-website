@@ -1,0 +1,26 @@
+/* ========================================
+   JACK026 ADMIN SHORTCUTS STYLES
+   Updated: 2025-08-06 20:13:28 UTC
+   Current User: Jack026
+======================================== */
+
+/* Basic shortcut styles - main functionality is in style.css */
+.admin-shortcut-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}   

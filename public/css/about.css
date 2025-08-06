@@ -127,7 +127,7 @@
 }
 
 .about-hero .hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-size: clamp(1.2rem, 2vw, 1rem);
     color: var(--primary-light);
     margin-bottom: var(--spacing-4);
     font-weight: 600;

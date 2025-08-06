@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Upload | Jack026 Admin Panel</title>
+    <link rel="stylesheet" href="css/admin-panel.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Connection Status Banner -->
+    <div class="connection-status success">
+        <div class="status-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Database Connected Successfully</span>
+            <div class="status-details">
+                Ready for data upload | User: Jack026 | Time: 2025-08-06 20:26:47
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="admin-nav">
+                <div class="admin-brand">
+                    <i class="fas fa-crown"></i>
+                    <span>Jack026 Data Upload</span>
+                </div>
+                <div class="admin-controls">
+                    <div class="current-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-time">2025-08-06 20:26:47</span>
+                    </div>
+                    <div class="admin-user">
+                        <div class="user-info">
+                            <span class="user-name">Jack026</span>
+                            <span class="user-role">Super Admin</span>
+                        </div>
+                        <button class="admin-logout" onclick="window.location.href='/admin/'">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="upload-main">
+        <div class="upload-container">
+            <div class="upload-header">
+                <h1>📤 Data Upload Center</h1>
+                <p>Upload and manage club data efficiently</p>
+                <div class="upload-stats">
+                    <div class="upload-stat">
+                        <span class="stat-number" id="upload-count">0</span>
+                        <span class="stat-label">Files Uploaded Today</span>
+                    </div>
+                    <div class="upload-stat">
+                        <span class="stat-number" id="processed-count">0</span>
+                        <span class="stat-label">Records Processed</span>
+                    </div>
+                    <div class="upload-stat">
+                        <span class="stat-number" id="success-rate">100%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Options Grid -->
+            <div class="upload-grid">
+                <!-- Members Upload -->
+                <div class="upload-card">
+                    <div class="upload-card-header">
+                        <div class="upload-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Upload Members</h3>
+                            <p>Bulk import member data via CSV file</p>
+                        </div>
+                    </div>
+                    <div class="upload-card-body">
+                        <div class="file-upload-area" id="members-upload">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop CSV file here or <button class="upload-browse-btn" onclick="triggerFileInput('members-file')">browse</button></p>
+                                <small>Supported: CSV files up to 10MB</small>
+                            </div>
+                            <input type="file" id="members-file" accept=".csv" style="display: none;" onchange="handleFileUpload('members', this)">
+                        </div>
+                        <div class="upload-actions">
+                            <button class="btn-upload" onclick="uploadMembersData()" disabled>
+                                <i class="fas fa-upload"></i>
+                                Upload Members
+                            </button>
+                            <button class="btn-template" onclick="downloadTemplate('members')">
+                                <i class="fas fa-download"></i>
+                                Download Template
+                            </button>
+                        </div>
+                        <div class="upload-progress" id="members-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-text">Uploading... 0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Upload -->
+                <div class="upload-card">
+                    <div class="upload-card-header">
+                        <div class="upload-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Upload Projects</h3>
+                            <p>Import project data in JSON format</p>
+                        </div>
+                    </div>
+                    <div class="upload-card-body">
+                        <div class="file-upload-area" id="projects-upload">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-code"></i>
+                                <p>Drop JSON file here or <button class="upload-browse-btn" onclick="triggerFileInput('projects-file')">browse</button></p>
+                                <small>Supported: JSON files up to 5MB</small>
+                            </div>
+                            <input type="file" id="projects-file" accept=".json" style="display: none;" onchange="handleFileUpload('projects', this)">
+                        </div>
+                        <div class="upload-actions">
+                            <button class="btn-upload" onclick="uploadProjectsData()" disabled>
+                                <i class="fas fa-upload"></i>
+                                Upload Projects
+                            </button>
+                            <button class="btn-template" onclick="downloadTemplate('projects')">
+                                <i class="fas fa-download"></i>
+                                Download Template
+                            </button>
+                        </div>
+                        <div class="upload-progress" id="projects-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-text">Uploading... 0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Upload -->
+                <div class="upload-card">
+                    <div class="upload-card-header">
+                        <div class="upload-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Upload Events</h3>
+                            <p>Schedule multiple events at once</p>
+                        </div>
+                    </div>
+                    <div class="upload-card-body">
+                        <div class="file-upload-area" id="events-upload">
+                            <div class="upload-placeholder">
+                                <i class="fas fa-calendar-plus"></i>
+                                <p>Drop CSV file here or <button class="upload-browse-btn" onclick="triggerFileInput('events-file')">browse</button></p>
+                                <small>Supported: CSV files up to 2MB</small>
+                            </div>
+                            <input type="file" id="events-file" accept=".csv" style="display: none;" onchange="handleFileUpload('events', this)">
+                        </div>
+                        <div class="upload-actions">
+                            <button class="btn-upload" onclick="uploadEventsData()" disabled>
+                                <i class="fas fa-upload"></i>
+                                Upload Events
+                            </button>
+                            <button class="btn-template" onclick="downloadTemplate('events')">
+                                <i class="fas fa-download"></i>
+                                Download Template
+                            </button>
+                        </div>
+                        <div class="upload-progress" id="events-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="progress-text">Uploading... 0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Operations -->
+                <div class="upload-card">
+                    <div class="upload-card-header">
+                        <div class="upload-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Bulk Operations</h3>
+                            <p>Advanced data management tools</p>
+                        </div>
+                    </div>
+                    <div class="upload-card-body">
+                        <div class="bulk-actions">
+                            <button class="btn-bulk" onclick="exportAllData()">
+                                <i class="fas fa-download"></i>
+                                Export All Data
+                            </button>
+                            <button class="btn-bulk" onclick="backupDatabase()">
+                                <i class="fas fa-shield-alt"></i>
+                                Backup Database
+                            </button>
+                            <button class="btn-bulk" onclick="clearCache()">
+                                <i class="fas fa-broom"></i>
+                                Clear Cache
+                            </button>
+                            <button class="btn-bulk danger" onclick="resetData()">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Reset Demo Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload History -->
+            <div class="upload-history">
+                <div class="history-header">
+                    <h2>📋 Recent Uploads</h2>
+                    <button class="btn-refresh" onclick="refreshUploadHistory()">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                </div>
+                <div class="history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Type</th>
+                                <th>File</th>
+                                <th>Records</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="upload-history-body">
+                            <!-- Upload history will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="upload-modal">
+        <div class="modal-overlay" onclick="closeUploadModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="uploadModalTitle">Processing Upload</h3>
+                <button class="modal-close" onclick="closeUploadModal()">×</button>
+            </div>
+            <div class="modal-body" id="uploadModalBody">
+                <!-- Upload results will be shown here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data-upload.js"></script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Upload | Jack026 Admin Panel</title>
+    <link rel="stylesheet" href="css/admin-panel.css">
+    <link rel="stylesheet" href="css/team-upload.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Connection Status Banner -->
+    <div class="connection-status success">
+        <div class="status-content">
+            <i class="fas fa-users"></i>
+            <span>Team Upload System Ready</span>
+            <div class="status-details">
+                Database Connected | User: Jack026 | Time: 2025-08-06 20:37:25
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="admin-nav">
+                <div class="admin-brand">
+                    <i class="fas fa-crown"></i>
+                    <span>Jack026 Team Upload</span>
+                    <div class="upload-indicator">
+                        <i class="fas fa-upload"></i>
+                        <span>Ready</span>
+                    </div>
+                </div>
+                <div class="admin-controls">
+                    <div class="current-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-time">2025-08-06 20:37:25</span>
+                    </div>
+                    <div class="team-stats">
+                        <div class="mini-stat">
+                            <span class="stat-value" id="total-members">156</span>
+                            <span class="stat-label">Total Members</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="stat-value" id="pending-uploads">0</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                    </div>
+                    <div class="admin-user">
+                        <div class="user-info">
+                            <span class="user-name">Jack026</span>
+                            <span class="user-role">Team Manager</span>
+                        </div>
+                        <div class="user-actions">
+                            <button class="nav-btn" onclick="window.location.href='/admin/'" title="Back to Admin">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <button class="nav-btn" onclick="window.location.href='/admin/team-management.html'" title="Team Management">
+                                <i class="fas fa-users-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="team-upload-main">
+        <div class="upload-container">
+            <!-- Upload Header -->
+            <div class="upload-header">
+                <div class="header-content">
+                    <h1>👥 Team Upload Center</h1>
+                    <p>Efficiently manage and upload club member data</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="showQuickAddMember()">
+                        <i class="fas fa-user-plus"></i>
+                        Quick Add Member
+                    </button>
+                    <button class="btn-secondary" onclick="exportTeamData()">
+                        <i class="fas fa-download"></i>
+                        Export Team Data
+                    </button>
+                    <button class="btn-info" onclick="showTeamStatistics()">
+                        <i class="fas fa-chart-bar"></i>
+                        Team Statistics
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Methods Grid -->
+            <div class="upload-methods-grid">
+                <!-- CSV Bulk Upload -->
+                <div class="upload-method-card primary">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-file-csv"></i>
+                        </div>
+                        <div class="method-info">
+                            <h3>CSV Bulk Upload</h3>
+                            <p>Upload multiple members via CSV file</p>
+                            <div class="method-features">
+                                <span class="feature-tag">✓ Bulk Processing</span>
+                                <span class="feature-tag">✓ Data Validation</span>
+                                <span class="feature-tag">✓ Duplicate Detection</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <div class="file-drop-zone" id="csv-drop-zone">
+                            <div class="drop-content" id="csv-drop-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h4>Drop CSV file here</h4>
+                                <p>or <button class="browse-btn" onclick="triggerFileInput('csv-file')">browse files</button></p>
+                                <div class="file-requirements">
+                                    <small>Max file size: 10MB | Format: CSV</small>
+                                    <small>Required columns: name, email, role</small>
+                                </div>
+                            </div>
+                            <input type="file" id="csv-file" accept=".csv" style="display: none;" onchange="handleCsvUpload(this)">
+                        </div>
+                        <div class="method-actions">
+                            <button class="btn-upload" id="csv-upload-btn" onclick="processCsvUpload()" disabled>
+                                <i class="fas fa-upload"></i>
+                                Upload CSV Data
+                            </button>
+                            <button class="btn-template" onclick="downloadCsvTemplate()">
+                                <i class="fas fa-download"></i>
+                                Download Template
+                            </button>
+                        </div>
+                        <div class="upload-progress" id="csv-progress" style="display: none;">
+                            <div class="progress-info">
+                                <span class="progress-label">Processing members...</span>
+                                <span class="progress-percentage">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Import -->
+                <div class="upload-method-card secondary">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <div class="method-info">
+                            <h3>JSON Import</h3>
+                            <p>Import structured member data</p>
+                            <div class="method-features">
+                                <span class="feature-tag">✓ Rich Data</span>
+                                <span class="feature-tag">✓ Nested Objects</span>
+                                <span class="feature-tag">✓ Metadata Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <div class="file-drop-zone" id="json-drop-zone">
+                            <div class="drop-content" id="json-drop-content">
+                                <i class="fas fa-file-code"></i>
+                                <h4>Drop JSON file here</h4>
+                                <p>or <button class="browse-btn" onclick="triggerFileInput('json-file')">browse files</button></p>
+                                <div class="file-requirements">
+                                    <small>Max file size: 5MB | Format: JSON</small>
+                                    <small>Array of member objects</small>
+                                </div>
+                            </div>
+                            <input type="file" id="json-file" accept=".json" style="display: none;" onchange="handleJsonUpload(this)">
+                        </div>
+                        <div class="method-actions">
+                            <button class="btn-upload" id="json-upload-btn" onclick="processJsonUpload()" disabled>
+                                <i class="fas fa-upload"></i>
+                                Import JSON Data
+                            </button>
+                            <button class="btn-template" onclick="downloadJsonTemplate()">
+                                <i class="fas fa-download"></i>
+                                JSON Template
+                            </button>
+                        </div>
+                        <div class="upload-progress" id="json-progress" style="display: none;">
+                            <div class="progress-info">
+                                <span class="progress-label">Importing data...</span>
+                                <span class="progress-percentage">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manual Entry -->
+                <div class="upload-method-card success">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <div class="method-info">
+                            <h3>Manual Entry</h3>
+                            <p>Add individual members manually</p>
+                            <div class="method-features">
+                                <span class="feature-tag">✓ Immediate</span>
+                                <span class="feature-tag">✓ Validation</span>
+                                <span class="feature-tag">✓ Photo Upload</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <div class="manual-entry-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="manual-name">Full Name *</label>
+                                    <input type="text" id="manual-name" placeholder="Enter full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-email">Email *</label>
+                                    <input type="email" id="manual-email" placeholder="Enter email address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-role">Role</label>
+                                    <select id="manual-role">
+                                        <option value="member">Member</option>
+                                        <option value="senior">Senior Member</option>
+                                        <option value="core">Core Team</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-department">Department</label>
+                                    <select id="manual-department">
+                                        <option value="">Select Department</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Mechanical">Mechanical</option>
+                                        <option value="Civil">Civil</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-year">Academic Year</label>
+                                    <select id="manual-year">
+                                        <option value="">Select Year</option>
+                                        <option value="1st Year">1st Year</option>
+                                        <option value="2nd Year">2nd Year</option>
+                                        <option value="3rd Year">3rd Year</option>
+                                        <option value="4th Year">4th Year</option>
+                                        <option value="Graduate">Graduate</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="manual-phone">Phone</label>
+                                    <input type="tel" id="manual-phone" placeholder="+91-9876543210">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="method-actions">
+                            <button class="btn-upload" onclick="addMemberManually()">
+                                <i class="fas fa-user-plus"></i>
+                                Add Member
+                            </button>
+                            <button class="btn-secondary" onclick="clearManualForm()">
+                                <i class="fas fa-eraser"></i>
+                                Clear Form
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Operations -->
+                <div class="upload-method-card warning">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="method-info">
+                            <h3>Team Operations</h3>
+                            <p>Bulk operations and management</p>
+                            <div class="method-features">
+                                <span class="feature-tag">✓ Bulk Edit</span>
+                                <span class="feature-tag">✓ Role Assignment</span>
+                                <span class="feature-tag">✓ Data Cleanup</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="method-body">
+                        <div class="operation-buttons">
+                            <button class="operation-btn" onclick="bulkUpdateRoles()">
+                                <i class="fas fa-user-tag"></i>
+                                <span>Bulk Update Roles</span>
+                            </button>
+                            <button class="operation-btn" onclick="validateTeamData()">
+                                <i class="fas fa-check-double"></i>
+                                <span>Validate Data</span>
+                            </button>
+                            <button class="operation-btn" onclick="findDuplicates()">
+                                <i class="fas fa-copy"></i>
+                                <span>Find Duplicates</span>
+                            </button>
+                            <button class="operation-btn" onclick="archiveInactiveMembers()">
+                                <i class="fas fa-archive"></i>
+                                <span>Archive Inactive</span>
+                            </button>
+                            <button class="operation-btn danger" onclick="resetTeamData()">
+                                <i class="fas fa-trash-restore"></i>
+                                <span>Reset Demo Data</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload History & Preview -->
+            <div class="upload-history-section">
+                <div class="section-header">
+                    <h2>📋 Recent Team Uploads</h2>
+                    <div class="section-actions">
+                        <button class="btn-refresh" onclick="refreshUploadHistory()">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh
+                        </button>
+                        <button class="btn-export" onclick="exportUploadHistory()">
+                            <i class="fas fa-file-export"></i>
+                            Export History
+                        </button>
+                    </div>
+                </div>
+
+                <div class="history-grid">
+                    <div class="history-table-container">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Method</th>
+                                    <th>File/Action</th>
+                                    <th>Records</th>
+                                    <th>Status</th>
+                                    <th>Added By</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="upload-history-tbody">
+                                <!-- History entries will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="preview-panel" id="preview-panel">
+                        <div class="preview-header">
+                            <h3>📊 Upload Preview</h3>
+                            <button class="preview-close" onclick="closePreview()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="preview-content" id="preview-content">
+                            <div class="preview-placeholder">
+                                <i class="fas fa-eye"></i>
+                                <p>Select a file to preview its contents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Upload Results Modal -->
+    <div id="uploadResultsModal" class="team-modal">
+        <div class="modal-overlay" onclick="closeUploadResults()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="upload-results-title">Upload Results</h3>
+                <button class="modal-close" onclick="closeUploadResults()">×</button>
+            </div>
+            <div class="modal-body" id="upload-results-body">
+                <!-- Upload results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Add Member Modal -->
+    <div id="quickAddModal" class="team-modal">
+        <div class="modal-overlay" onclick="closeQuickAdd()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>➕ Quick Add Member</h3>
+                <button class="modal-close" onclick="closeQuickAdd()">×</button>
+            </div>
+            <div class="modal-body">
+                <form class="quick-add-form" onsubmit="submitQuickAdd(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quick-name">Full Name *</label>
+                            <input type="text" id="quick-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-email">Email *</label>
+                            <input type="email" id="quick-email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quick-role">Role</label>
+                            <select id="quick-role">
+                                <option value="member">Member</option>
+                                <option value="senior">Senior Member</option>
+                                <option value="core">Core Team</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quick-department">Department</label>
+                            <select id="quick-department">
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeQuickAdd()">Cancel</button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Add Member
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/team-upload.js"></script>
+</body>
+</html>

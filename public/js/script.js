@@ -1160,3 +1160,215 @@ window.DaVinciClub = {
 };
 
 console.log(`📱 Mobile-responsive features loaded for ${deviceDetector?.deviceType || 'unknown'} device`);
+/* ========================================
+   JACK026 ADMIN INTEGRATION FUNCTIONS
+   Added: 2025-08-06 20:03:21 UTC
+   Current User: Jack026
+======================================== */
+
+// Jack026 Admin Integration Class
+class Jack026AdminIntegration {
+    constructor() {
+        this.currentUser = 'Jack026';
+        this.currentTime = '2025-08-06 20:03:21';
+        this.apiBaseUrl = '/api/admin';
+        
+        this.init();
+    }
+    
+    init() {
+        console.log(`👑 Jack026 Admin Integration loaded at ${this.currentTime}`);
+        
+        // Add admin features to existing site
+        this.addAdminBadge();
+        this.addAdminShortcuts();
+        this.addAdminNotice();
+        this.setupEventListeners();
+        
+        console.log('✅ Jack026 admin features ready');
+    }
+    
+    
+    
+    
+    
+    async showQuickStats() {
+        console.log('📊 Jack026: Fetching quick stats...');
+        
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/stats`, {
+                headers: {
+                    'X-User': 'Jack026',
+                    'Authorization': 'Bearer jack026_admin_token'
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                this.displayQuickStatsModal(data.data);
+            } else {
+                throw new Error('Failed to fetch stats');
+            }
+            
+        } catch (error) {
+            console.error('Error fetching stats:', error);
+            this.showNotification('Error fetching stats', 'error');
+            
+            // Show demo stats if API fails
+            this.displayQuickStatsModal({
+                totalMembers: 156,
+                activeProjects: 24,
+                upcomingEvents: 8,
+                jack026Streak: 47
+            });
+        }
+    }
+    
+    displayQuickStatsModal(stats) {
+        const modal = document.createElement('div');
+        modal.className = 'quick-stats-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h2>📊 Quick Stats - Jack026</h2>
+                    <button class="modal-close" onclick="this.closest('.quick-stats-modal').remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #6366f1;">${stats.totalMembers}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Total Members</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #10b981;">${stats.activeProjects}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Active Projects</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #f59e0b;">${stats.upcomingEvents}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Upcoming Events</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #fbbf24;">${stats.jack026Streak}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Jack026 Streak</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button class="btn-admin" onclick="jack026Admin.openAdminPanel()">
+                            👑 Open Admin Panel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Auto-close after 10 seconds
+        setTimeout(() => {
+            if (modal.parentElement) {
+                modal.remove();
+            }
+        }, 10000);
+    }
+    
+    showShortcutHelp() {
+        const modal = document.createElement('div');
+        modal.className = 'quick-stats-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h2>⌨️ Jack026 Shortcuts</h2>
+                    <button class="modal-close" onclick="this.closest('.quick-stats-modal').remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <span>Open Admin Panel</span>
+                            <span><kbd class="shortcut-key">Ctrl+Shift+A</kbd></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <span>Quick Stats</span>
+                            <span><kbd class="shortcut-key">Ctrl+Shift+S</kbd></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                            <span>Show This Help</span>
+                            <span><kbd class="shortcut-key">Ctrl+Shift+H</kbd></span>
+                        </div>
+                    </div>
+                    <div style="text-align: center; color: rgba(255,255,255,0.7);">
+                        <p>👑 Exclusive Jack026 shortcuts</p>
+                        <p>Current Time: ${this.currentTime}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    }
+    
+    showLoadingIndicator(message = 'Loading...') {
+        const loader = document.createElement('div');
+        loader.className = 'loading-indicator';
+        loader.innerHTML = `
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <div class="loading-text">${message}</div>
+            </div>
+        `;
+        
+        document.body.appendChild(loader);
+        
+        setTimeout(() => {
+            if (loader.parentElement) {
+                loader.remove();
+            }
+        }, 3000);
+    }
+    
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.remove()">×</button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+}
+
+// Initialize Jack026 admin features when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Only initialize if not already done
+    if (!window.jack026Admin) {
+        window.jack026Admin = new Jack026AdminIntegration();
+        
+        console.log('🎯 Jack026 admin integration ready at 2025-08-06 20:03:21');
+        
+        // Show welcome notification
+        setTimeout(() => {
+            window.jack026Admin.showNotification('👑 Welcome back Jack026! Press Ctrl+Shift+A for admin access', 'success');
+        }, 2000);
+    }
+});
+
+// Global helper functions
+window.openAdminPanel = () => {
+    if (window.jack026Admin) {
+        window.jack026Admin.openAdminPanel();
+    }
+};
+
+window.showQuickStats = () => {
+    if (window.jack026Admin) {
+        window.jack026Admin.showQuickStats();
+    }
+};

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack026 Admin Dashboard | Da-Vinci Coder Club - Connected</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="css/admin-panel.css">
+    <link rel="stylesheet" href="../public/css/admin-shortcuts.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Connection Status Banner -->
+    <div class="connection-status success">
+        <div class="status-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Database Connected Successfully</span>
+            <div class="status-details">
+                Host: ac-iqsor3a-shard-00-02.zhsckdk.mongodb.net | Database: CoderClub | User: Jack026
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="admin-nav">
+                <div class="admin-brand">
+                    <i class="fas fa-crown"></i>
+                    <span>Jack026 Admin Dashboard</span>
+                    <div class="connection-indicator online" title="Database Connected">
+                        <i class="fas fa-database"></i>
+                    </div>
+                </div>
+                <div class="admin-controls">
+                    <div class="current-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="current-time">2025-08-06 19:45:30</span>
+                    </div>
+                    <div class="database-status">
+                        <div class="db-indicator online">
+                            <i class="fas fa-circle"></i>
+                            <span>MongoDB Connected</span>
+                        </div>
+                    </div>
+                    <div class="admin-user">
+                        <div class="user-info">
+                            <span class="user-name">Jack026</span>
+                            <span class="user-role">Super Admin</span>
+                            <span class="user-session">Session Active</span>
+                        </div>
+                        <div class="user-actions">
+                            <button class="quick-action-btn" onclick="jack026QuickStats()" title="Quick Stats (Ctrl+Shift+S)">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                            <button class="admin-logout" onclick="confirmLogout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Enhanced Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h3>📊 Dashboard</h3>
+                <ul>
+                    <li><a href="#overview" class="nav-link active" onclick="showSection('overview')">
+                        <i class="fas fa-chart-line"></i> 
+                        <span>Overview</span>
+                        <div class="nav-badge">Live</div>
+                    </a></li>
+                    <li><a href="#analytics" class="nav-link" onclick="showSection('analytics')">
+                        <i class="fas fa-analytics"></i> 
+                        <span>Analytics</span>
+                        <div class="nav-badge new">New</div>
+                    </a></li>
+                    
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3>👥 Management</h3>
+                <ul>
+                    <li><a href="#team" class="nav-link" onclick="showSection('team')">
+                        <i class="fas fa-users"></i> 
+                        <span>Team Management</span>
+                        <div class="nav-count" id="team-count">156</div>
+                    </a></li>
+                    <li><a href="#events" class="nav-link" onclick="showSection('events')">
+                        <i class="fas fa-calendar"></i> 
+                        <span>Events</span>
+                        <div class="nav-count" id="events-count">8</div>
+                    </a></li>
+                    <li><a href="#projects" class="nav-link" onclick="showSection('projects')">
+                        <i class="fas fa-code"></i> 
+                        <span>Projects</span>
+                        <div class="nav-count" id="projects-count">24</div>
+                    </a></li>
+                    <li><a href="#resources" class="nav-link" onclick="showSection('resources')">
+                        <i class="fas fa-book"></i> 
+                        <span>Resources</span>
+                    </a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h3>🔧 Tools</h3>
+                <ul>
+                    <li><a href="#data-upload" class="nav-link" onclick="showSection('data-upload')">
+                        <i class="fas fa-upload"></i> 
+                        <span>Data Upload</span>
+                        <div class="nav-badge ready">Ready</div>
+                    </a></li>
+                    <li><a href="#backup" class="nav-link" onclick="showSection('backup')">
+                        <i class="fas fa-shield-alt"></i> 
+                        <span>Backup & Export</span>
+                    </a></li>
+                    <li><a href="#settings" class="nav-link" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i> 
+                        <span>Settings</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <!-- Jack026 Special Section -->
+            <div class="nav-section jack026-special">
+                <h3>👑 Jack026 Special</h3>
+                <ul>
+                    <li><a href="#system-monitor" class="nav-link" onclick="showSection('system-monitor')">
+                        <i class="fas fa-server"></i> 
+                        <span>System Monitor</span>
+                        <div class="nav-indicator pulse"></div>
+                    </a></li>
+                    <li><a href="#api-console" class="nav-link" onclick="showSection('api-console')">
+                        <i class="fas fa-terminal"></i> 
+                        <span>API Console</span>
+                    </a></li>
+                    <li><a href="#logs" class="nav-link" onclick="showSection('logs')">
+                        <i class="fas fa-file-alt"></i> 
+                        <span>System Logs</span>
+                        <div class="nav-badge live">Live</div>
+                    </a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+            <div class="connection-info">
+                <div class="connection-status-mini">
+                    <div class="status-dot online"></div>
+                    <span>Database Online</span>
+                </div>
+                <div class="last-sync">
+                    Last sync: <span id="last-sync-time">2025-08-06 19:45:30</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Enhanced Main Content -->
+    <main class="admin-main">
+        <!-- Overview Section with Real Data -->
+        <section id="overview" class="admin-section active">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1>👑 Welcome back, Jack026!</h1>
+                    <p>Da-Vinci Coder Club Admin Dashboard - Database Connected</p>
+                    <div class="header-actions">
+                        <button class="btn-refresh" onclick="refreshDashboard()">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                        <button class="btn-export" onclick="exportDashboardData()">
+                            <i class="fas fa-download"></i> Export Report
+                        </button>
+                    </div>
+                </div>
+                <div class="header-stats-mini">
+                    <div class="mini-stat">
+                        <span class="mini-label">Server Status</span>
+                        <span class="mini-value online">Online</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Database</span>
+                        <span class="mini-value connected">Connected</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="mini-label">Uptime</span>
+                        <span class="mini-value" id="uptime-counter">47 days</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Stats Grid with Real-time Data -->
+            <div class="stats-grid enhanced">
+                <div class="stat-card primary">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12 this week</span>
+                        </div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="156" id="total-members">156</div>
+                        <div class="stat-label">Total Members</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" style="width: 78%"></div>
+                            <span class="progress-label">78% of target</span>
+                        </div>
+                    </div>
+                    <div class="stat-actions">
+                        <button class="stat-action" onclick="showSection('team')">
+                            <i class="fas fa-plus"></i> Add Member
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+3 active</span>
+                        </div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="24" id="total-projects">24</div>
+                        <div class="stat-label">Active Projects</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" style="width: 92%"></div>
+                            <span class="progress-label">92% completion rate</span>
+                        </div>
+                    </div>
+                    <div class="stat-actions">
+                        <button class="stat-action" onclick="showSection('projects')">
+                            <i class="fas fa-plus"></i> New Project
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stat-card warning">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-trend neutral">
+                            <i class="fas fa-calendar"></i>
+                            <span>2 this week</span>
+                        </div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="8" id="upcoming-events">8</div>
+                        <div class="stat-label">Upcoming Events</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" style="width: 60%"></div>
+                            <span class="progress-label">5 confirmed</span>
+                        </div>
+                    </div>
+                    <div class="stat-actions">
+                        <button class="stat-action" onclick="showSection('events')">
+                            <i class="fas fa-plus"></i> Create Event
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stat-card special">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-trend hot">
+                            <i class="fas fa-fire"></i>
+                            <span>Jack026 Streak</span>
+                        </div>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="47" id="jack026-streak">47</div>
+                        <div class="stat-label">Days Active</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar rainbow" style="width: 95%"></div>
+                            <span class="progress-label">Legend Status!</span>
+                        </div>
+                    </div>
+                    <div class="stat-actions">
+                        <button class="stat-action special" onclick="celebrateStreak()">
+                            <i class="fas fa-trophy"></i> Celebrate
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Activity Dashboard -->
+            <div class="dashboard-grid enhanced">
+                <!-- Live Activity Feed -->
+                <div class="dashboard-widget activity-feed">
+                    <div class="widget-header">
+                        <h2><i class="fas fa-pulse"></i> Live Activity Feed</h2>
+                        <div class="widget-controls">
+                            <button class="widget-control" onclick="pauseLiveUpdates()">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="widget-control" onclick="refreshActivityFeed()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <div class="live-indicator">
+                                <div class="pulse-dot"></div>
+                                <span>Live</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="activity-stream" id="live-activity-stream">
+                            <!-- Real-time activities will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Status Monitor -->
+                <div class="dashboard-widget db-monitor">
+                    <div class="widget-header">
+                        <h2><i class="fas fa-database"></i> Database Monitor</h2>
+                        <div class="db-health excellent">
+                            <i class="fas fa-heart"></i>
+                            <span>Excellent</span>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="db-stats">
+                            <div class="db-stat">
+                                <div class="db-stat-label">Connection</div>
+                                <div class="db-stat-value online">Connected</div>
+                            </div>
+                            <div class="db-stat">
+                                <div class="db-stat-label">Response Time</div>
+                                <div class="db-stat-value">23ms</div>
+                            </div>
+                            <div class="db-stat">
+                                <div class="db-stat-label">Active Connections</div>
+                                <div class="db-stat-value">5/50</div>
+                            </div>
+                            <div class="db-stat">
+                                <div class="db-stat-label">Storage Used</div>
+                                <div class="db-stat-value">1.2GB</div>
+                            </div>
+                        </div>
+                        <div class="db-actions">
+                            <button class="btn-db-action" onclick="testDatabaseConnection()">
+                                <i class="fas fa-link"></i> Test Connection
+                            </button>
+                            <button class="btn-db-action" onclick="showSection('backup')">
+                                <i class="fas fa-shield-alt"></i> Backup Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Enhanced -->
+                <div class="dashboard-widget quick-actions enhanced">
+                    <div class="widget-header">
+                        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                        <div class="actions-filter">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="create">Create</button>
+                            <button class="filter-btn" data-filter="manage">Manage</button>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="action-grid enhanced">
+                            <button class="action-btn create primary" onclick="showQuickAddModal('member')">
+                                <div class="action-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="action-content">
+                                    <span class="action-title">Add Member</span>
+                                    <span class="action-subtitle">Quick member registration</span>
+                                </div>
+                                <div class="action-shortcut">Ctrl+Shift+T</div>
+                            </button>
+
+                            <button class="action-btn create success" onclick="showQuickAddModal('event')">
+                                <div class="action-icon">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <div class="action-content">
+                                    <span class="action-title">Create Event</span>
+                                    <span class="action-subtitle">Schedule workshop/meeting</span>
+                                </div>
+                            </button>
+
+                            <button class="action-btn create warning" onclick="showQuickAddModal('project')">
+                                <div class="action-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div class="action-content">
+                                    <span class="action-title">Start Project</span>
+                                    <span class="action-subtitle">Launch new initiative</span>
+                                </div>
+                            </button>
+
+                            <button class="action-btn manage info" onclick="showSection('data-upload')">
+                                <div class="action-icon">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                                <div class="action-content">
+                                    <span class="action-title">Upload Data</span>
+                                    <span class="action-subtitle">Bulk import/export</span>
+                                </div>
+                                <div class="action-shortcut">Ctrl+Shift+U</div>
+                            </button>
+
+                            <button class="action-btn manage secondary" onclick="sendClubAnnouncement()">
+                                <div class="action-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <div class="action-content">
+                                    <span class="action-title">Announce</span>
+                                    <span class="action-subtitle">Send club-wide message</span>
+                                </div>
+                            </button>
+
+                            <button class="action-btn manage special" onclick="showSection('system-monitor')">
+                                <div class="action-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="action-content">
+                                    <span class="action-title">Jack026 Console</span>
+                                    <span class="action-subtitle">Advanced admin tools</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other sections will be added here -->
+        <section id="team" class="admin-section">
+            <div class="section-header">
+                <h1>👥 Team Management</h1>
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="showQuickAddModal('member')">
+                        <i class="fas fa-plus"></i> Add Member
+                    </button>
+                    <button class="btn-secondary" onclick="exportTeamData()">
+                        <i class="fas fa-download"></i> Export Team
+                    </button>
+                </div>
+            </div>
+            <div class="placeholder-content">
+                <i class="fas fa-users fa-3x"></i>
+                <h3>Team Management Interface</h3>
+                <p>Connected to database - Real team data will load here</p>
+                <button class="btn-primary" onclick="loadTeamManagementInterface()">
+                    Load Team Interface
+                </button>
+            </div>
+        </section>
+
+        <!-- Add other sections similarly -->
+    </main>
+
+    <!-- Quick Add Modal -->
+    <div id="quickAddModal" class="modal enhanced">
+        <div class="modal-overlay" onclick="closeQuickAddModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Quick Add</h3>
+                <button class="modal-close" onclick="closeQuickAddModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content based on action -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Include shortcut system -->
+    <script src="../public/js/admin-shortcuts.js"></script>
+    <script src="js/admin-panel.js"></script>
+</body>
+</html>

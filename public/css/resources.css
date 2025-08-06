@@ -238,7 +238,7 @@
     margin-right: auto;
 }
 
-/* Enhanced Hero Stats with Jack026 personalization */
+/* Enhanced Hero Stats with Jack026ersonalization */
 .resources-hero .hero-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -783,7 +783,7 @@
     box-shadow: var(--shadow-md);
 }
 
-/* Jack026's Personalized Dashboard */
+/* Jack026 Personalized Dashboard */
 .personalized-dashboard {
     padding: var(--spacing-20) 0;
     background: var(--bg-secondary);
@@ -2153,14 +2153,14 @@
     }
 }
 
-/* Jack026 Specific Personalization Styles */
-.Jack026-highlight {
+/* Jack026pecific Personalization Styles */
+.Jack026ighlight {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(244, 63, 94, 0.1));
     border: 1px solid rgba(99, 102, 241, 0.3);
-    animation: Jack026Glow 3s ease-in-out infinite;
+    animation: Jack026ow 3s ease-in-out infinite;
 }
 
-@keyframes Jack026Glow {
+@keyframes Jack026ow {
     0%, 100% {
         box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
     }
@@ -2169,12 +2169,12 @@
     }
 }
 
-.Jack026-progress-ring {
+.Jack026rogress-ring {
     position: relative;
     display: inline-block;
 }
 
-.Jack026-progress-ring::before {
+.Jack026rogress-ring::before {
     content: '';
     position: absolute;
     top: -5px;
@@ -2184,21 +2184,21 @@
     border: 2px solid var(--primary-500);
     border-radius: 50%;
     border-top-color: transparent;
-    animation: Jack026ProgressSpin 2s linear infinite;
+    animation: Jack026ogressSpin 2s linear infinite;
 }
 
-@keyframes Jack026ProgressSpin {
+@keyframes Jack026ogressSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-/* Resource Card Enhanced States for Jack026 */
-.resource-card.Jack026-bookmarked {
+/* Resource Card Enhanced States for Jack026/
+.resource-card.Jack026ookmarked {
     border-color: var(--warning-500);
     background: rgba(245, 158, 11, 0.05);
 }
 
-.resource-card.Jack026-bookmarked::after {
+.resource-card.Jack026ookmarked::after {
     content: '🔖';
     position: absolute;
     top: var(--spacing-3);
@@ -2207,12 +2207,12 @@
     z-index: 3;
 }
 
-.resource-card.Jack026-completed {
+.resource-card.Jack026ompleted {
     border-color: var(--success-500);
     background: rgba(16, 185, 129, 0.05);
 }
 
-.resource-card.Jack026-completed::after {
+.resource-card.Jack026ompleted::after {
     content: '✅';
     position: absolute;
     top: var(--spacing-3);
@@ -2221,12 +2221,12 @@
     z-index: 3;
 }
 
-.resource-card.Jack026-in-progress {
+.resource-card.Jack026n-progress {
     border-color: var(--accent-500);
     background: rgba(6, 182, 212, 0.05);
 }
 
-.resource-card.Jack026-in-progress::after {
+.resource-card.Jack026n-progress::after {
     content: '📖';
     position: absolute;
     top: var(--spacing-3);
@@ -2235,14 +2235,14 @@
     z-index: 3;
 }
 
-/* Learning Path Progress for Jack026 */
-.path-card.Jack026-active {
+/* Learning Path Progress for Jack026/
+.path-card.Jack026e {
     border-color: var(--primary-500);
     background: rgba(99, 102, 241, 0.05);
     position: relative;
 }
 
-.path-card.Jack026-active::before {
+.path-card.Jack026ctive::before {
     content: '🎯 Currently Learning';
     position: absolute;
     top: var(--spacing-3);
@@ -2256,13 +2256,13 @@
     z-index: 3;
 }
 
-/* Enhanced Tooltips for Jack026 */
-.Jack026-tooltip {
+/* Enhanced Tooltips for Jack026/
+.Jack026ooltip {
     position: relative;
     cursor: help;
 }
 
-.Jack026-tooltip::before {
+.Jack026ooltip::before {
     content: attr(data-tooltip);
     position: absolute;
     bottom: 125%;
@@ -2282,7 +2282,7 @@
     z-index: var(--z-tooltip);
 }
 
-.Jack026-tooltip::after {
+.Jack026ooltip::after {
     content: '';
     position: absolute;
     bottom: 115%;
@@ -2296,8 +2296,8 @@
     z-index: var(--z-tooltip);
 }
 
-.Jack026-tooltip:hover::before,
-.Jack026-tooltip:hover::after {
+.Jack026ooltip:hover::before,
+.Jack026ooltip:hover::after {
     opacity: 1;
     visibility: visible;
 }
@@ -2344,7 +2344,7 @@
     color: var(--warning-500);
 }
 
-/* Enhanced Search Results for Jack026 */
+/* Enhanced Search Results for Jack026/
 .search-result-highlight {
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
     border: 1px solid rgba(245, 158, 11, 0.3);
@@ -2402,7 +2402,7 @@
         border: 2px solid var(--text-primary);
     }
     
-    .Jack026-highlight {
+    .Jack026ighlight {
         border: 3px solid var(--primary-500);
     }
 }
@@ -2427,8 +2427,8 @@
         transform: none;
     }
     
-    .Jack026Glow,
-    .Jack026ProgressSpin,
+    .Jack026ow,
+    .Jack026ogressSpin,
     .streakFlame {
         animation: none;
     }
@@ -2445,7 +2445,7 @@
         opacity: 0.3;
     }
     
-    .Jack026-highlight {
+    .Jack026ighlight {
         background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(244, 63, 94, 0.08));
     }
 }
@@ -2535,7 +2535,7 @@
     line-height: 1.6;
 }
 
-/* Jack026's Achievement Badges */
+/* Jack026 Achievement Badges */
 .achievement-badge {
     display: inline-flex;
     align-items: center;
@@ -2626,5 +2626,5 @@
    File Size: ~85KB
    Last Updated: 2025-08-06 12:09:22 UTC
    Current User: Jack026
-   Built for: Jack026's Learning Journey
+   Built for: Jack026 Learning Journey
 ======================================== */
