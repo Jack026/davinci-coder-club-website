@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jack026's Account Dashboard - Da-Vinci Coder Club at Assam Downtown University. Manage profile, settings, achievements, and track coding journey.">
+    <meta name="keywords" content="Jack026, account, profile, Da-Vinci Coder Club, ADTU, dashboard, settings, achievements, coding progress">
+    <meta name="author" content="Da-Vinci Coder Club">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- Enhanced Open Graph / Facebook -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://davincicoders.adtu.ac.in/account">
+    <meta property="og:title" content="Jack026's Profile | Lead Developer | Da-Vinci Coder Club">
+    <meta property="og:description" content="Jack026 - Lead Developer and President of Da-Vinci Coder Club. Full-stack developer, mentor, and innovation leader at ADTU.">
+    <meta property="og:image" content="https://davincicoders.adtu.ac.in/images/og/jack026-profile.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="profile:first_name" content="Jack">
+    <meta property="profile:last_name" content="Anderson">
+    <meta property="profile:username" content="Jack026">
+
+    <!-- Enhanced Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@davinci_coders">
+    <meta name="twitter:creator" content="@jack026">
+    <meta name="twitter:url" content="https://davincicoders.adtu.ac.in/account">
+    <meta name="twitter:title" content="Jack026 | Lead Developer | Da-Vinci Coder Club">
+    <meta name="twitter:description" content="Leading innovation at Da-Vinci Coder Club • Full-stack Developer • Mentor • President at ADTU">
+    <meta property="twitter:image" content="https://davincicoders.adtu.ac.in/images/og/jack026-twitter.jpg">
+
+    <title>Account Dashboard | Jack026 | Da-Vinci Coder Club</title>
+    <link rel="canonical" href="https://davincicoders.adtu.ac.in/account">
+    
+    <!-- Enhanced CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/account.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Enhanced Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='35' text-anchor='middle' fill='white' font-size='20' font-family='monospace'>👤</text><text x='50' y='65' text-anchor='middle' fill='white' font-size='20' font-family='monospace'>&lt;/&gt;</text></svg>">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Enhanced Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jack Anderson",
+        "alternateName": "Jack026",
+        "description": "Lead Developer and President of Da-Vinci Coder Club at Assam Downtown University",
+        "url": "https://davincicoders.adtu.ac.in/account",
+        "image": "https://davincicoders.adtu.ac.in/images/jack026-profile.jpg",
+        "jobTitle": "Lead Developer & Club President",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Da-Vinci Coder Club",
+            "url": "https://davincicoders.adtu.ac.in"
+        },
+        "affiliation": {
+            "@type": "EducationalOrganization",
+            "name": "Assam Downtown University",
+            "url": "https://adtu.ac.in"
+        },
+        "knowsAbout": [
+            "React.js",
+            "Node.js",
+            "Python",
+            "System Design",
+            "Full-stack Development",
+            "Team Leadership",
+            "Mentoring"
+        ],
+        "sameAs": [
+            "https://github.com/jack026",
+            "https://linkedin.com/in/jack026",
+            "https://twitter.com/jack026"
+        ],
+        "memberOf": {
+            "@type": "Organization",
+            "name": "Da-Vinci Coder Club"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <!-- Enhanced Loading Screen -->
+    <div id="loading-screen" class="loading-screen" aria-hidden="true" role="status">
+        <div class="loading-container">
+            <div class="loading-logo" aria-label="Jack026 Account Loading">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span>Account</span>
+            </div>
+            <div class="loading-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Loading progress">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Loading Jack026's dashboard...</p>
+            <div class="loading-tips">
+                <p class="loading-tip">🎯 Welcome back, Jack026! Preparing your personalized dashboard...</p>
+                <p class="loading-timestamp">🕒 <time datetime="2025-08-06T13:28:58Z">2025-08-06 13:28:58 UTC</time></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <header>
+        <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="/" class="nav-logo" aria-label="Da-Vinci Coder Club Home">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <span>Da-Vinci Coder Club</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu" role="menubar">
+                    <li role="none"><a href="/" class="nav-link" role="menuitem">Home</a></li>
+                    <li role="none"><a href="/about" class="nav-link" role="menuitem">About</a></li>
+                    <li role="none"><a href="/events" class="nav-link" role="menuitem">Events</a></li>
+                    <li role="none"><a href="/projects" class="nav-link" role="menuitem">Projects</a></li>
+                    <li role="none"><a href="/resources" class="nav-link" role="menuitem">Resources</a></li>
+                    <li role="none"><a href="/team" class="nav-link" role="menuitem">Team</a></li>
+                    <li role="none"><a href="/contact" class="nav-link" role="menuitem">Contact</a></li>
+                </ul>
+                
+                <!-- Jack026's Account Button -->
+                <div class="nav-account" role="region" aria-label="Account menu">
+                    <div class="account-dropdown">
+                        <button class="account-btn" aria-label="Jack026 account menu" aria-expanded="false" aria-haspopup="true">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%236366f1'/><text x='40' y='50' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>J</text></svg>" 
+                                 alt="Jack026" width="32" height="32" class="account-avatar">
+                            <div class="account-info">
+                                <span class="account-name">Jack026</span>
+                                <span class="account-role">Lead Developer</span>
+                                <div class="account-status">
+                                    <i class="fas fa-circle online-indicator"></i>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down account-arrow"></i>
+                        </button>
+                        
+                        <div class="account-dropdown-menu" role="menu">
+                            <a href="/account" class="dropdown-item active" role="menuitem">
+                                <i class="fas fa-user"></i>
+                                <span>My Account</span>
+                            </a>
+                            <a href="/account/profile" class="dropdown-item" role="menuitem">
+                                <i class="fas fa-edit"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                            <a href="/account/achievements" class="dropdown-item" role="menuitem">
+                                <i class="fas fa-trophy"></i>
+                                <span>Achievements</span>
+                            </a>
+                            <a href="/account/projects" class="dropdown-item" role="menuitem">
+                                <i class="fas fa-code"></i>
+                                <span>My Projects</span>
+                            </a>
+                            <a href="/account/settings" class="dropdown-item" role="menuitem">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/logout" class="dropdown-item logout" role="menuitem">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Account Hero Section -->
+        <section class="account-hero" aria-labelledby="hero-title">
+            <div class="hero-background" aria-hidden="true">
+                <div class="hero-particles" role="presentation"></div>
+                <div class="hero-gradient" role="presentation"></div>
+                <div class="coding-matrix" role="presentation"></div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <!-- Enhanced Breadcrumb -->
+                    <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+                        <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+                                <meta itemprop="position" content="1">
+                            </li>
+                            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+                                <span itemprop="name">Account</span>
+                                <meta itemprop="position" content="2">
+                            </li>
+                        </ol>
+                    </nav>
+                    
+                    <div class="hero-profile" data-aos="fade-up">
+                        <div class="profile-avatar-section">
+                            <div class="avatar-container">
+                                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%236366f1'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-weight='bold'>J</text></svg>" 
+                                     alt="Jack026" width="120" height="120" class="profile-avatar">
+                                <div class="avatar-ring"></div>
+                                <div class="status-indicator online">
+                                    <i class="fas fa-circle"></i>
+                                </div>
+                                <button class="avatar-edit-btn" aria-label="Edit profile picture">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info">
+                            <div class="profile-header">
+                                <h1 id="hero-title" class="profile-name">
+                                    Jack Anderson
+                                    <span class="verified-badge" title="Verified Lead Developer">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                </h1>
+                                <p class="profile-username">@Jack026</p>
+                                <p class="profile-title">Lead Developer & Club President</p>
+                                <p class="profile-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Assam Downtown University, Guwahati
+                                </p>
+                            </div>
+                            
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="156">0</span>
+                                    <span class="stat-label">Contributions</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="24">0</span>
+                                    <span class="stat-label">Projects</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="47">0</span>
+                                    <span class="stat-label">Mentees</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-count="892">0</span>
+                                    <span class="stat-label">Days Active</span>
+                                </div>
+                            </div>
+                            
+                            <div class="profile-actions">
+                                <button class="btn btn-primary" onclick="window.location.href='/account/profile'">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Edit Profile</span>
+                                </button>
+                                <button class="btn btn-secondary" onclick="accountPage.shareProfile()">
+                                    <i class="fas fa-share"></i>
+                                    <span>Share Profile</span>
+                                </button>
+                                <button class="btn btn-accent" onclick="accountPage.exportData()">
+                                    <i class="fas fa-download"></i>
+                                    <span>Export Data</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Navigation Tabs -->
+        <section class="account-navigation" aria-label="Account sections">
+            <div class="container">
+                <div class="nav-tabs" role="tablist">
+                    <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="overview-panel" id="overview-tab">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Overview</span>
+                    </button>
+                    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="activity-panel" id="activity-tab">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Activity</span>
+                    </button>
+                    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="projects-panel" id="projects-tab">
+                        <i class="fas fa-code"></i>
+                        <span>Projects</span>
+                    </button>
+                    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="achievements-panel" id="achievements-tab">
+                        <i class="fas fa-trophy"></i>
+                        <span>Achievements</span>
+                    </button>
+                    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="settings-panel" id="settings-tab">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Content Panels -->
+        <div class="account-content">
+            <div class="container">
+                <!-- Overview Panel -->
+                <div class="tab-panel active" id="overview-panel" role="tabpanel" aria-labelledby="overview-tab">
+                    <div class="panel-grid">
+                        <!-- Welcome Card -->
+                        <div class="overview-card welcome-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-sun"></i>
+                                    Welcome back, Jack026!
+                                </h3>
+                                <div class="current-time">
+                                    <time datetime="2025-08-06T13:28:58Z" id="currentTime">
+                                        Wednesday, August 6, 2025 • 1:28 PM
+                                    </time>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="welcome-message">Ready to continue your coding journey? You have 3 pending tasks and 2 new project invitations waiting for you.</p>
+                                <div class="quick-actions">
+                                    <button class="quick-action" onclick="accountPage.continueLastProject()">
+                                        <i class="fas fa-play"></i>
+                                        <span>Continue Coding</span>
+                                    </button>
+                                    <button class="quick-action" onclick="accountPage.viewNotifications()">
+                                        <i class="fas fa-bell"></i>
+                                        <span>View Notifications</span>
+                                        <span class="notification-badge">5</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Current Streak -->
+                        <div class="overview-card streak-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-fire"></i>
+                                    Coding Streak
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="streak-display">
+                                    <span class="streak-number">47</span>
+                                    <span class="streak-unit">days</span>
+                                </div>
+                                <p class="streak-description">Keep it up! You're on fire 🔥</p>
+                                <div class="streak-calendar">
+                                    <div class="calendar-week">
+                                        <div class="calendar-day active" title="Today">
+                                            <span>M</span>
+                                        </div>
+                                        <div class="calendar-day completed" title="Completed">
+                                            <span>T</span>
+                                        </div>
+                                        <div class="calendar-day completed" title="Completed">
+                                            <span>W</span>
+                                        </div>
+                                        <div class="calendar-day completed" title="Completed">
+                                            <span>T</span>
+                                        </div>
+                                        <div class="calendar-day completed" title="Completed">
+                                            <span>F</span>
+                                        </div>
+                                        <div class="calendar-day completed" title="Completed">
+                                            <span>S</span>
+                                        </div>
+                                        <div class="calendar-day completed" title="Completed">
+                                            <span>S</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="overview-card activity-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-history"></i>
+                                    Recent Activity
+                                </h3>
+                                <a href="#" class="view-all-link">View all</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon code">
+                                            <i class="fas fa-code"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Pushed new commit to <strong>Learning Platform</strong></p>
+                                            <time datetime="2025-08-06T12:15:00Z">2 hours ago</time>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon achievement">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Earned <strong>Code Mentor</strong> badge</p>
+                                            <time datetime="2025-08-05T18:30:00Z">Yesterday</time>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon collaboration">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <p>Mentored <strong>3 new members</strong></p>
+                                            <time datetime="2025-08-05T14:20:00Z">Yesterday</time>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Progress -->
+                        <div class="overview-card skills-card" data-aos="fade-up" data-aos-delay="400">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-brain"></i>
+                                    Skills Progress
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="skills-list">
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">React.js</span>
+                                            <span class="skill-percentage">95%</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" style="width: 95%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">Node.js</span>
+                                            <span class="skill-percentage">88%</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" style="width: 88%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">Python</span>
+                                            <span class="skill-percentage">92%</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" style="width: 92%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">System Design</span>
+                                            <span class="skill-percentage">76%</span>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress" style="width: 76%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="overview-card stats-card" data-aos="fade-up" data-aos-delay="500">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-bar"></i>
+                                    This Month
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats-grid">
+                                    <div class="stat-box">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-code"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-value">127</span>
+                                            <span class="stat-label">Commits</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-box">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-value">15</span>
+                                            <span class="stat-label">Mentored</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-box">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-value">89h</span>
+                                            <span class="stat-label">Coding</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-box">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-value">4.9</span>
+                                            <span class="stat-label">Rating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Notifications -->
+                        <div class="overview-card notifications-card" data-aos="fade-up" data-aos-delay="600">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-bell"></i>
+                                    Notifications
+                                </h3>
+                                <button class="mark-all-read" onclick="accountPage.markAllAsRead()">
+                                    Mark all as read
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="notifications-list">
+                                    <div class="notification-item unread">
+                                        <div class="notification-icon project">
+                                            <i class="fas fa-code-branch"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <p><strong>Sarah Kumar</strong> invited you to collaborate on <strong>Mobile App UI</strong></p>
+                                            <time datetime="2025-08-06T11:30:00Z">2 hours ago</time>
+                                        </div>
+                                        <div class="notification-actions">
+                                            <button class="btn-small btn-primary">Accept</button>
+                                            <button class="btn-small btn-secondary">Decline</button>
+                                        </div>
+                                    </div>
+                                    <div class="notification-item unread">
+                                        <div class="notification-icon achievement">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <p>Congratulations! You've earned the <strong>Team Leader</strong> badge</p>
+                                            <time datetime="2025-08-06T09:15:00Z">4 hours ago</time>
+                                        </div>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-icon event">
+                                            <i class="fas fa-calendar"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <p>Reminder: <strong>Code Review Session</strong> starts in 30 minutes</p>
+                                            <time datetime="2025-08-05T16:45:00Z">Yesterday</time>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Panel -->
+                <div class="tab-panel" id="activity-panel" role="tabpanel" aria-labelledby="activity-tab">
+                    <div class="panel-grid">
+                        <!-- Activity Chart -->
+                        <div class="activity-chart-card" data-aos="fade-up">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-area"></i>
+                                    Coding Activity
+                                </h3>
+                                <div class="chart-controls">
+                                    <select id="activityPeriod" class="chart-select">
+                                        <option value="week">This Week</option>
+                                        <option value="month" selected>This Month</option>
+                                        <option value="year">This Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="activityChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Language Stats -->
+                        <div class="language-stats-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-code"></i>
+                                    Languages Used
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="language-list">
+                                    <div class="language-item">
+                                        <div class="language-info">
+                                            <span class="language-name">
+                                                <span class="language-dot" style="background: #f1e05a;"></span>
+                                                JavaScript
+                                            </span>
+                                            <span class="language-percentage">42.3%</span>
+                                        </div>
+                                        <div class="language-bar">
+                                            <div class="language-progress" style="width: 42.3%; background: #f1e05a;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="language-item">
+                                        <div class="language-info">
+                                            <span class="language-name">
+                                                <span class="language-dot" style="background: #3572A5;"></span>
+                                                Python
+                                            </span>
+                                            <span class="language-percentage">28.7%</span>
+                                        </div>
+                                        <div class="language-bar">
+                                            <div class="language-progress" style="width: 28.7%; background: #3572A5;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="language-item">
+                                        <div class="language-info">
+                                            <span class="language-name">
+                                                <span class="language-dot" style="background: #e34c26;"></span>
+                                                HTML
+                                            </span>
+                                            <span class="language-percentage">15.2%</span>
+                                        </div>
+                                        <div class="language-bar">
+                                            <div class="language-progress" style="width: 15.2%; background: #e34c26;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="language-item">
+                                        <div class="language-info">
+                                            <span class="language-name">
+                                                <span class="language-dot" style="background: #563d7c;"></span>
+                                                CSS
+                                            </span>
+                                            <span class="language-percentage">13.8%</span>
+                                        </div>
+                                        <div class="language-bar">
+                                            <div class="language-progress" style="width: 13.8%; background: #563d7c;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contribution Heatmap -->
+                        <div class="contribution-heatmap-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Contribution Activity
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="heatmap-container">
+                                    <div class="heatmap-months">
+                                        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span>
+                                        <span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+                                        <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                                    </div>
+                                    <div class="heatmap-grid" id="contributionHeatmap">
+                                        <!-- Generated by JavaScript -->
+                                    </div>
+                                    <div class="heatmap-legend">
+                                        <span>Less</span>
+                                        <div class="legend-squares">
+                                            <div class="legend-square level-0"></div>
+                                            <div class="legend-square level-1"></div>
+                                            <div class="legend-square level-2"></div>
+                                            <div class="legend-square level-3"></div>
+                                            <div class="legend-square level-4"></div>
+                                        </div>
+                                        <span>More</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Panel -->
+                <div class="tab-panel" id="projects-panel" role="tabpanel" aria-labelledby="projects-tab">
+                    <div class="projects-section">
+                        <div class="section-header">
+                            <h3>My Projects</h3>
+                            <div class="section-actions">
+                                <button class="btn btn-primary" onclick="accountPage.createNewProject()">
+                                    <i class="fas fa-plus"></i>
+                                    New Project
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="projects-grid">
+                            <div class="project-card featured" data-aos="fade-up" data-aos-delay="100">
+                                <div class="project-header">
+                                    <div class="project-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="project-status">
+                                        <span class="status-badge active">Active</span>
+                                    </div>
+                                </div>
+                                <div class="project-body">
+                                    <h4 class="project-title">Da-Vinci Learning Platform</h4>
+                                    <p class="project-description">A comprehensive e-learning platform for coding education with interactive tutorials and real-time collaboration.</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">Node.js</span>
+                                        <span class="tech-tag">MongoDB</span>
+                                    </div>
+                                    <div class="project-progress">
+                                        <div class="progress-info">
+                                            <span>Progress</span>
+                                            <span>75%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 75%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="project-stats">
+                                        <div class="stat">
+                                            <i class="fas fa-code"></i>
+                                            <span>12,547 lines</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-users"></i>
+                                            <span>5 contributors</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>23 stars</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="project-btn primary">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        View Project
+                                    </button>
+                                    <button class="project-btn secondary">
+                                        <i class="fab fa-github"></i>
+                                        GitHub
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="project-header">
+                                    <div class="project-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="project-status">
+                                        <span class="status-badge planning">Planning</span>
+                                    </div>
+                                </div>
+                                <div class="project-body">
+                                    <h4 class="project-title">Club Management App</h4>
+                                    <p class="project-description">Mobile application for managing club activities, events, and member communications.</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Flutter</span>
+                                        <span class="tech-tag">Firebase</span>
+                                        <span class="tech-tag">Dart</span>
+                                    </div>
+                                    <div class="project-progress">
+                                        <div class="progress-info">
+                                            <span>Progress</span>
+                                            <span>15%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 15%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="project-stats">
+                                        <div class="stat">
+                                            <i class="fas fa-code"></i>
+                                            <span>2,341 lines</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-users"></i>
+                                            <span>3 contributors</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>8 stars</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="project-btn primary">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        View Project
+                                    </button>
+                                    <button class="project-btn secondary">
+                                        <i class="fab fa-github"></i>
+                                        GitHub
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="project-header">
+                                    <div class="project-icon">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="project-status">
+                                        <span class="status-badge completed">Completed</span>
+                                    </div>
+                                </div>
+                                <div class="project-body">
+                                    <h4 class="project-title">AI Study Assistant</h4>
+                                    <p class="project-description">Intelligent chatbot that helps students with coding questions and provides personalized learning recommendations.</p>
+                                    <div class="project-tech">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">TensorFlow</span>
+                                        <span class="tech-tag">FastAPI</span>
+                                    </div>
+                                    <div class="project-progress">
+                                        <div class="progress-info">
+                                            <span>Progress</span>
+                                            <span>100%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill completed" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="project-stats">
+                                        <div class="stat">
+                                            <i class="fas fa-code"></i>
+                                            <span>8,923 lines</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-users"></i>
+                                            <span>2 contributors</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>45 stars</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-actions">
+                                    <button class="project-btn primary">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        View Project
+                                    </button>
+                                    <button class="project-btn secondary">
+                                        <i class="fab fa-github"></i>
+                                        GitHub
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements Panel -->
+                <div class="tab-panel" id="achievements-panel" role="tabpanel" aria-labelledby="achievements-tab">
+                    <div class="achievements-section">
+                        <div class="section-header">
+                            <h3>Achievements & Badges</h3>
+                            <div class="achievement-stats">
+                                <span class="achievement-count">24 earned</span>
+                                <span class="achievement-progress">8 in progress</span>
+                            </div>
+                        </div>
+                        
+                        <div class="achievements-grid">
+                            <div class="achievement-card earned" data-aos="fade-up" data-aos-delay="100">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="achievement-content">
+                                    <h4 class="achievement-title">Club President</h4>
+                                    <p class="achievement-description">Elected as the president of Da-Vinci Coder Club</p>
+                                    <div class="achievement-date">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Earned on August 15, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-badge legendary">
+                                    <span>Legendary</span>
+                                </div>
+                            </div>
+
+                            <div class="achievement-card earned" data-aos="fade-up" data-aos-delay="200">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="achievement-content">
+                                    <h4 class="achievement-title">Master Mentor</h4>
+                                    <p class="achievement-description">Successfully mentored 50+ club members</p>
+                                    <div class="achievement-date">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Earned on July 28, 2025</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-badge epic">
+                                    <span>Epic</span>
+                                </div>
+                            </div>
+
+                            <div class="achievement-card earned" data-aos="fade-up" data-aos-delay="300">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="achievement-content">
+                                    <h4 class="achievement-title">Streak Master</h4>
+                                    <p class="achievement-description">Maintained 30+ day coding streak</p>
+                                    <div class="achievement-date">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Earned on July 20, 2025</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-badge rare">
+                                    <span>Rare</span>
+                                </div>
+                            </div>
+
+                            <div class="achievement-card in-progress" data-aos="fade-up" data-aos-delay="400">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div class="achievement-content">
+                                    <h4 class="achievement-title">Innovation Leader</h4>
+                                    <p class="achievement-description">Lead 10 successful project launches</p>
+                                    <div class="achievement-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 70%;"></div>
+                                        </div>
+                                        <span class="progress-text">7/10 projects</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-badge legendary">
+                                    <span>In Progress</span>
+                                </div>
+                            </div>
+
+                            <div class="achievement-card locked" data-aos="fade-up" data-aos-delay="500">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="achievement-content">
+                                    <h4 class="achievement-title">Global Recognition</h4>
+                                    <p class="achievement-description">Gain recognition in international coding competitions</p>
+                                    <div class="achievement-requirements">
+                                        <span>Requirements: Participate in 5 international events</span>
+                                    </div>
+                                </div>
+                                <div class="achievement-badge legendary">
+                                    <span>Locked</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievement Categories -->
+                        <div class="achievement-categories">
+                            <h4>Achievement Categories</h4>
+                            <div class="categories-grid">
+                                <div class="category-card">
+                                    <div class="category-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h5>Coding Mastery</h5>
+                                        <div class="category-progress">
+                                            <span>8/12 earned</span>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 67%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-card">
+                                    <div class="category-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h5>Leadership</h5>
+                                        <div class="category-progress">
+                                            <span>6/8 earned</span>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 75%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-card">
+                                    <div class="category-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h5>Mentoring</h5>
+                                        <div class="category-progress">
+                                            <span>5/6 earned</span>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 83%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-card">
+                                    <div class="category-icon">
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="category-info">
+                                        <h5>Competition</h5>
+                                        <div class="category-progress">
+                                            <span>3/10 earned</span>
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 30%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class="tab-panel" id="settings-panel" role="tabpanel" aria-labelledby="settings-tab">
+                    <div class="settings-section">
+                        <div class="section-header">
+                            <h3>Account Settings</h3>
+                            <p>Manage your account preferences and privacy settings</p>
+                        </div>
+                        
+                        <div class="settings-grid">
+                            <!-- Profile Settings -->
+                            <div class="settings-card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="settings-header">
+                                    <h4>
+                                        <i class="fas fa-user"></i>
+                                        Profile Information
+                                    </h4>
+                                </div>
+                                <div class="settings-body">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" id="fullName" value="Jack Anderson" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" id="username" value="Jack026" class="form-control" readonly>
+                                        <small class="form-text">Username cannot be changed</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" value="jack026@davincicoders.adtu.ac.in" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bio">Bio</label>
+                                        <textarea id="bio" class="form-control" rows="3">Lead Developer and President of Da-Vinci Coder Club. Passionate about full-stack development and mentoring the next generation of coders.</textarea>
+                                    </div>
+                                    <button class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+
+                            <!-- Privacy Settings -->
+                            <div class="settings-card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="settings-header">
+                                    <h4>
+                                        <i class="fas fa-shield-alt"></i>
+                                        Privacy & Security
+                                    </h4>
+                                </div>
+                                <div class="settings-body">
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Profile Visibility</h5>
+                                            <p>Control who can see your profile</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <select class="form-control">
+                                                <option value="public" selected>Public</option>
+                                                <option value="members">Club Members Only</option>
+                                                <option value="private">Private</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Activity Status</h5>
+                                            <p>Show when you're online</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Two-Factor Authentication</h5>
+                                            <p>Add an extra layer of security</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <button class="btn btn-secondary">Enable 2FA</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div class="settings-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="settings-header">
+                                    <h4>
+                                        <i class="fas fa-bell"></i>
+                                        Notifications
+                                    </h4>
+                                </div>
+                                <div class="settings-body">
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Email Notifications</h5>
+                                            <p>Receive updates via email</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Project Updates</h5>
+                                            <p>Notifications about your projects</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Collaboration Requests</h5>
+                                            <p>When someone wants to collaborate</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Achievement Notifications</h5>
+                                            <p>When you earn new badges</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Theme Settings -->
+                            <div class="settings-card" data-aos="fade-up" data-aos-delay="400">
+                                <div class="settings-header">
+                                    <h4>
+                                        <i class="fas fa-palette"></i>
+                                        Appearance
+                                    </h4>
+                                </div>
+                                <div class="settings-body">
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Theme</h5>
+                                            <p>Choose your preferred theme</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <div class="theme-options">
+                                                <label class="theme-option">
+                                                    <input type="radio" name="theme" value="dark" checked>
+                                                    <div class="theme-preview dark">
+                                                        <div class="theme-header"></div>
+                                                        <div class="theme-content"></div>
+                                                    </div>
+                                                    <span>Dark</span>
+                                                </label>
+                                                <label class="theme-option">
+                                                    <input type="radio" name="theme" value="light">
+                                                    <div class="theme-preview light">
+                                                        <div class="theme-header"></div>
+                                                        <div class="theme-content"></div>
+                                                    </div>
+                                                    <span>Light</span>
+                                                </label>
+                                                <label class="theme-option">
+                                                    <input type="radio" name="theme" value="auto">
+                                                    <div class="theme-preview auto">
+                                                        <div class="theme-header"></div>
+                                                        <div class="theme-content"></div>
+                                                    </div>
+                                                    <span>Auto</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="setting-item">
+                                        <div class="setting-info">
+                                            <h5>Reduced Motion</h5>
+                                            <p>Minimize animations and transitions</p>
+                                        </div>
+                                        <div class="setting-control">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account Management -->
+                            <div class="settings-card danger-zone" data-aos="fade-up" data-aos-delay="500">
+                                <div class="settings-header">
+                                    <h4>
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        Danger Zone
+                                    </h4>
+                                </div>
+                                <div class="settings-body">
+                                    <div class="danger-actions">
+                                        <div class="danger-item">
+                                            <div class="danger-info">
+                                                <h5>Export Account Data</h5>
+                                                <p>Download a copy of your account data</p>
+                                            </div>
+                                            <button class="btn btn-secondary">Export Data</button>
+                                        </div>
+                                        <div class="danger-item">
+                                            <div class="danger-info">
+                                                <h5>Deactivate Account</h5>
+                                                <p>Temporarily disable your account</p>
+                                            </div>
+                                            <button class="btn btn-warning">Deactivate</button>
+                                        </div>
+                                        <!-- Continuing from the Danger Zone section... -->
+                                        <div class="danger-item">
+                                            <div class="danger-info">
+                                                <h5>Delete Account</h5>
+                                                <p>Permanently delete your account and all data</p>
+                                            </div>
+                                            <button class="btn btn-danger" onclick="accountPage.confirmDeleteAccount()">Delete Account</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-main">
+                    <div class="footer-logo">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <span class="logo-text">Da-Vinci Coder Club</span>
+                    </div>
+                    <p class="footer-description">
+                        Empowering the next generation of innovators at Assam Downtown University through creativity, 
+                        collaboration, and cutting-edge technology. Welcome to Jack026's personalized account dashboard!
+                    </p>
+                    <div class="footer-contact-quick">
+                        <div class="contact-quick-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:jack026@davincicoders.adtu.ac.in">jack026@davincicoders.adtu.ac.in</a>
+                        </div>
+                        <div class="contact-quick-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+918765432109">+91 87654 32109</a>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <a href="https://github.com/jack026" aria-label="Jack026's GitHub" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/jack026" aria-label="Jack026's LinkedIn" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/jack026" aria-label="Jack026's Twitter" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://discord.gg/davinci-coders" aria-label="Join our Discord community" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Account Quick Links</h4>
+                    <ul>
+                        <li><a href="/account">🏠 Dashboard</a></li>
+                        <li><a href="/account/profile">👤 Edit Profile</a></li>
+                        <li><a href="/account/projects">💻 My Projects</a></li>
+                        <li><a href="/account/achievements">🏆 Achievements</a></li>
+                        <li><a href="/account/settings">⚙️ Settings</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Jack026's Stats</h4>
+                    <ul>
+                        <li><i class="fas fa-code"></i> 156 Total Contributions</li>
+                        <li><i class="fas fa-project-diagram"></i> 24 Active Projects</li>
+                        <li><i class="fas fa-users"></i> 47 Members Mentored</li>
+                        <li><i class="fas fa-trophy"></i> 24 Achievements Earned</li>
+                        <li><i class="fas fa-fire"></i> 47-Day Coding Streak</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support & Help</h4>
+                    <ul>
+                        <li><a href="/help">❓ Help Center</a></li>
+                        <li><a href="/contact">📞 Contact Support</a></li>
+                        <li><a href="/privacy">🔒 Privacy Policy</a></li>
+                        <li><a href="/terms">📄 Terms of Service</a></li>
+                        <li><a href="/accessibility">♿ Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        <p>&copy; 2025 Da-Vinci Coder Club, Assam Downtown University. All rights reserved.</p>
+                        <p class="build-info">
+                            Personalized for Jack026 | 
+                            <time datetime="2025-08-06T13:33:55Z">Last updated: August 6, 2025 at 1:33 PM UTC</time> |
+                            <a href="https://github.com/davinci-coder-club/account-dashboard" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i> Account Dashboard Source
+                            </a>
+                        </p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/terms">Terms of Service</a>
+                        <a href="/security">Security</a>
+                        <a href="/status">System Status</a>
+                        <a href="/api">API Docs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top" title="Back to top" aria-label="Scroll to top of page">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Jack026's Personal Assistant Widget -->
+    <div id="personalAssistant" class="personal-assistant-widget">
+        <button class="assistant-toggle" aria-label="Open Jack026's personal assistant">
+            <i class="fas fa-robot"></i>
+            <span class="assistant-notification">3</span>
+        </button>
+        <div class="assistant-window">
+            <div class="assistant-header">
+                <div class="assistant-info">
+                    <i class="fas fa-robot"></i>
+                    <div class="assistant-details">
+                        <span class="assistant-name">DevBot</span>
+                        <span class="assistant-status">Your Personal AI Assistant</span>
+                    </div>
+                </div>
+                <button class="assistant-close" aria-label="Close assistant">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="assistant-messages">
+                <div class="assistant-message received">
+                    <div class="message-content">
+                        <p>Hi Jack026! 👋 I've noticed you have 3 pending project reviews. Would you like me to prioritize them for you?</p>
+                        <span class="message-time">Just now</span>
+                    </div>
+                </div>
+                <div class="assistant-message received">
+                    <div class="message-content">
+                        <p>🎉 Congratulations! You're just 3 projects away from earning the "Innovation Leader" badge!</p>
+                        <span class="message-time">2 minutes ago</span>
+                    </div>
+                </div>
+                <div class="assistant-suggestions">
+                    <h4>Quick Actions</h4>
+                    <div class="suggestion-buttons">
+                        <button class="suggestion-btn" onclick="accountPage.reviewPendingProjects()">
+                            <i class="fas fa-tasks"></i>
+                            Review Projects
+                        </button>
+                        <button class="suggestion-btn" onclick="accountPage.checkNotifications()">
+                            <i class="fas fa-bell"></i>
+                            Check Notifications
+                        </button>
+                        <button class="suggestion-btn" onclick="accountPage.viewUpcomingEvents()">
+                            <i class="fas fa-calendar"></i>
+                            Upcoming Events
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="assistant-input">
+                <input type="text" placeholder="Ask me anything, Jack026..." aria-label="Chat with assistant">
+                <button type="button" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Activity Tracker -->
+    <div id="activityTracker" class="activity-tracker">
+        <div class="tracker-content">
+            <div class="tracker-header">
+                <h4>Live Activity</h4>
+                <div class="activity-indicator">
+                    <span class="indicator-dot"></span>
+                    <span>Tracking</span>
+                </div>
+            </div>
+            <div class="tracker-stats">
+                <div class="tracker-item">
+                    <span class="tracker-label">Session Time</span>
+                    <span class="tracker-value" id="sessionTime">00:00:00</span>
+                </div>
+                <div class="tracker-item">
+                    <span class="tracker-label">Actions Today</span>
+                    <span class="tracker-value" data-count="47">0</span>
+                </div>
+                <div class="tracker-item">
+                    <span class="tracker-label">Pages Visited</span>
+                    <span class="tracker-value" data-count="12">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Account Modals -->
+    
+    <!-- Profile Picture Upload Modal -->
+    <div id="avatarUploadModal" class="modal" role="dialog" aria-labelledby="avatar-upload-title" aria-hidden="true">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-content avatar-upload-modal">
+            <div class="modal-header">
+                <h3 id="avatar-upload-title">
+                    <i class="fas fa-camera"></i>
+                    Update Profile Picture
+                </h3>
+                <button class="modal-close" aria-label="Close avatar upload modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area">
+                    <div class="upload-preview">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><circle cx='60' cy='60' r='60' fill='%236366f1'/><text x='60' y='75' text-anchor='middle' fill='white' font-size='48' font-weight='bold'>J</text></svg>" 
+                             alt="Profile preview" id="avatarPreview" width="120" height="120">
+                    </div>
+                    <div class="upload-controls">
+                        <input type="file" id="avatarInput" accept="image/*" hidden>
+                        <button class="btn btn-primary" onclick="document.getElementById('avatarInput').click()">
+                            <i class="fas fa-upload"></i>
+                            Choose Photo
+                        </button>
+                        <p class="upload-hint">Recommended: Square image, at least 400x400 pixels</p>
+                    </div>
+                </div>
+                <div class="avatar-options">
+                    <h4>Or choose a preset:</h4>
+                    <div class="preset-avatars">
+                        <button class="preset-avatar" data-avatar="1">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%236366f1'/><text x='40' y='50' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>J</text></svg>" alt="Preset 1">
+                        </button>
+                        <button class="preset-avatar" data-avatar="2">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%23f43f5e'/><text x='40' y='50' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>J</text></svg>" alt="Preset 2">
+                        </button>
+                        <button class="preset-avatar" data-avatar="3">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%2310b981'/><text x='40' y='50' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>J</text></svg>" alt="Preset 3">
+                        </button>
+                        <button class="preset-avatar" data-avatar="4">
+                            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%23f59e0b'/><text x='40' y='50' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>J</text></svg>" alt="Preset 4">
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="accountPage.saveAvatar()">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                    <button class="btn btn-secondary" onclick="modalSystem.close('avatarUploadModal')">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Profile Modal -->
+    <div id="shareProfileModal" class="modal" role="dialog" aria-labelledby="share-profile-title" aria-hidden="true">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-content share-profile-modal">
+            <div class="modal-header">
+                <h3 id="share-profile-title">
+                    <i class="fas fa-share"></i>
+                    Share Jack026's Profile
+                </h3>
+                <button class="modal-close" aria-label="Close share modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-preview">
+                    <div class="preview-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><circle cx='40' cy='40' r='40' fill='%236366f1'/><text x='40' y='50' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>J</text></svg>" 
+                             alt="Jack026" width="60" height="60">
+                        <div class="preview-info">
+                            <h4>Jack Anderson (@Jack026)</h4>
+                            <p>Lead Developer & Club President at Da-Vinci Coder Club</p>
+                            <div class="preview-stats">
+                                <span>156 contributions</span>
+                                <span>24 projects</span>
+                                <span>47 mentees</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="share-options">
+                    <div class="share-link">
+                        <label for="profileLink">Profile Link</label>
+                        <div class="link-input">
+                            <input type="text" id="profileLink" value="https://davincicoders.adtu.ac.in/profile/jack026" readonly>
+                            <button class="copy-btn" onclick="accountPage.copyProfileLink()">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="share-social">
+                        <h4>Share on Social Media</h4>
+                        <div class="social-share-buttons">
+                            <a href="#" class="share-btn twitter" onclick="accountPage.shareOnTwitter()">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                            <a href="#" class="share-btn linkedin" onclick="accountPage.shareOnLinkedIn()">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="share-btn facebook" onclick="accountPage.shareOnFacebook()">
+                                <i class="fab fa-facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="#" class="share-btn whatsapp" onclick="accountPage.shareOnWhatsApp()">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="qr-code">
+                        <h4>QR Code</h4>
+                        <div class="qr-container">
+                            <canvas id="qrCode" width="150" height="150"></canvas>
+                            <p>Scan to view Jack026's profile</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Confirmation Modal -->
+    <div id="deleteAccountModal" class="modal danger-modal" role="dialog" aria-labelledby="delete-account-title" aria-hidden="true">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-content delete-account-modal">
+            <div class="modal-header">
+                <h3 id="delete-account-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Delete Account
+                </h3>
+                <button class="modal-close" aria-label="Close delete confirmation">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-content">
+                    <div class="warning-icon">
+                        <i class="fas fa-skull-crossbones"></i>
+                    </div>
+                    <h4>This action cannot be undone!</h4>
+                    <p>Deleting your account will permanently remove:</p>
+                    <ul class="deletion-list">
+                        <li><i class="fas fa-user"></i> Your profile and personal information</li>
+                        <li><i class="fas fa-code"></i> All your projects and contributions</li>
+                        <li><i class="fas fa-trophy"></i> Achievements and badges earned</li>
+                        <li><i class="fas fa-comments"></i> Messages and collaboration history</li>
+                        <li><i class="fas fa-chart-line"></i> Activity data and statistics</li>
+                    </ul>
+                    <div class="confirmation-input">
+                        <label for="deleteConfirmation">
+                            Type <strong>DELETE JACK026</strong> to confirm:
+                        </label>
+                        <input type="text" id="deleteConfirmation" placeholder="DELETE JACK026" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="confirmDeleteBtn" disabled onclick="accountPage.executeAccountDeletion()">
+                        <i class="fas fa-trash"></i>
+                        Yes, Delete My Account
+                    </button>
+                    <button class="btn btn-secondary" onclick="modalSystem.close('deleteAccountModal')">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jack026's Status Widget -->
+    <div class="jack026-status-widget">
+        <div class="status-content">
+            <div class="status-header">
+                <span class="status-text">Jack026</span>
+                <div class="status-indicator online">
+                    <i class="fas fa-circle"></i>
+                </div>
+            </div>
+            <div class="status-details">
+                <div class="status-item">
+                    <i class="fas fa-code"></i>
+                    <span>Currently coding</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Active for <span id="activeTime">2h 15m</span></span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Working on Learning Platform</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/script.js" defer></script>
+    <script src="/js/account.js" defer></script>
+    
+    <!-- Account Page Specific Scripts -->
+    <script>
+        // Enhanced page tracking for Account page
+        window.addEventListener('load', function() {
+            console.log(`👤 Account page loaded for Jack026 at ${new Date().toISOString()}`);
+            console.log(`⏰ Load time: ${Date.now() - performance.timing.navigationStart}ms`);
+            console.log(`🎯 Personalized dashboard ready for ${DAVINCI_CONFIG.currentUser}`);
+            
+            // Initialize account features
+            initializeAccountFeatures();
+            
+            // Track page view
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    page_title: 'Account Dashboard - Jack026',
+                    page_location: window.location.href,
+                    custom_map: { 
+                        user: 'Jack026',
+                        timestamp: '2025-08-06T13:33:55Z',
+                        page_type: 'account',
+                        dashboard_version: '2.1.0'
+                    }
+                });
+            }
+        });
+
+        // Initialize account-specific features
+        function initializeAccountFeatures() {
+            // Update real-time elements
+            updateCurrentTime();
+            updateSessionTime();
+            updateActiveStatus();
+            
+            // Initialize charts and widgets
+            initializeActivityChart();
+            initializeContributionHeatmap();
+            
+            // Setup personal assistant
+            initializePersonalAssistant();
+            
+            // Track user engagement
+            trackAccountEngagement();
+        }
+
+        // Update current time
+        function updateCurrentTime() {
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                const now = new Date();
+                const options = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZone: 'UTC'
+                };
+                timeElement.textContent = now.toLocaleDateString('en-US', options) + ' UTC';
+                timeElement.setAttribute('datetime', now.toISOString());
+            }
+            
+            // Update every minute
+            setTimeout(updateCurrentTime, 60000);
+        }
+
+        // Update session time
+        function updateSessionTime() {
+            const sessionStartTime = Date.now();
+            const sessionTimeElement = document.getElementById('sessionTime');
+            
+            function updateTime() {
+                if (sessionTimeElement) {
+                    const elapsed = Date.now() - sessionStartTime;
+                    const hours = Math.floor(elapsed / 3600000);
+                    const minutes = Math.floor((elapsed % 3600000) / 60000);
+                    const seconds = Math.floor((elapsed % 60000) / 1000);
+                    
+                    sessionTimeElement.textContent = 
+                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }
+            
+            updateTime();
+            setInterval(updateTime, 1000);
+        }
+
+        // Update active status
+        function updateActiveStatus() {
+            const activeTimeElement = document.getElementById('activeTime');
+            if (activeTimeElement) {
+                // Simulate active time (in real app, this would come from server)
+                let minutes = 135; // 2h 15m
+                
+                setInterval(() => {
+                    minutes++;
+                    const hours = Math.floor(minutes / 60);
+                    const mins = minutes % 60;
+                    activeTimeElement.textContent = `${hours}h ${mins}m`;
+                }, 60000);
+            }
+        }
+
+        // Initialize activity chart
+        function initializeActivityChart() {
+            const canvas = document.getElementById('activityChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Sample data for Jack026's activity
+            const data = {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Coding Hours',
+                    data: [8, 6, 9, 7, 8, 4, 5],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            };
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize contribution heatmap
+        function initializeContributionHeatmap() {
+            const heatmapContainer = document.getElementById('contributionHeatmap');
+            if (!heatmapContainer) return;
+            
+            // Generate heatmap data for the year
+            const today = new Date();
+            const yearStart = new Date(today.getFullYear(), 0, 1);
+            const days = Math.floor((today - yearStart) / (24 * 60 * 60 * 1000));
+            
+            let heatmapHTML = '';
+            for (let i = 0; i < days; i++) {
+                const level = Math.floor(Math.random() * 5); // Random activity level
+                const date = new Date(yearStart);
+                date.setDate(date.getDate() + i);
+                
+                heatmapHTML += `<div class="heatmap-day level-${level}" 
+                                   title="${date.toDateString()}" 
+                                   data-date="${date.toISOString().split('T')[0]}"></div>`;
+            }
+            
+            heatmapContainer.innerHTML = heatmapHTML;
+        }
+
+        // Initialize personal assistant
+        function initializePersonalAssistant() {
+            const assistantWidget = document.getElementById('personalAssistant');
+            const assistantToggle = assistantWidget?.querySelector('.assistant-toggle');
+            const assistantWindow = assistantWidget?.querySelector('.assistant-window');
+            const assistantClose = assistantWidget?.querySelector('.assistant-close');
+            
+            if (assistantToggle && assistantWindow && assistantClose) {
+                assistantToggle.addEventListener('click', function() {
+                    assistantWindow.style.display = assistantWindow.style.display === 'none' ? 'block' : 'none';
+                });
+                
+                assistantClose.addEventListener('click', function() {
+                    assistantWindow.style.display = 'none';
+                });
+            }
+        }
+
+        // Track account engagement
+        function trackAccountEngagement() {
+            let engagementStartTime = Date.now();
+            let tabSwitches = 0;
+            let settingsChanges = 0;
+            
+            // Track tab switches
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.nav-tab')) {
+                    tabSwitches++;
+                    daVinciState.analytics.track('account_tab_switched', {
+                        tab: e.target.closest('.nav-tab').textContent.trim(),
+                        totalSwitches: tabSwitches,
+                        user: 'Jack026',
+                        timestamp: '2025-08-06T13:33:55Z'
+                    });
+                }
+            });
+            
+            // Track settings changes
+            document.addEventListener('change', (e) => {
+                if (e.target.closest('.settings-card')) {
+                    settingsChanges++;
+                    daVinciState.analytics.track('account_setting_changed', {
+                        setting: e.target.name || e.target.id,
+                        value: e.target.value || e.target.checked,
+                        totalChanges: settingsChanges,
+                        user: 'Jack026',
+                        timestamp: '2025-08-06T13:33:55Z'
+                    });
+                }
+            });
+            
+            // Track session end
+            window.addEventListener('beforeunload', () => {
+                const sessionDuration = Date.now() - engagementStartTime;
+                daVinciState.analytics.track('account_session_end', {
+                    duration: sessionDuration,
+                    tabSwitches,
+                    settingsChanges,
+                    user: 'Jack026',
+                    timestamp: '2025-08-06T13:33:55Z'
+                });
+            });
+        }
+
+        // Account dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const accountBtn = document.querySelector('.account-btn');
+            const accountDropdown = document.querySelector('.account-dropdown-menu');
+            
+            if (accountBtn && accountDropdown) {
+                accountBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = accountDropdown.style.display === 'block';
+                    accountDropdown.style.display = isOpen ? 'none' : 'block';
+                    accountBtn.setAttribute('aria-expanded', !isOpen);
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function() {
+                    accountDropdown.style.display = 'none';
+                    accountBtn.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    </script>
+
+    <!-- Performance Monitoring -->
+    <script>
+        // Monitor account page performance
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                console.log(`📊 Jack026's Account page performance:
+                    DNS Lookup: ${Math.round(perfData.domainLookupEnd - perfData.domainLookupStart)}ms
+                    Connection: ${Math.round(perfData.connectEnd - perfData.connectStart)}ms
+                    Response: ${Math.round(perfData.responseEnd - perfData.responseStart)}ms
+                    DOM Load: ${Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart)}ms
+                    Total Load: ${Math.round(perfData.loadEventEnd - perfData.loadEventStart)}ms
+                    
+                    👤 User: Jack026
+                    🕒 Timestamp: 2025-08-06T13:33:55Z
+                    🎯 Dashboard Version: 2.1.0`);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -165,12 +165,14 @@
                 </ul>
                 
                 <!-- Enhanced User Profile Section -->
+
+
                 <div class="nav-user" role="region" aria-label="User profile">
-                    <div class="user-info">
+                    <a href="account.html" class="user-info" aria-label="User profile" style="text-decoration: none;">
                         <i class="fas fa-user-circle" aria-hidden="true"></i>
                         <span class="user-name">Jack026</span>
                         <span class="user-status" aria-label="Online status">●</span>
-                    </div>
+                    </a>
                 </div>
                 
                 <!-- Mobile Menu Toggle -->
@@ -314,12 +316,11 @@ console.log("🌟 Join the revolution!");
             </div>
             
             <!-- Enhanced Scroll Indicator -->
-            <div class="scroll-indicator" aria-hidden="true">
-                <button class="scroll-arrow" aria-label="Scroll down to explore more" onclick="document.querySelector('.preview-section').scrollIntoView({behavior: 'smooth'})">
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <span class="scroll-text">Explore More</span>
-            </div>
+            <div class="scroll-indicator" role="navigation" aria-label="Scroll down to explore more">
+                <a href="#features" class="scroll-down" aria-label="Scroll down to features section">
+                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                </a>
+            
         </section>
 
         <!-- Enhanced Features Overview Section -->
