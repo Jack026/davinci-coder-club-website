@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://davincicoders.adtu.ac.in/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /api/admin/
+Disallow: /uploads/private/
+
+# Allow important directories
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /docs/
+Allow: /downloads/

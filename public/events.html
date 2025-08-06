@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover upcoming events, workshops, hackathons, and tech talks organized by Da-Vinci Coder Club at Assam Downtown University. Join our coding community!">
+    <meta name="keywords" content="events, hackathons, workshops, coding competitions, tech talks, ADTU, Da-Vinci Coder Club">
+    <meta name="author" content="Da-Vinci Coder Club">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://davinci-coders.adtu.ac.in/events">
+    <meta property="og:title" content="Events | Da-Vinci Coder Club | ADTU">
+    <meta property="og:description" content="Join exciting coding events, hackathons, and workshops at Da-Vinci Coder Club">
+    <meta property="og:image" content="/images/og-events.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://davinci-coders.adtu.ac.in/events">
+    <meta property="twitter:title" content="Events | Da-Vinci Coder Club | ADTU">
+    <meta property="twitter:description" content="Join exciting coding events, hackathons, and workshops at Da-Vinci Coder Club">
+    <meta property="twitter:image" content="/images/og-events.jpg">
+
+    <title>Events | Da-Vinci Coder Club | Assam Downtown University</title>
+    <link rel="canonical" href="https://davinci-coders.adtu.ac.in/events">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/events.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <!-- Structured Data for Events -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Da-Vinci Coder Club Events",
+        "description": "Upcoming events at Da-Vinci Coder Club",
+        "itemListElement": []
+    }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Events</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Loading Events...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-code"></i>
+                <span>Da-Vinci Coder Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+                <li><a href="/events" class="nav-link active">Events</a></li>
+                <li><a href="/projects" class="nav-link">Projects</a></li>
+                <li><a href="/resources" class="nav-link">Resources</a></li>
+                <li><a href="/team" class="nav-link">Team</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="events-hero">
+        <div class="hero-background">
+            <div class="particles"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Upcoming <span class="text-gradient">Events</span></h1>
+                <p class="hero-subtitle">Join Our Coding Adventures</p>
+                <p class="hero-description">Discover workshops, hackathons, competitions, and tech talks that will boost your coding journey.</p>
+                <div class="breadcrumb">
+                    <a href="/">Home</a>
+                    <span>•</span>
+                    <span>Events</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Filters -->
+    <section class="event-filters">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="categoryFilter">Category:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Hackathon">Hackathon</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Competition">Competition</option>
+                        <option value="Meetup">Meetup</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Status:</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="upcoming">Upcoming</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button id="featuredFilter" class="filter-btn">
+                        <i class="fas fa-star"></i>
+                        Featured Only
+                    </button>
+                </div>
+                <div class="search-group">
+                    <div class="search-box">
+                        <input type="text" id="searchEvents" placeholder="Search events...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Events -->
+    <section class="featured-events">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Events</h2>
+                <p class="section-subtitle">Don't miss these amazing opportunities</p>
+            </div>
+            <div id="featuredEventsContainer" class="featured-events-grid">
+                <!-- Featured events will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- All Events -->
+    <section class="all-events">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">All Events</h2>
+                <div class="view-toggle">
+                    <button id="gridView" class="view-btn active">
+                        <i class="fas fa-th"></i>
+                        Grid
+                    </button>
+                    <button id="listView" class="view-btn">
+                        <i class="fas fa-list"></i>
+                        List
+                    </button>
+                </div>
+            </div>
+            <div id="eventsContainer" class="events-grid">
+                <!-- Events will be loaded here -->
+            </div>
+            <div class="loading-spinner" id="loadingSpinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Loading events...</span>
+            </div>
+            <div class="pagination-container">
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Event Registration</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm">
+                    <input type="hidden" id="eventId" name="eventId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="fullName" name="fullName" required>
+                            <label for="fullName">Full Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email Address</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" required>
+                            <label for="phone">Phone Number</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <label for="department">Department</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <select id="year" name="year" required>
+                                <option value="">Select Year</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                                <option value="Graduate">Graduate</option>
+                            </select>
+                            <label for="year">Academic Year</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="experience" name="experience" required>
+                                <option value="">Experience Level</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                            <label for="experience">Coding Experience</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="motivation" name="motivation" rows="3"></textarea>
+                        <label for="motivation">Why do you want to attend this event? (Optional)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                        <label for="termsAccept">I agree to the terms and conditions</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Register Now</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Integration -->
+    <section class="calendar-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Event Calendar</h2>
+                <p class="section-subtitle">View all events in calendar format</p>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prevMonth" class="calendar-nav">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="calendar-title">
+                        <h3 id="currentMonth"></h3>
+                    </div>
+                    <button id="nextMonth" class="calendar-nav">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="calendar" class="calendar-grid">
+                    <!-- Calendar will be generated here -->
+                </div>
+            </div>
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <span class="legend-color upcoming"></span>
+                    <span>Upcoming</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color ongoing"></span>
+                    <span>Ongoing</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color completed"></span>
+                    <span>Completed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-signup">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h3>Never Miss an Event!</h3>
+                    <p>Subscribe to our newsletter and get notified about upcoming events, workshops, and exclusive opportunities.</p>
+                </div>
+                <div class="newsletter-form">
+                    <form id="newsletterForm">
+                        <div class="input-group">
+                            <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Subscribe</span>
+                                <i class="fas fa-bell"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-code"></i>
+                        <span>Da-Vinci Coder Club</span>
+                    </div>
+                    <p>Empowering the next generation of innovators at Assam Downtown University through creativity, collaboration, and cutting-edge technology.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/team">Our Team</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Event Categories</h4>
+                    <ul>
+                        <li><a href="/events?category=Workshop">Workshops</a></li>
+                        <li><a href="/events?category=Hackathon">Hackathons</a></li>
+                        <li><a href="/events?category=Seminar">Seminars</a></li>
+                        <li><a href="/events?category=Competition">Competitions</a></li>
+                        <li><a href="/events?category=Meetup">Meetups</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> davinci.coders@adtu.ac.in</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-map-marker-alt"></i> ADTU, Guwahati</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Da-Vinci Coder Club, Assam Downtown University. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/terms">Terms of Service</a>
+                        <a href="/conduct">Code of Conduct</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="/js/script.js"></script>
+    <script src="/js/events.js"></script>
+</body>
+</html>

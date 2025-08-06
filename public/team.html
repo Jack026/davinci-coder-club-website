@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the talented team behind Da-Vinci Coder Club at Assam Downtown University. Get to know our passionate developers, designers, and innovators.">
+    <meta name="keywords" content="team, members, developers, designers, ADTU, Da-Vinci Coder Club, students, leadership">
+    <meta name="author" content="Da-Vinci Coder Club">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://davinci-coders.adtu.ac.in/team">
+    <meta property="og:title" content="Our Team | Da-Vinci Coder Club | ADTU">
+    <meta property="og:description" content="Meet the brilliant minds behind Da-Vinci Coder Club">
+    <meta property="og:image" content="/images/og-team.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://davinci-coders.adtu.ac.in/team">
+    <meta property="twitter:title" content="Our Team | Da-Vinci Coder Club | ADTU">
+    <meta property="twitter:description" content="Meet the brilliant minds behind Da-Vinci Coder Club">
+    <meta property="twitter:image" content="/images/og-team.jpg">
+
+    <title>Our Team | Da-Vinci Coder Club | Assam Downtown University</title>
+    <link rel="canonical" href="https://davinci-coders.adtu.ac.in/team">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/team.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <i class="fas fa-users"></i>
+                <span>Team</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p>Loading Team...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-code"></i>
+                <span>Da-Vinci Coder Club</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+                <li><a href="/events" class="nav-link">Events</a></li>
+                <li><a href="/projects" class="nav-link">Projects</a></li>
+                <li><a href="/resources" class="nav-link">Resources</a></li>
+                <li><a href="/team" class="nav-link active">Team</a></li>
+                <li><a href="/contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="team-hero">
+        <div class="hero-background">
+            <div class="particles"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Meet Our <span class="text-gradient">Team</span></h1>
+                <p class="hero-subtitle">The Minds Behind the Magic</p>
+                <p class="hero-description">Passionate developers, creative designers, and innovative thinkers working together to build the future of technology.</p>
+                <div class="breadcrumb">
+                    <a href="/">Home</a>
+                    <span>•</span>
+                    <span>Team</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Filters -->
+    <section class="team-filters">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="positionFilter">Position:</label>
+                    <select id="positionFilter" class="filter-select">
+                        <option value="all">All Positions</option>
+                        <option value="leadership">Leadership</option>
+                        <option value="core">Core Team</option>
+                        <option value="member">Members</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="departmentFilter">Department:</label>
+                    <select id="departmentFilter" class="filter-select">
+                        <option value="all">All Departments</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="yearFilter">Year:</label>
+                    <select id="yearFilter" class="filter-select">
+                        <option value="all">All Years</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <div class="search-box">
+                        <input type="text" id="searchTeam" placeholder="Search members...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="leadership-team">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Leadership Team</h2>
+                <p class="section-subtitle">Guiding our club towards excellence</p>
+            </div>
+            <div id="leadershipContainer" class="leadership-grid">
+                <!-- Leadership team will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Team -->
+    <section class="core-team">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Core Team</h2>
+                <p class="section-subtitle">The backbone of our operations</p>
+            </div>
+            <div id="coreTeamContainer" class="team-grid">
+                <!-- Core team will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- All Members -->
+    <section class="all-members">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">All Members</h2>
+                <div class="member-count">
+                    <span id="memberCount">0 members found</span>
+                </div>
+            </div>
+            <div id="membersContainer" class="members-grid">
+                <!-- All members will be loaded here -->
+            </div>
+            <div class="pagination-container">
+                <div id="pagination" class="pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Member Profile Modal -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content member-modal">
+            <div class="modal-header">
+                <h3 id="modalMemberName">Member Profile</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modalMemberContent">
+                    <!-- Member details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Team CTA -->
+    <section class="join-team-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h3>Want to Join Our Team?</h3>
+                    <p>We're always looking for passionate individuals who share our love for technology and innovation. Join us and be part of something amazing!</p>
+                    <div class="cta-features">
+                        <div class="feature">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Learn & Grow</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Network</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-trophy"></i>
+                            <span>Achieve</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <span>Have Fun</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-actions">
+                    <a href="/contact" class="btn btn-primary">
+                        <span>Join Us</span>
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                    <a href="/about" class="btn btn-secondary">
+                        <span>Learn More</span>
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-code"></i>
+                        <span>Da-Vinci Coder Club</span>
+                    </div>
+                    <p>Empowering the next generation of innovators at Assam Downtown University through creativity, collaboration, and cutting-edge technology.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Team</h4>
+                    <ul>
+                        <li><a href="/team?position=leadership">Leadership</a></li>
+                        <li><a href="/team?position=core">Core Team</a></li>
+                        <li><a href="/team?department=Computer Science">CS Members</a></li>
+                        <li><a href="/team?department=Information Technology">IT Members</a></li>
+                        <li><a href="/contact">Join Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Departments</h4>
+                    <ul>
+                        <li><a href="/team?position=Technical Lead">Technical</a></li>
+                        <li><a href="/team?position=Creative Head">Creative</a></li>
+                        <li><a href="/team?position=Event Manager">Events</a></li>
+                        <li><a href="/projects">Projects</a></li>
+                        <li><a href="/resources">Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="https://github.com/davinci-coder-club">GitHub</a></li>
+                        <li><a href="#newsletter">Newsletter</a></li>
+                        <li><a href="/about">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Da-Vinci Coder Club, Assam Downtown University. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="/privacy">Privacy Policy</a>
+                        <a href="/terms">Terms of Service</a>
+                        <a href="/conduct">Code of Conduct</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="/js/script.js"></script>
+    <script src="/js/team.js"></script>
+</body>
+</html>
