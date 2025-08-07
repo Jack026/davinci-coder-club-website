@@ -1,0 +1,7 @@
+name,role,department,year,bio,skills,position
+Jack026,Super Admin,Computer Science,Final,Full stack developer and club leader,JavaScript;Python;React;Node.js;MongoDB,President
+Sarah Chen,Frontend Developer,Information Technology,3rd,UI/UX specialist with React expertise,React;JavaScript;CSS;Figma,Core Member
+Alex Rodriguez,Backend Developer,Computer Science,4th,Database and API expert,Node.js;MongoDB;Express;SQL,Technical Lead
+Priya Sharma,Mobile Developer,Computer Science,2nd,Flutter and React Native developer,Flutter;Dart;React Native;Firebase,Member
+David Kim,DevOps Engineer,Information Technology,4th,Cloud and deployment specialist,AWS;Docker;Kubernetes;CI/CD,Senior Member
+Maya Patel,Data Scientist,Computer Science,3rd,ML and analytics expert,Python;TensorFlow;Pandas;Jupyter,Core Member

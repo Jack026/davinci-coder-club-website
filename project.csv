@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Club Website v2.0",
+    "description": "Enhanced official Da-Vinci Coder Club website with real-time features",
+    "category": "Web Development",
+    "technologies": ["HTML", "CSS", "JavaScript", "Node.js", "MongoDB"],
+    "githubUrl": "https://github.com/Jack026/davinci-coder-club-website",
+    "status": "in-progress",
+    "team": [
+      {"name": "Jack026", "role": "Full Stack Lead"},
+      {"name": "Sarah Chen", "role": "Frontend Developer"}
+    ]
+  },
+  {
+    "title": "Event Management System",
+    "description": "Comprehensive system to manage club events and registrations",
+    "category": "Web Development",
+    "technologies": ["React", "Express", "MongoDB", "Socket.io"],
+    "status": "completed",
+    "team": [
+      {"name": "Alex Rodriguez", "role": "Backend Lead"},
+      {"name": "Priya Sharma", "role": "Mobile Developer"}
+    ]
+  },
+  {
+    "title": "Member Portal",
+    "description": "Portal for club members to manage profiles and track progress",
+    "category": "Web Development",
+    "technologies": ["Vue.js", "Express", "PostgreSQL", "Redis"],
+    "status": "in-progress",
+    "team": [
+      {"name": "Maya Patel", "role": "Data Analytics"},
+      {"name": "David Kim", "role": "DevOps"}
+    ]
+  }
+]

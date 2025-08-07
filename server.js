@@ -1,9 +1,9 @@
 /* ========================================
    DA-VINCI CODER CLUB SERVER
-   Updated: 2025-08-06 19:51:36 UTC
+   Updated: 2025-08-07 06:21:52 UTC
    Current User: Jack026
    Database: MongoDB Atlas Connected
-   Fix: Removed missing route dependency
+   Fix: Real MongoDB upload functionality
 ======================================== */
 
 const express = require('express');
@@ -12,7 +12,14 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
+const fs = require('fs');
+const csv = require('csv-parser');
 require('dotenv').config();
+
+// Import MongoDB models
+const Event = require('./server/models/Event');
+const Project = require('./server/models/Project'); 
+const TeamMember = require('./server/models/TeamMember');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,7 +28,7 @@ const PORT = process.env.PORT || 3000;
 async function connectDatabaseForJack026() {
     try {
         console.log('🔄 Jack026: Attempting database connection...');
-        console.log('⏰ Current Time: 2025-08-06 19:51:36 UTC');
+        console.log('⏰ Current Time: 2025-08-07 06:21:52 UTC');
         
         const mongoURI = process.env.MONGODB_URI || 
             'mongodb+srv://souravjyotisahariahbtcs:OPhZ0ea5DIIEfRr0@coderclub.zhsckdk.mongodb.net/?retryWrites=true&w=majority&appName=CoderClub';
@@ -47,13 +54,13 @@ async function connectDatabaseForJack026() {
         console.log(`🗄️ Database: ${conn.connection.name}`);
         console.log(`👤 User: Jack026`);
         console.log(`🎯 Status: Production Ready`);
-        console.log(`⏰ Connected at: 2025-08-06 19:51:36 UTC`);
+        console.log(`⏰ Connected at: 2025-08-07 06:21:52 UTC`);
         
         return true;
         
     } catch (error) {
         console.error('❌ Jack026: MongoDB Connection Failed');
-        console.error(`🕒 Error Time: 2025-08-06 19:51:36 UTC`);
+        console.error(`🕒 Error Time: 2025-08-07 06:21:52 UTC`);
         console.error(`📝 Error: ${error.message}`);
         
         // Continue without database in development
@@ -167,43 +174,77 @@ adminRouter.use((req, res, next) => {
         res.status(401).json({ 
             success: false, 
             error: 'Jack026 access required',
-            timestamp: '2025-08-06 19:51:36'
+            timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
         });
     }
 });
 
 // Dashboard stats endpoint
-adminRouter.get('/stats', (req, res) => {
+adminRouter.get('/stats', async (req, res) => {
     console.log('📊 Jack026: Fetching dashboard stats...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
-    res.json({
-        success: true,
-        data: {
-            totalMembers: 156,
-            activeProjects: 24,
-            upcomingEvents: 8,
-            jack026Streak: 47,
-            trends: {
-                members: { change: 12, direction: 'up' },
-                projects: { change: 3, direction: 'up' },
-                events: { change: 2, direction: 'neutral' }
+    try {
+        // Get real counts from database if connected
+        let realCounts = { members: 156, projects: 24, events: 8 };
+        
+        if (mongoose.connection.readyState === 1) {
+            const memberCount = await TeamMember.countDocuments();
+            const projectCount = await Project.countDocuments();
+            const eventCount = await Event.countDocuments();
+            
+            realCounts = {
+                members: memberCount || 0,
+                projects: projectCount || 0,
+                events: eventCount || 0
+            };
+        }
+        
+        res.json({
+            success: true,
+            data: {
+                totalMembers: realCounts.members,
+                activeProjects: realCounts.projects,
+                upcomingEvents: realCounts.events,
+                jack026Streak: 48,
+                trends: {
+                    members: { change: 12, direction: 'up' },
+                    projects: { change: 3, direction: 'up' },
+                    events: { change: 2, direction: 'neutral' }
+                },
+                lastUpdated: currentTime,
+                user: 'Jack026'
             },
-            lastUpdated: '2025-08-06 19:51:36',
-            user: 'Jack026'
-        },
-        timestamp: '2025-08-06 19:51:36'
-    });
+            timestamp: currentTime
+        });
+    } catch (error) {
+        console.error('❌ Error fetching stats:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch stats',
+            timestamp: currentTime
+        });
+    }
 });
 
 // Recent activity endpoint
 adminRouter.get('/activity', (req, res) => {
     console.log('📋 Jack026: Fetching recent activity...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
     res.json({
         success: true,
         data: [
             {
                 id: 1,
+                type: 'upload_success',
+                message: 'Data upload system activated by Jack026',
+                timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString(),
+                user: 'Jack026',
+                icon: 'fas fa-upload'
+            },
+            {
+                id: 2,
                 type: 'member_joined',
                 message: 'New member joined: Sarah Chen',
                 timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
@@ -211,7 +252,7 @@ adminRouter.get('/activity', (req, res) => {
                 icon: 'fas fa-user-plus'
             },
             {
-                id: 2,
+                id: 3,
                 type: 'project_updated',
                 message: 'Project "EcoTracker" updated by Jack026',
                 timestamp: new Date(Date.now() - 12 * 60 * 1000).toISOString(),
@@ -219,7 +260,7 @@ adminRouter.get('/activity', (req, res) => {
                 icon: 'fas fa-project-diagram'
             },
             {
-                id: 3,
+                id: 4,
                 type: 'event_created',
                 message: 'Workshop scheduled for Friday',
                 timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
@@ -227,29 +268,22 @@ adminRouter.get('/activity', (req, res) => {
                 icon: 'fas fa-calendar'
             },
             {
-                id: 4,
+                id: 5,
                 type: 'achievement',
-                message: 'Jack026 reached 47-day streak!',
+                message: 'Jack026 reached 48-day streak!',
                 timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
                 user: 'Jack026',
                 icon: 'fas fa-trophy'
-            },
-            {
-                id: 5,
-                type: 'system',
-                message: 'Database connection established',
-                timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
-                user: 'System',
-                icon: 'fas fa-database'
             }
         ],
-        timestamp: '2025-08-06 19:51:36'
+        timestamp: currentTime
     });
 });
 
 // System status endpoint
 adminRouter.get('/system-status', (req, res) => {
     console.log('⚙️ Jack026: Checking system status...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
     const isDbConnected = mongoose.connection.readyState === 1;
     const uptime = process.uptime();
@@ -274,197 +308,648 @@ adminRouter.get('/system-status', (req, res) => {
                     total: Math.round(memory.heapTotal / 1024 / 1024),
                     external: Math.round(memory.external / 1024 / 1024)
                 },
-                timestamp: '2025-08-06 19:51:36'
+                timestamp: currentTime
+            },
+            uploadSystem: {
+                status: 'active',
+                message: 'Real MongoDB uploads enabled'
             },
             user: 'Jack026'
         },
-        timestamp: '2025-08-06 19:51:36'
+        timestamp: currentTime
     });
 });
 
-// Members endpoint
-adminRouter.get('/members', (req, res) => {
+// Members endpoint with real data
+adminRouter.get('/members', async (req, res) => {
     console.log('👥 Jack026: Fetching members data...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
-    res.json({
-        success: true,
-        data: {
-            total: 156,
-            active: 142,
-            new_this_week: 12,
-            core_team: 8,
-            members: [
-                { 
-                    id: 1, 
-                    name: 'Jack026', 
-                    email: 'jack026@davincicoders.adtu.ac.in',
-                    role: 'super_admin', 
-                    status: 'active',
-                    joinDate: '2022-08-15',
-                    streak: 47
+    try {
+        if (mongoose.connection.readyState === 1) {
+            const members = await TeamMember.find().limit(50).sort({ createdAt: -1 });
+            const totalMembers = await TeamMember.countDocuments();
+            const activeMembers = await TeamMember.countDocuments({ isActive: true });
+            
+            res.json({
+                success: true,
+                data: {
+                    total: totalMembers,
+                    active: activeMembers,
+                    new_this_week: members.filter(m => 
+                        new Date(m.joinDate) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+                    ).length,
+                    core_team: members.filter(m => 
+                        ['President', 'Vice President', 'Secretary', 'Treasurer'].includes(m.position)
+                    ).length,
+                    members: members.map(member => ({
+                        id: member._id,
+                        name: member.name,
+                        email: member.email || `${member.name.toLowerCase().replace(' ', '.')}@student.adtu.ac.in`,
+                        role: member.position,
+                        department: member.department,
+                        status: member.isActive ? 'active' : 'inactive',
+                        joinDate: member.joinDate.toISOString().split('T')[0],
+                        skills: member.skills
+                    }))
                 },
-                { 
-                    id: 2, 
-                    name: 'Sarah Chen', 
-                    email: 'sarah.chen@student.adtu.ac.in',
-                    role: 'member', 
-                    status: 'active',
-                    joinDate: '2025-07-30',
-                    department: 'Computer Science'
+                timestamp: currentTime
+            });
+        } else {
+            // Fallback data when database not connected
+            res.json({
+                success: true,
+                data: {
+                    total: 156,
+                    active: 142,
+                    new_this_week: 12,
+                    core_team: 8,
+                    members: [
+                        { 
+                            id: 1, 
+                            name: 'Jack026', 
+                            email: 'jack026@davincicoders.adtu.ac.in',
+                            role: 'super_admin', 
+                            status: 'active',
+                            joinDate: '2022-08-15',
+                            streak: 48
+                        }
+                    ]
                 },
-                { 
-                    id: 3, 
-                    name: 'Alex Rodriguez', 
-                    email: 'alex.rodriguez@student.adtu.ac.in',
-                    role: 'senior', 
-                    status: 'active',
-                    joinDate: '2024-09-15',
-                    department: 'Information Technology'
-                },
-                { 
-                    id: 4, 
-                    name: 'Priya Sharma', 
-                    email: 'priya.sharma@student.adtu.ac.in',
-                    role: 'core', 
-                    status: 'active',
-                    joinDate: '2023-01-20',
-                    department: 'Computer Science'
-                }
-            ]
-        },
-        timestamp: '2025-08-06 19:51:36'
-    });
+                timestamp: currentTime
+            });
+        }
+    } catch (error) {
+        console.error('❌ Error fetching members:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch members',
+            timestamp: currentTime
+        });
+    }
 });
 
 // Add member endpoint
-adminRouter.post('/members', (req, res) => {
+adminRouter.post('/members', async (req, res) => {
     console.log('➕ Jack026: Adding new member...');
-    console.log('Member data:', req.body);
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
-    const newMember = {
-        id: Date.now(),
-        ...req.body,
-        status: 'active',
-        addedBy: 'Jack026',
-        addedAt: '2025-08-06 19:51:36',
-        joinDate: new Date().toISOString().split('T')[0]
-    };
-    
-    res.json({
-        success: true,
-        message: `Member ${req.body.name} added successfully`,
-        data: newMember,
-        timestamp: '2025-08-06 19:51:36'
-    });
+    try {
+        if (mongoose.connection.readyState === 1) {
+            const newMember = new TeamMember({
+                ...req.body,
+                isActive: true,
+                joinDate: new Date()
+            });
+            
+            const savedMember = await newMember.save();
+            
+            res.json({
+                success: true,
+                message: `Member ${req.body.name} added successfully to MongoDB`,
+                data: {
+                    id: savedMember._id,
+                    ...req.body,
+                    addedBy: 'Jack026',
+                    addedAt: currentTime
+                },
+                timestamp: currentTime
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                error: 'Database not connected',
+                timestamp: currentTime
+            });
+        }
+    } catch (error) {
+        console.error('❌ Error adding member:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to add member',
+            timestamp: currentTime
+        });
+    }
 });
 
-// Projects endpoint
-adminRouter.get('/projects', (req, res) => {
+// Projects endpoint with real data
+adminRouter.get('/projects', async (req, res) => {
     console.log('💻 Jack026: Fetching projects data...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
-    res.json({
-        success: true,
-        data: {
-            total: 24,
-            active: 18,
-            completed: 6,
-            projects: [
-                {
-                    id: 1,
-                    title: 'EcoTracker',
-                    description: 'Environmental impact tracking application',
-                    status: 'active',
-                    priority: 'high',
-                    progress: 75,
-                    lead: 'Jack026',
-                    team_size: 5,
-                    technologies: ['React', 'Node.js', 'MongoDB'],
-                    start_date: '2025-07-01'
+    try {
+        if (mongoose.connection.readyState === 1) {
+            const projects = await Project.find().limit(50).sort({ createdAt: -1 });
+            const totalProjects = await Project.countDocuments();
+            const activeProjects = await Project.countDocuments({ status: 'in-progress' });
+            const completedProjects = await Project.countDocuments({ status: 'completed' });
+            
+            res.json({
+                success: true,
+                data: {
+                    total: totalProjects,
+                    active: activeProjects,
+                    completed: completedProjects,
+                    projects: projects.map(project => ({
+                        id: project._id,
+                        title: project.title,
+                        description: project.description,
+                        status: project.status,
+                        category: project.category,
+                        technologies: project.technologies,
+                        githubUrl: project.githubUrl,
+                        liveUrl: project.liveUrl,
+                        team: project.team,
+                        featured: project.featured,
+                        createdAt: project.createdAt.toISOString().split('T')[0]
+                    }))
                 },
-                {
-                    id: 2,
-                    title: 'Club Website',
-                    description: 'Official Da-Vinci Coder Club website',
-                    status: 'active',
-                    priority: 'high',
-                    progress: 90,
-                    lead: 'Jack026',
-                    team_size: 3,
-                    technologies: ['HTML', 'CSS', 'JavaScript'],
-                    start_date: '2025-06-15'
+                timestamp: currentTime
+            });
+        } else {
+            // Fallback data
+            res.json({
+                success: true,
+                data: {
+                    total: 24,
+                    active: 18,
+                    completed: 6,
+                    projects: [
+                        {
+                            id: 1,
+                            title: 'EcoTracker',
+                            description: 'Environmental impact tracking application',
+                            status: 'active',
+                            priority: 'high',
+                            progress: 75,
+                            lead: 'Jack026',
+                            team_size: 5,
+                            technologies: ['React', 'Node.js', 'MongoDB'],
+                            start_date: '2025-07-01'
+                        }
+                    ]
                 },
-                {
-                    id: 3,
-                    title: 'Learning Management System',
-                    description: 'Platform for club learning resources',
-                    status: 'planning',
-                    priority: 'medium',
-                    progress: 10,
-                    lead: 'Sarah Chen',
-                    team_size: 4,
-                    technologies: ['Vue.js', 'Express.js', 'PostgreSQL'],
-                    start_date: '2025-08-01'
-                }
-            ]
-        },
-        timestamp: '2025-08-06 19:51:36'
-    });
+                timestamp: currentTime
+            });
+        }
+    } catch (error) {
+        console.error('❌ Error fetching projects:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch projects',
+            timestamp: currentTime
+        });
+    }
 });
 
-// Events endpoint
-adminRouter.get('/events', (req, res) => {
+// Events endpoint with real data
+adminRouter.get('/events', async (req, res) => {
     console.log('📅 Jack026: Fetching events data...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
-    res.json({
-        success: true,
-        data: {
-            total: 8,
-            upcoming: 5,
-            past: 3,
-            events: [
-                {
-                    id: 1,
-                    title: 'React Workshop',
-                    description: 'Hands-on React development workshop',
-                    type: 'workshop',
-                    date: '2025-08-10',
-                    time: '14:00',
-                    location: 'Lab 301',
-                    status: 'scheduled',
-                    organizer: 'Jack026',
-                    max_participants: 30,
-                    registered: 24
+    try {
+        if (mongoose.connection.readyState === 1) {
+            const events = await Event.find().limit(50).sort({ date: -1 });
+            const totalEvents = await Event.countDocuments();
+            const upcomingEvents = await Event.countDocuments({ 
+                date: { $gte: new Date() },
+                status: 'upcoming'
+            });
+            const pastEvents = await Event.countDocuments({ 
+                date: { $lt: new Date() }
+            });
+            
+            res.json({
+                success: true,
+                data: {
+                    total: totalEvents,
+                    upcoming: upcomingEvents,
+                    past: pastEvents,
+                    events: events.map(event => ({
+                        id: event._id,
+                        title: event.title,
+                        description: event.description,
+                        type: event.category,
+                        date: event.date.toISOString().split('T')[0],
+                        time: event.time,
+                        location: event.venue,
+                        status: event.status,
+                        organizer: event.organizer,
+                        max_participants: event.capacity,
+                        registered: event.registered
+                    }))
                 },
-                {
-                    id: 2,
-                    title: 'Monthly Club Meeting',
-                    description: 'Regular club coordination meeting',
-                    type: 'meeting',
-                    date: '2025-08-15',
-                    time: '18:00',
-                    location: 'Conference Room A',
-                    status: 'scheduled',
-                    organizer: 'Jack026',
-                    max_participants: 50,
-                    registered: 35
+                timestamp: currentTime
+            });
+        } else {
+            // Fallback data
+            res.json({
+                success: true,
+                data: {
+                    total: 8,
+                    upcoming: 5,
+                    past: 3,
+                    events: [
+                        {
+                            id: 1,
+                            title: 'React Workshop',
+                            description: 'Hands-on React development workshop',
+                            type: 'workshop',
+                            date: '2025-08-10',
+                            time: '14:00',
+                            location: 'Lab 301',
+                            status: 'scheduled',
+                            organizer: 'Jack026',
+                            max_participants: 30,
+                            registered: 24
+                        }
+                    ]
                 },
-                {
-                    id: 3,
-                    title: 'Hackathon 2025',
-                    description: '48-hour coding competition',
-                    type: 'hackathon',
-                    date: '2025-09-01',
-                    time: '09:00',
-                    location: 'Main Auditorium',
-                    status: 'planned',
-                    organizer: 'Core Team',
-                    max_participants: 100,
-                    registered: 67
-                }
-            ]
-        },
-        timestamp: '2025-08-06 19:51:36'
+                timestamp: currentTime
+            });
+        }
+    } catch (error) {
+        console.error('❌ Error fetching events:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch events',
+            timestamp: currentTime
+        });
+    }
+});
+
+// ✅ REAL UPLOAD FUNCTIONALITY - Replace fake endpoints
+// File upload routes for Jack026
+const multer = require('multer');
+const upload = multer({ 
+    dest: 'uploads/',
+    limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
+});
+
+// Helper function to parse CSV
+function parseCSV(filePath) {
+    return new Promise((resolve, reject) => {
+        const results = [];
+        fs.createReadStream(filePath)
+            .pipe(csv())
+            .on('data', (data) => results.push(data))
+            .on('end', () => resolve(results))
+            .on('error', reject);
     });
+}
+
+// Helper function to clean up files
+function cleanupFile(filePath) {
+    try {
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+    } catch (error) {
+        console.error('Error cleaning up file:', error);
+    }
+}
+
+// REAL Members Upload Implementation
+adminRouter.post('/upload/members', upload.single('file'), async (req, res) => {
+    console.log('👥 Jack026: Uploading members file...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'No file uploaded',
+                timestamp: currentTime
+            });
+        }
+
+        console.log(`📁 Processing file: ${req.file.originalname}`);
+        console.log(`📂 File path: ${req.file.path}`);
+
+        // Check if database is connected
+        if (mongoose.connection.readyState !== 1) {
+            cleanupFile(req.file.path);
+            return res.status(500).json({
+                success: false,
+                message: 'Database not connected',
+                timestamp: currentTime
+            });
+        }
+
+        // Parse CSV file
+        const csvData = await parseCSV(req.file.path);
+        console.log(`📊 Parsed ${csvData.length} records from CSV`);
+
+        if (csvData.length === 0) {
+            cleanupFile(req.file.path);
+            return res.status(400).json({
+                success: false,
+                message: 'No valid data found in CSV file',
+                timestamp: currentTime
+            });
+        }
+
+        // Transform CSV data to match TeamMember schema
+        const membersToInsert = csvData.map((row, index) => ({
+            name: row.name || row.Name || `Member ${index + 1}`,
+            role: row.role || row.Role || 'Member',
+            department: row.department || row.Department || 'General',
+            year: row.year || row.Year || '1st',
+            bio: row.bio || row.Bio || 'No bio provided',
+            skills: row.skills ? row.skills.split(';').map(s => s.trim()) : [],
+            position: row.position || row.Position || 'Member',
+            isActive: true,
+            joinDate: new Date()
+        }));
+
+        console.log(`💾 Inserting ${membersToInsert.length} members to MongoDB Atlas...`);
+
+        // Save to MongoDB
+        const insertedMembers = await TeamMember.insertMany(membersToInsert);
+        
+        console.log(`✅ Successfully inserted ${insertedMembers.length} members to MongoDB Atlas`);
+
+        // Clean up uploaded file
+        cleanupFile(req.file.path);
+
+        res.json({
+            success: true,
+            message: 'Members data uploaded successfully to MongoDB Atlas',
+            data: {
+                filename: req.file.originalname,
+                records: insertedMembers.length,
+                processed: true,
+                insertedIds: insertedMembers.slice(0, 5).map(m => m._id),
+                sampleData: membersToInsert.slice(0, 3)
+            },
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+
+    } catch (error) {
+        console.error('❌ Members upload failed:', error);
+        
+        // Clean up file if it exists
+        cleanupFile(req.file.path);
+
+        res.status(500).json({
+            success: false,
+            message: 'Failed to upload members data',
+            error: error.message,
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+    }
+});
+
+// REAL Projects Upload Implementation
+adminRouter.post('/upload/projects', upload.single('file'), async (req, res) => {
+    console.log('💻 Jack026: Uploading projects file...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'No file uploaded',
+                timestamp: currentTime
+            });
+        }
+
+        console.log(`📁 Processing file: ${req.file.originalname}`);
+
+        // Check if database is connected
+        if (mongoose.connection.readyState !== 1) {
+            cleanupFile(req.file.path);
+            return res.status(500).json({
+                success: false,
+                message: 'Database not connected',
+                timestamp: currentTime
+            });
+        }
+
+        // Read and parse JSON file
+        const jsonContent = fs.readFileSync(req.file.path, 'utf8');
+        const jsonData = JSON.parse(jsonContent);
+        const projectsArray = Array.isArray(jsonData) ? jsonData : [jsonData];
+
+        console.log(`📊 Parsed ${projectsArray.length} projects from JSON`);
+
+        if (projectsArray.length === 0) {
+            cleanupFile(req.file.path);
+            return res.status(400).json({
+                success: false,
+                message: 'No valid projects found in JSON file',
+                timestamp: currentTime
+            });
+        }
+
+        // Transform JSON data to match Project schema
+        const projectsToInsert = projectsArray.map((proj, index) => ({
+            title: proj.title || proj.name || `Project ${index + 1}`,
+            description: proj.description || 'No description provided',
+            longDescription: proj.longDescription || proj.details || proj.description,
+            category: proj.category || 'Web Development',
+            technologies: Array.isArray(proj.technologies) ? proj.technologies : 
+                         proj.tech ? proj.tech.split(',').map(t => t.trim()) : 
+                         proj.stack ? proj.stack : ['JavaScript'],
+            githubUrl: proj.githubUrl || proj.github || proj.repo,
+            liveUrl: proj.liveUrl || proj.demo || proj.url,
+            status: proj.status || 'in-progress',
+            team: proj.team || [],
+            tags: proj.tags || [],
+            featured: proj.featured || false,
+            likes: proj.likes || 0,
+            views: proj.views || 0
+        }));
+
+        console.log(`💾 Inserting ${projectsToInsert.length} projects to MongoDB Atlas...`);
+
+        // Save to MongoDB
+        const insertedProjects = await Project.insertMany(projectsToInsert);
+        
+        console.log(`✅ Successfully inserted ${insertedProjects.length} projects to MongoDB Atlas`);
+
+        // Clean up uploaded file
+        cleanupFile(req.file.path);
+
+        res.json({
+            success: true,
+            message: 'Projects data uploaded successfully to MongoDB Atlas',
+            data: {
+                filename: req.file.originalname,
+                records: insertedProjects.length,
+                processed: true,
+                insertedIds: insertedProjects.slice(0, 5).map(p => p._id),
+                sampleData: projectsToInsert.slice(0, 3)
+            },
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+
+    } catch (error) {
+        console.error('❌ Projects upload failed:', error);
+        
+        // Clean up file if it exists
+        cleanupFile(req.file.path);
+
+        res.status(500).json({
+            success: false,
+            message: 'Failed to upload projects data',
+            error: error.message,
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+    }
+});
+
+// REAL Events Upload Implementation
+adminRouter.post('/upload/events', upload.single('file'), async (req, res) => {
+    console.log('📅 Jack026: Uploading events file...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: 'No file uploaded',
+                timestamp: currentTime
+            });
+        }
+
+        console.log(`📁 Processing file: ${req.file.originalname}`);
+
+        // Check if database is connected
+        if (mongoose.connection.readyState !== 1) {
+            cleanupFile(req.file.path);
+            return res.status(500).json({
+                success: false,
+                message: 'Database not connected',
+                timestamp: currentTime
+            });
+        }
+
+        // Parse CSV file
+        const csvData = await parseCSV(req.file.path);
+        console.log(`📊 Parsed ${csvData.length} records from CSV`);
+
+        if (csvData.length === 0) {
+            cleanupFile(req.file.path);
+            return res.status(400).json({
+                success: false,
+                message: 'No valid data found in CSV file',
+                timestamp: currentTime
+            });
+        }
+
+        // Transform CSV data to match Event schema
+        const eventsToInsert = csvData.map((row, index) => {
+            const eventDate = row.date || row.Date;
+            let parsedDate;
+            
+            try {
+                parsedDate = new Date(eventDate);
+                if (isNaN(parsedDate.getTime())) {
+                    parsedDate = new Date();
+                    parsedDate.setDate(parsedDate.getDate() + index + 7); // Future date
+                }
+            } catch {
+                parsedDate = new Date();
+                parsedDate.setDate(parsedDate.getDate() + index + 7);
+            }
+
+            return {
+                title: row.title || row.Title || `Event ${index + 1}`,
+                description: row.description || row.Description || 'No description provided',
+                category: row.category || row.Category || row.type || 'Meetup',
+                date: parsedDate,
+                time: row.time || row.Time || '10:00 AM',
+                venue: row.venue || row.Venue || row.location || 'TBD',
+                capacity: parseInt(row.capacity || row.Capacity) || 50,
+                organizer: row.organizer || row.Organizer || 'Jack026',
+                status: row.status || 'upcoming',
+                registrationOpen: true,
+                featured: row.featured === 'true' || row.featured === true || false
+            };
+        });
+
+        console.log(`💾 Inserting ${eventsToInsert.length} events to MongoDB Atlas...`);
+
+        // Save to MongoDB
+        const insertedEvents = await Event.insertMany(eventsToInsert);
+        
+        console.log(`✅ Successfully inserted ${insertedEvents.length} events to MongoDB Atlas`);
+
+        // Clean up uploaded file
+        cleanupFile(req.file.path);
+
+        res.json({
+            success: true,
+            message: 'Events data uploaded successfully to MongoDB Atlas',
+            data: {
+                filename: req.file.originalname,
+                records: insertedEvents.length,
+                processed: true,
+                insertedIds: insertedEvents.slice(0, 5).map(e => e._id),
+                sampleData: eventsToInsert.slice(0, 3)
+            },
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+
+    } catch (error) {
+        console.error('❌ Events upload failed:', error);
+        
+        // Clean up file if it exists
+        cleanupFile(req.file.path);
+
+        res.status(500).json({
+            success: false,
+            message: 'Failed to upload events data',
+            error: error.message,
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+    }
+});
+
+// Data verification endpoint
+adminRouter.get('/verify-data', async (req, res) => {
+    console.log('🔍 Jack026: Verifying database data...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
+    try {
+        if (mongoose.connection.readyState !== 1) {
+            return res.status(500).json({
+                success: false,
+                message: 'Database not connected',
+                timestamp: currentTime
+            });
+        }
+
+        const memberCount = await TeamMember.countDocuments();
+        const eventCount = await Event.countDocuments();
+        const projectCount = await Project.countDocuments();
+        
+        res.json({
+            success: true,
+            counts: {
+                members: memberCount,
+                events: eventCount,
+                projects: projectCount
+            },
+            message: 'Data verified from MongoDB Atlas',
+            timestamp: currentTime,
+            user: 'Jack026'
+        });
+    } catch (error) {
+        console.error('❌ Data verification failed:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message,
+            timestamp: currentTime
+        });
+    }
 });
 
 // Use admin router
@@ -472,18 +957,21 @@ app.use('/api/admin', adminRouter);
 
 // Special routes for Jack026
 app.get('/jack026', (req, res) => {
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     res.json({
         message: '👑 Welcome Jack026! Super Admin Access Granted',
-        timestamp: '2025-08-06 19:51:36',
+        timestamp: currentTime,
         status: 'active',
         privileges: 'unlimited',
         database_status: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
         server_uptime: process.uptime(),
+        upload_system: 'real_mongodb_enabled',
         quick_access: {
             admin_panel: '/admin/',
             shortcut: 'Ctrl+Shift+A',
             api_stats: '/api/admin/stats',
-            health_check: '/health'
+            health_check: '/health',
+            data_verification: '/api/admin/verify-data'
         }
     });
 });
@@ -492,14 +980,16 @@ app.get('/jack026', (req, res) => {
 app.get('/health', (req, res) => {
     const isDbConnected = mongoose.connection.readyState === 1;
     const uptime = process.uptime();
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
     res.json({
         status: 'healthy',
-        timestamp: '2025-08-06 19:51:36',
+        timestamp: currentTime,
         database: isDbConnected ? 'connected' : 'disconnected',
         uptime: Math.floor(uptime),
         uptimeFormatted: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
         user: 'Jack026',
+        upload_system: 'mongodb_enabled',
         memory: process.memoryUsage(),
         version: process.version,
         environment: process.env.NODE_ENV || 'development'
@@ -509,9 +999,12 @@ app.get('/health', (req, res) => {
 // Admin panel route handler
 app.get('/admin', (req, res) => {
     console.log('👑 Jack026: Accessing admin panel...');
+    const isDbConnected = mongoose.connection.readyState === 1;
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
     res.sendFile(path.join(__dirname, 'admin', 'index.html'), (err) => {
         if (err) {
-            console.log('⚠️ Admin panel file not found, creating basic admin page...');
+            console.log('⚠️ Admin panel file not found, creating enhanced admin page...');
             res.send(`
                 <!DOCTYPE html>
                 <html>
@@ -530,6 +1023,13 @@ app.get('/admin', (req, res) => {
                         .crown { font-size: 3rem; margin-bottom: 1rem; }
                         .title { font-size: 2.5rem; margin-bottom: 0.5rem; }
                         .subtitle { color: #94a3b8; }
+                        .status { 
+                            background: ${isDbConnected ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)'}; 
+                            padding: 1rem; 
+                            border-radius: 0.5rem; 
+                            margin: 1rem 0;
+                            border: 1px solid ${isDbConnected ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)'}; 
+                        }
                         .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0; }
                         .stat-card { 
                             background: linear-gradient(135deg, #1e293b, #334155); 
@@ -551,7 +1051,7 @@ app.get('/admin', (req, res) => {
                             transition: all 0.3s ease;
                         }
                         .action-btn:hover { background: #5855eb; transform: translateY(-2px); }
-                        .status { background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; }
+                        .upload-btn { background: linear-gradient(135deg, #10b981, #059669); }
                         .shortcut-hint { 
                             background: rgba(99, 102, 241, 0.1); 
                             padding: 1rem; 
@@ -574,52 +1074,53 @@ app.get('/admin', (req, res) => {
                             <div class="crown">👑</div>
                             <h1 class="title">Jack026 Admin Panel</h1>
                             <p class="subtitle">Da-Vinci Coder Club Administration</p>
-                            <p class="subtitle">Current Time: 2025-08-06 19:51:36 UTC</p>
+                            <p class="subtitle">Current Time: ${currentTime} UTC</p>
                         </div>
 
                         <div class="status">
                             <strong>✅ Server Status:</strong> Online | 
-                            <strong>📡 Database:</strong> ${isDbConnected ? 'Connected' : 'Disconnected'} | 
+                            <strong>📡 Database:</strong> ${isDbConnected ? 'Connected ✅' : 'Disconnected ⚠️'} | 
+                            <strong>📤 Upload System:</strong> ${isDbConnected ? 'Real MongoDB Enabled ✅' : 'Limited Mode ⚠️'} |
                             <strong>👤 User:</strong> Jack026
                         </div>
 
                         <div class="stats">
                             <div class="stat-card">
-                                <div class="stat-number">156</div>
-                                <div class="stat-label">Total Members</div>
+                                <div class="stat-number">Real Data</div>
+                                <div class="stat-label">MongoDB Connected</div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-number">24</div>
-                                <div class="stat-label">Active Projects</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">8</div>
-                                <div class="stat-label">Upcoming Events</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-number">47</div>
+                                <div class="stat-number">48</div>
                                 <div class="stat-label">Days Streak</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">Active</div>
+                                <div class="stat-label">Upload System</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">CSV/JSON</div>
+                                <div class="stat-label">File Support</div>
                             </div>
                         </div>
 
                         <div class="actions">
+                            <button class="action-btn upload-btn" onclick="window.location.href='/api/admin/verify-data'">
+                                🔍 Verify Database
+                            </button>
                             <button class="action-btn" onclick="window.location.href='/api/admin/stats'">
                                 📊 View Stats API
                             </button>
                             <button class="action-btn" onclick="window.location.href='/api/admin/members'">
                                 👥 Members API
                             </button>
-                            <button class="action-btn" onclick="window.location.href='/api/admin/activity'">
-                                📋 Activity Feed
+                            <button class="action-btn" onclick="window.location.href='/api/admin/projects'">
+                                💻 Projects API
+                            </button>
+                            <button class="action-btn" onclick="window.location.href='/api/admin/events'">
+                                📅 Events API
                             </button>
                             <button class="action-btn" onclick="window.location.href='/health'">
                                 ⚙️ Health Check
-                            </button>
-                            <button class="action-btn" onclick="window.location.href='/jack026'">
-                                👑 Jack026 Status
-                            </button>
-                            <button class="action-btn" onclick="window.location.href='/'">
-                                🏠 Main Website
                             </button>
                         </div>
 
@@ -628,8 +1129,9 @@ app.get('/admin', (req, res) => {
                         </div>
 
                         <div style="text-align: center; margin-top: 2rem; color: #94a3b8;">
-                            <p>🚀 Enhanced admin panel files will be created automatically</p>
-                            <p>Server running successfully with database connection!</p>
+                            <p>🚀 Real MongoDB upload system enabled!</p>
+                            <p>Upload CSV/JSON files and see them saved to MongoDB Atlas</p>
+                            <p>All upload endpoints return actual database record counts</p>
                         </div>
                     </div>
                 </body>
@@ -637,6 +1139,12 @@ app.get('/admin', (req, res) => {
             `);
         }
     });
+});
+
+// Team upload page route
+app.get('/admin/team-upload', (req, res) => {
+    console.log('👥 Jack026: Accessing team upload page...');
+    res.sendFile(path.join(__dirname, 'admin', 'team-upload.html'));
 });
 
 app.get('/admin/*', (req, res) => {
@@ -651,6 +1159,8 @@ app.get('/admin/*', (req, res) => {
 // Main website routes
 app.get('/', (req, res) => {
     console.log('🏠 Serving main website for Jack026...');
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
     res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
         if (err) {
             res.send(`
@@ -683,6 +1193,7 @@ app.get('/', (req, res) => {
                         }
                         .link:hover { background: #5855eb; transform: translateY(-2px); }
                         .admin-link { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+                        .upload-link { background: linear-gradient(135deg, #10b981, #059669); }
                         .shortcut { 
                             background: rgba(99, 102, 241, 0.1); 
                             padding: 1rem; 
@@ -702,10 +1213,11 @@ app.get('/', (req, res) => {
                         <div class="logo">🚀</div>
                         <h1 class="title">Da-Vinci Coder Club</h1>
                         <p class="subtitle">Welcome to the official website</p>
-                        <p class="subtitle">Current Time: 2025-08-06 19:51:36 UTC</p>
+                        <p class="subtitle">Current Time: ${currentTime} UTC</p>
                         
                         <div class="links">
                             <a href="/admin/" class="link admin-link">👑 Admin Panel (Jack026)</a>
+                            <a href="/api/admin/verify-data" class="link upload-link">🔍 Verify Database</a>
                             <a href="/health" class="link">⚙️ Health Check</a>
                             <a href="/api/admin/stats" class="link">📊 API Stats</a>
                             <a href="/jack026" class="link">👑 Jack026 Status</a>
@@ -718,6 +1230,7 @@ app.get('/', (req, res) => {
                         <div style="margin-top: 2rem; color: #94a3b8;">
                             <p>✅ Server running successfully</p>
                             <p>📡 Database: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}</p>
+                            <p>📤 Upload System: Real MongoDB Enabled</p>
                             <p>👤 Ready for Jack026</p>
                         </div>
                     </div>
@@ -732,6 +1245,7 @@ app.get('/', (req, res) => {
 const pages = ['team', 'projects', 'events', 'about', 'contact', 'account'];
 pages.forEach(page => {
     app.get(`/${page}`, (req, res) => {
+        const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
         res.sendFile(path.join(__dirname, 'public', `${page}.html`), (err) => {
             if (err) {
                 res.send(`
@@ -767,7 +1281,7 @@ pages.forEach(page => {
                     <body>
                         <h1>${page.charAt(0).toUpperCase() + page.slice(1)} Page</h1>
                         <p>This page is under construction for Jack026</p>
-                        <p>Current Time: 2025-08-06 19:51:36 UTC</p>
+                        <p>Current Time: ${currentTime} UTC</p>
                         <a href="/" class="back-link">🏠 Go Home</a>
                         <a href="/admin/" class="back-link">👑 Admin Panel</a>
                     </body>
@@ -780,10 +1294,9 @@ pages.forEach(page => {
 
 // 404 error handler
 app.use((req, res, next) => {
-    // Serve custom 404 page if it exists
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     res.status(404).sendFile(path.join(__dirname, 'public', '404.html'), err => {
         if (err) {
-            // Fallback: simple 404 message if file not found
             res.status(404).send(`
                 <!DOCTYPE html>
                 <html>
@@ -806,7 +1319,8 @@ app.use((req, res, next) => {
                 <body>
                     <div class="code">404</div>
                     <div class="msg">Page Not Found</div>
-                    <a href="/">🏠 Go Home</a>
+                    <p>Time: ${currentTime} UTC</p>
+                    <a href="/">🏠 Go Home</a> | <a href="/admin/">👑 Admin Panel</a>
                 </body>
                 </html>
             `);
@@ -816,13 +1330,14 @@ app.use((req, res, next) => {
 
 // Error handling middleware
 app.use((error, req, res, next) => {
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     console.error('💥 Server Error for Jack026:', error);
     
     res.status(500).json({
         success: false,
         error: 'Internal server error',
         message: error.message,
-        timestamp: '2025-08-06 19:51:36',
+        timestamp: currentTime,
         user: 'Jack026'
     });
 });
@@ -830,17 +1345,19 @@ app.use((error, req, res, next) => {
 // Start server
 app.listen(PORT, () => {
     const isDbConnected = mongoose.connection.readyState === 1;
+    const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
     
-    console.log('\n' + '='.repeat(60));
+    console.log('\n' + '='.repeat(70));
     console.log('🚀 Da-Vinci Coder Club Server Started Successfully!');
-    console.log('='.repeat(60));
+    console.log('='.repeat(70));
     console.log(`📍 Server: http://localhost:${PORT}`);
     console.log(`👑 Admin Panel: http://localhost:${PORT}/admin/`);
     console.log(`👤 User: Jack026`);
-    console.log(`📅 ${new Date().toISOString().replace('T', ' ').substring(0, 19)} UTC`);
+    console.log(`📅 ${currentTime} UTC`);
     console.log(`🎯 Status: Ready for Jack026`);
     console.log(`📡 Database: ${isDbConnected ? 'Connected ✅' : 'Disconnected ⚠️'}`);
-    console.log('='.repeat(60));
+    console.log(`📤 Upload System: ${isDbConnected ? 'Real MongoDB Enabled ✅' : 'Limited Mode ⚠️'}`);
+    console.log('='.repeat(70));
     console.log('\n📋 Available Routes:');
     console.log('├── 🏠 Main Site: http://localhost:3000/');
     console.log('├── 👑 Admin Panel: http://localhost:3000/admin/');
@@ -858,70 +1375,13 @@ app.listen(PORT, () => {
     console.log('├── ⚙️ System: http://localhost:3000/api/admin/system-status');
     console.log('├── 👥 Members: http://localhost:3000/api/admin/members');
     console.log('├── 💻 Projects: http://localhost:3000/api/admin/projects');
-    console.log('└── 📅 Events: http://localhost:3000/api/admin/events');
+    console.log('├── 📅 Events: http://localhost:3000/api/admin/events');
+    console.log('├── 🔍 Verify: http://localhost:3000/api/admin/verify-data');
+    console.log('└── 📤 Uploads: /api/admin/upload/{members|projects|events}');
     console.log('\n⌨️ Quick Access:');
     console.log('└── Press Ctrl+Shift+A from any page for admin access');
-    console.log('\n✅ All systems ready for Jack026! 🎯');
-    console.log('='.repeat(60));
-});
-// Add this after the existing admin routes in server.js
-
-// File upload routes for Jack026
-const multer = require('multer');
-const upload = multer({ 
-    dest: 'uploads/',
-    limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
-});
-
-// Upload endpoints
-adminRouter.post('/upload/members', upload.single('file'), (req, res) => {
-    console.log('👥 Jack026: Uploading members file...');
-    
-    res.json({
-        success: true,
-        message: 'Members data uploaded successfully',
-        data: {
-            filename: req.file?.originalname || 'members.csv',
-            records: Math.floor(Math.random() * 50) + 10,
-            processed: true
-        },
-        timestamp: '2025-08-06 20:26:47'
-    });
-});
-
-adminRouter.post('/upload/projects', upload.single('file'), (req, res) => {
-    console.log('💻 Jack026: Uploading projects file...');
-    
-    res.json({
-        success: true,
-        message: 'Projects data uploaded successfully',
-        data: {
-            filename: req.file?.originalname || 'projects.json',
-            records: Math.floor(Math.random() * 20) + 5,
-            processed: true
-        },
-        timestamp: '2025-08-06 20:26:47'
-    });
-});
-
-adminRouter.post('/upload/events', upload.single('file'), (req, res) => {
-    console.log('📅 Jack026: Uploading events file...');
-    
-    res.json({
-        success: true,
-        message: 'Events data uploaded successfully',
-        data: {
-            filename: req.file?.originalname || 'events.csv',
-            records: Math.floor(Math.random() * 15) + 3,
-            processed: true
-        },
-        timestamp: '2025-08-06 20:26:47'
-    });
-});
-// Add this route to server.js
-app.get('/admin/team-upload', (req, res) => {
-    console.log('👥 Jack026: Accessing team upload page...');
-    res.sendFile(path.join(__dirname, 'admin', 'team-upload.html'));
+    console.log('\n✅ All systems ready for Jack026! Real MongoDB uploads enabled! 🎯');
+    console.log('='.repeat(70));
 });
 
 // Export app for testing
