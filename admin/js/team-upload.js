@@ -94,6 +94,19 @@ class Jack026TeamUpload {
     }
     
     async loadTeamData() {
+        // Try to load from localStorage first
+        const savedTeamData = localStorage.getItem('jack026_team_members');
+        if (savedTeamData) {
+            try {
+                this.teamMembers = JSON.parse(savedTeamData);
+                this.updateTeamStats({ total: this.teamMembers.length });
+                console.log(`✅ Loaded ${this.teamMembers.length} team members from localStorage`);
+                return;
+            } catch (error) {
+                console.error('Error parsing saved team data:', error);
+            }
+        }
+        
         try {
             const response = await fetch(`${this.apiBaseUrl}/members`, {
                 headers: { 'X-User': 'Jack026' }
@@ -102,6 +115,7 @@ class Jack026TeamUpload {
             if (response.ok) {
                 const data = await response.json();
                 this.teamMembers = data.data.members || [];
+                this.saveTeamMembers(); // Save to localStorage
                 this.updateTeamStats(data.data);
             }
         } catch (error) {
@@ -110,6 +124,7 @@ class Jack026TeamUpload {
                 { id: 1, name: 'Jack026', email: 'jack026@club.adtu.ac.in', role: 'admin' },
                 { id: 2, name: 'Sarah Chen', email: 'sarah.chen@student.adtu.ac.in', role: 'member' }
             ];
+            this.saveTeamMembers(); // Save demo data to localStorage
             this.updateTeamStats({ total: 156, active: 142 });
         }
     }
@@ -576,6 +591,9 @@ class Jack026TeamUpload {
         member.id = Date.now() + Math.random();
         this.teamMembers.push(member);
         
+        // Save to localStorage
+        this.saveTeamMembers();
+        
         // In production, this would be an actual API call:
         // const response = await fetch(`${this.apiBaseUrl}/members`, {
         //     method: 'POST',
@@ -1021,6 +1039,7 @@ class Jack026TeamUpload {
             this.teamMembers = [];
             this.uploadHistory = [];
             localStorage.removeItem('jack026_team_upload_history');
+            localStorage.removeItem('jack026_team_members');
             
             // Reload demo data
             await this.loadTeamData();
@@ -1096,6 +1115,11 @@ class Jack026TeamUpload {
     
     saveUploadHistory() {
         localStorage.setItem('jack026_team_upload_history', JSON.stringify(this.uploadHistory));
+    }
+    
+    saveTeamMembers() {
+        localStorage.setItem('jack026_team_members', JSON.stringify(this.teamMembers));
+        console.log(`💾 Saved ${this.teamMembers.length} team members to localStorage`);
     }
     
     showNotification(message, type = 'info') {
