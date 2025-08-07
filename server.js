@@ -1242,8 +1242,7 @@ app.get('/', (req, res) => {
 });
 
 // Other page routes
-const pages = ['team', 'projects', 'events', 'about', 'contact', 'account'];
-pages.forEach(page => {
+const pages = ['team', 'projects', 'events', 'about', 'contact', 'account', 'resources'];pages.forEach(page => {
     app.get(`/${page}`, (req, res) => {
         const currentTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
         res.sendFile(path.join(__dirname, 'public', `${page}.html`), (err) => {
@@ -1367,6 +1366,7 @@ app.listen(PORT, () => {
     console.log('├── ℹ️ About: http://localhost:3000/about');
     console.log('├── 📧 Contact: http://localhost:3000/contact');
     console.log('├── 👤 Account: http://localhost:3000/account');
+    console.log('├── 📚 Resources: http://localhost:3000/resources'); // Add this line
     console.log('├── ⚙️ Health: http://localhost:3000/health');
     console.log('└── 👑 Jack026: http://localhost:3000/jack026');
     console.log('\n🔗 API Endpoints:');
