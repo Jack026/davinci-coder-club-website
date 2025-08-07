@@ -502,8 +502,9 @@ class Jack026TeamUpload {
                     member[header] = values[index];
                 });
                 
-                // Add default values
+                // Add default values and normalize data
                 member.role = member.role || 'member';
+                member.position = this.normalizePosition(member.position || member.role);
                 member.status = 'active';
                 member.joinDate = new Date().toISOString().split('T')[0];
                 member.addedBy = 'Jack026';
@@ -529,6 +530,7 @@ class Jack026TeamUpload {
             return {
                 ...member,
                 role: member.role || 'member',
+                position: this.normalizePosition(member.position || member.role),
                 status: member.status || 'active',
                 joinDate: member.joinDate || new Date().toISOString().split('T')[0],
                 addedBy: 'Jack026',
@@ -1105,6 +1107,27 @@ class Jack026TeamUpload {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+    }
+    
+    normalizePosition(position) {
+        if (!position) return 'member';
+        
+        const positionMapping = {
+            'super admin': 'leadership',
+            'admin': 'leadership', 
+            'president': 'leadership',
+            'vice president': 'leadership',
+            'technical lead': 'leadership',
+            'lead': 'leadership',
+            'core member': 'core',
+            'senior member': 'core',
+            'senior': 'core',
+            'core': 'core',
+            'member': 'member',
+            'alumni': 'alumni'
+        };
+        
+        return positionMapping[position.toLowerCase()] || 'member';
     }
     
     // Utility Functions

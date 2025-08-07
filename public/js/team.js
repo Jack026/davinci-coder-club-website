@@ -4,6 +4,86 @@
    Built for: Jack026
 ======================================== */
 
+// Simple DOM utilities if not available
+const DOMUtils = {
+    $(selector) {
+        return document.querySelector(selector);
+    },
+    $$(selector) {
+        return document.querySelectorAll(selector);
+    },
+    create(tag, options = {}) {
+        const element = document.createElement(tag);
+        if (options.className) element.className = options.className;
+        if (options.innerHTML) element.innerHTML = options.innerHTML;
+        if (options.attributes) {
+            Object.entries(options.attributes).forEach(([key, value]) => {
+                element.setAttribute(key, value);
+            });
+        }
+        return element;
+    }
+};
+
+// Simple state management if not available
+const daVinciState = window.daVinciState || {
+    analytics: {
+        track: (event, data) => {
+            console.log(`📊 Analytics: ${event}`, data);
+        }
+    },
+    showNotification: (message, type, duration) => {
+        console.log(`🔔 Notification [${type}]: ${message}`);
+    }
+};
+
+// Simple modal system if not available
+const modalSystem = window.modalSystem || {
+    open: (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            modal.classList.add('show');
+        }
+    },
+    close: (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+            modal.classList.remove('show');
+        }
+    },
+    register: (modalId, modal) => {
+        // Simple modal registration
+    }
+};
+
+// DAVINCI_CONFIG fallback
+const DAVINCI_CONFIG = window.DAVINCI_CONFIG || {
+    currentUser: 'Jack026'
+};
+
+// CounterAnimation fallback
+class CounterAnimation {
+    constructor(element) {
+        if (!element) return;
+        const target = parseInt(element.getAttribute('data-count')) || 0;
+        const current = parseInt(element.textContent) || 0;
+        
+        if (current < target) {
+            const increment = Math.ceil(target / 50);
+            const timer = setInterval(() => {
+                const currentValue = parseInt(element.textContent) || 0;
+                if (currentValue < target) {
+                    element.textContent = Math.min(currentValue + increment, target);
+                } else {
+                    clearInterval(timer);
+                }
+            }, 50);
+        }
+    }
+}
+
 class TeamPage {
     constructor() {
         this.members = [];
@@ -34,21 +114,32 @@ class TeamPage {
         try {
             this.showLoading();
             
-            // Mock API call - replace with actual endpoint
+            // Load uploaded team members from localStorage first
+            const uploadedMembers = this.loadUploadedMembers();
+            
+            // Mock API call for default/demo data
             const response = await this.mockTeamAPI();
-            this.members = response.members;
+            let mockMembers = response.members;
+            
+            // Merge uploaded members with mock members, prioritizing uploaded data
+            const allMembers = this.mergeTeamMembers(uploadedMembers, mockMembers);
+            
+            this.members = allMembers;
             this.filteredMembers = [...this.members];
             
             // Find Jack026's profile
-            this.Jack026Profile = this.members.find(m => m.username === 'Jack026');
+            this.Jack026Profile = this.members.find(m => m.username === 'Jack026' || m.name === 'Jack026');
             
             this.renderTeamSections();
             this.updateMemberCount();
             this.updateTeamStats();
             this.hideLoading();
             
+            console.log(`👥 Team loaded: ${uploadedMembers.length} uploaded + ${mockMembers.length} mock = ${this.members.length} total members`);
+            
             daVinciState.analytics.track('team_loaded', {
                 totalMembers: this.members.length,
+                uploadedMembers: uploadedMembers.length,
                 currentUser: 'Jack026'
             });
             
@@ -56,6 +147,119 @@ class TeamPage {
             console.error('Failed to load team members:', error);
             this.showError('Failed to load team members. Please try again.');
         }
+    }
+    
+    loadUploadedMembers() {
+        try {
+            const savedTeamData = localStorage.getItem('jack026_team_members');
+            if (savedTeamData) {
+                const uploadedMembers = JSON.parse(savedTeamData);
+                console.log(`📥 Loaded ${uploadedMembers.length} uploaded team members from localStorage`);
+                
+                // Transform uploaded members to match expected format
+                return uploadedMembers.map(member => this.transformUploadedMember(member));
+            }
+        } catch (error) {
+            console.error('Error loading uploaded team members:', error);
+        }
+        return [];
+    }
+    
+    transformUploadedMember(uploadedMember) {
+        // Transform uploaded member data to match the expected team page format
+        const member = {
+            id: uploadedMember.id || Date.now() + Math.random(),
+            username: uploadedMember.username || uploadedMember.name?.toLowerCase().replace(/\s+/g, '_'),
+            name: uploadedMember.name,
+            position: this.mapRoleToPosition(uploadedMember.role),
+            role: uploadedMember.role || 'Member',
+            department: uploadedMember.department || 'Computer Science',
+            year: uploadedMember.year || '2nd Year',
+            email: uploadedMember.email,
+            phone: uploadedMember.phone || '',
+            avatar: this.generateAvatar(uploadedMember.name?.charAt(0) || 'M', this.getRandomColor()),
+            bio: uploadedMember.bio || `${uploadedMember.role || 'Member'} at Da-Vinci Coder Club`,
+            skills: this.parseSkills(uploadedMember.skills) || ['Programming'],
+            projects: uploadedMember.projects || [],
+            achievements: uploadedMember.achievements || [],
+            joinDate: uploadedMember.joinDate || uploadedMember.addedAt?.split(' ')[0] || new Date().toISOString().split('T')[0],
+            contributions: uploadedMember.contributions || Math.floor(Math.random() * 50) + 10,
+            isOnline: Math.random() > 0.5,
+            lastSeen: Math.random() > 0.5 ? 'now' : `${Math.floor(Math.random() * 60)} minutes ago`,
+            social: uploadedMember.social || {},
+            status: uploadedMember.status || 'active',
+            addedBy: uploadedMember.addedBy || 'Admin',
+            addedAt: uploadedMember.addedAt
+        };
+        
+        return member;
+    }
+    
+    mapRoleToPosition(role) {
+        if (!role) return 'member';
+        
+        const roleMapping = {
+            'super admin': 'leadership',
+            'admin': 'leadership', 
+            'president': 'leadership',
+            'vice president': 'leadership',
+            'technical lead': 'leadership',
+            'core member': 'core',
+            'senior member': 'core',
+            'senior': 'core',
+            'core': 'core',
+            'member': 'member',
+            'alumni': 'alumni'
+        };
+        
+        return roleMapping[role.toLowerCase()] || 'member';
+    }
+    
+    parseSkills(skills) {
+        if (!skills) return [];
+        if (Array.isArray(skills)) return skills;
+        if (typeof skills === 'string') {
+            // Handle different separators (semicolon, comma, pipe)
+            return skills.split(/[;,|]/).map(skill => skill.trim()).filter(skill => skill.length > 0);
+        }
+        return [];
+    }
+    
+    getRandomColor() {
+        const colors = ['#6366f1', '#f43f5e', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    mergeTeamMembers(uploadedMembers, mockMembers) {
+        // Create a map of existing members by email to avoid duplicates
+        const membersByEmail = new Map();
+        
+        // First, add all uploaded members (they take priority)
+        uploadedMembers.forEach(member => {
+            if (member.email) {
+                membersByEmail.set(member.email.toLowerCase(), member);
+            }
+        });
+        
+        // Then add mock members only if they don't already exist
+        mockMembers.forEach(member => {
+            if (member.email && !membersByEmail.has(member.email.toLowerCase())) {
+                membersByEmail.set(member.email.toLowerCase(), member);
+            }
+        });
+        
+        // Convert back to array and sort by position priority
+        const allMembers = Array.from(membersByEmail.values());
+        
+        // Sort by position priority and then by name
+        const positionOrder = { leadership: 0, core: 1, senior: 2, member: 3, alumni: 4 };
+        allMembers.sort((a, b) => {
+            const positionDiff = (positionOrder[a.position] || 3) - (positionOrder[b.position] || 3);
+            if (positionDiff !== 0) return positionDiff;
+            return a.name.localeCompare(b.name);
+        });
+        
+        return allMembers;
     }
     
     async mockTeamAPI() {
@@ -600,7 +804,15 @@ class TeamPage {
         const leadership = this.members.filter(m => m.position === 'leadership');
         
         if (leadership.length === 0) {
-            container.innerHTML = '<p>Loading leadership team...</p>';
+            container.innerHTML = `
+                <div class="no-leadership">
+                    <div class="no-members-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>No Leadership Members</h3>
+                    <p>Leadership team members will appear here once they are added.</p>
+                </div>
+            `;
             return;
         }
         
@@ -616,6 +828,19 @@ class TeamPage {
         if (!container) return;
         
         const coreTeam = this.members.filter(m => m.position === 'core');
+        
+        if (coreTeam.length === 0) {
+            container.innerHTML = `
+                <div class="no-core-team">
+                    <div class="no-members-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>No Core Team Members</h3>
+                    <p>Core team members will appear here once they are added.</p>
+                </div>
+            `;
+            return;
+        }
         
         container.innerHTML = coreTeam.map(member => 
             this.createMemberCard(member)
@@ -1139,9 +1364,18 @@ class TeamPage {
             years[member.year] = (years[member.year] || 0) + 1;
         });
         
+        // Get all year elements and find matches by text content
+        const yearElements = DOMUtils.$$('.year-item');
+        
         Object.entries(years).forEach(([year, count]) => {
             const percentage = (count / this.members.length) * 100;
-            const yearElement = DOMUtils.$(`.year-item:contains("${year}")`);
+            
+            // Find the year element by searching through text content
+            const yearElement = Array.from(yearElements).find(el => {
+                const labelElement = el.querySelector('.year-label');
+                return labelElement && labelElement.textContent.includes(year);
+            });
+            
             if (yearElement) {
                 const fillElement = yearElement.querySelector('.year-fill');
                 const countElement = yearElement.querySelector('.year-count');
@@ -1161,10 +1395,18 @@ class TeamPage {
             });
         });
         
-        Object.entries(skillCounts).forEach(([skill, count]) => {
-            const skillElement = DOMUtils.$(`.skill-item .skill-name:contains("${skill}")`);
+        // Get all skill elements and find matches by text content
+        const skillElements = DOMUtils.$$('.skill-item');
+        
+        Object.entries(skillCounts).forEach(([skillCategory, count]) => {
+            // Find the skill element by searching through text content
+            const skillElement = Array.from(skillElements).find(el => {
+                const nameElement = el.querySelector('.skill-name');
+                return nameElement && nameElement.textContent.includes(skillCategory);
+            });
+            
             if (skillElement) {
-                const countElement = skillElement.parentElement.querySelector('.skill-count');
+                const countElement = skillElement.querySelector('.skill-count');
                 if (countElement) countElement.textContent = count;
             }
         });
