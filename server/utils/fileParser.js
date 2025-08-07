@@ -192,7 +192,13 @@ class FileParser {
             return field;
         }
         if (typeof field === 'string') {
-            return ['true', 'yes', '1', 'on'].includes(field.toLowerCase());
+            const normalized = field.toLowerCase().trim();
+            if (['true', 'yes', '1', 'on'].includes(normalized)) {
+                return true;
+            }
+            if (['false', 'no', '0', 'off'].includes(normalized)) {
+                return false;
+            }
         }
         return defaultValue;
     }
