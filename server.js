@@ -868,55 +868,371 @@ app.listen(PORT, () => {
 
 // File upload routes for Jack026
 const multer = require('multer');
+const FileParser = require('./server/utils/fileParser');
+const TeamMember = require('./server/models/TeamMember');
+const Project = require('./server/models/Project');
+const Event = require('./server/models/Event');
+
 const upload = multer({ 
     dest: 'uploads/',
     limits: { fileSize: 10 * 1024 * 1024 } // 10MB limit
 });
 
 // Upload endpoints
-adminRouter.post('/upload/members', upload.single('file'), (req, res) => {
+adminRouter.post('/upload/members', upload.single('file'), async (req, res) => {
     console.log('👥 Jack026: Uploading members file...');
     
-    res.json({
-        success: true,
-        message: 'Members data uploaded successfully',
-        data: {
-            filename: req.file?.originalname || 'members.csv',
-            records: Math.floor(Math.random() * 50) + 10,
-            processed: true
-        },
-        timestamp: '2025-08-06 20:26:47'
-    });
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                error: 'No file uploaded',
+                message: 'Please select a file to upload',
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            });
+        }
+
+        const filePath = req.file.path;
+        const filename = req.file.originalname;
+        let parsedData = [];
+
+        try {
+            // Parse file based on extension
+            if (filename.toLowerCase().endsWith('.csv')) {
+                parsedData = await FileParser.parseCSV(filePath, ['name', 'Name']);
+            } else if (filename.toLowerCase().endsWith('.json')) {
+                parsedData = await FileParser.parseJSON(filePath);
+            } else {
+                throw new Error('Unsupported file format. Please upload CSV or JSON files.');
+            }
+
+            if (parsedData.length === 0) {
+                throw new Error('No valid data found in the uploaded file');
+            }
+
+            // Validate and clean data
+            const validMembers = [];
+            const errors = [];
+            
+            for (let i = 0; i < parsedData.length; i++) {
+                try {
+                    const cleanedMember = FileParser.validateMemberData(parsedData[i]);
+                    
+                    // Check required fields
+                    if (!cleanedMember.name || !cleanedMember.role || !cleanedMember.department) {
+                        errors.push(`Row ${i + 1}: Missing required fields (name, role, department)`);
+                        continue;
+                    }
+                    
+                    validMembers.push(cleanedMember);
+                } catch (error) {
+                    errors.push(`Row ${i + 1}: ${error.message}`);
+                }
+            }
+
+            if (validMembers.length === 0) {
+                throw new Error(`No valid members found. Errors: ${errors.join(', ')}`);
+            }
+
+            // Insert members into database
+            let insertedCount = 0;
+            let duplicateCount = 0;
+            
+            for (const memberData of validMembers) {
+                try {
+                    // Check for existing member with same name and department
+                    const existingMember = await TeamMember.findOne({
+                        name: memberData.name,
+                        department: memberData.department
+                    });
+                    
+                    if (existingMember) {
+                        duplicateCount++;
+                        console.log(`⚠️ Duplicate member skipped: ${memberData.name} from ${memberData.department}`);
+                        continue;
+                    }
+                    
+                    const newMember = new TeamMember(memberData);
+                    await newMember.save();
+                    insertedCount++;
+                    
+                } catch (dbError) {
+                    console.error(`❌ Error inserting member ${memberData.name}:`, dbError.message);
+                    errors.push(`Database error for ${memberData.name}: ${dbError.message}`);
+                }
+            }
+
+            // Clean up uploaded file
+            FileParser.cleanupFile(filePath);
+            
+            console.log(`✅ Jack026: Members upload completed - ${insertedCount} inserted, ${duplicateCount} duplicates skipped`);
+            
+            res.json({
+                success: true,
+                message: `Members data uploaded successfully`,
+                data: {
+                    filename: filename,
+                    records: insertedCount,
+                    duplicates: duplicateCount,
+                    processed: true,
+                    totalProcessed: validMembers.length,
+                    errors: errors.length > 0 ? errors : undefined
+                },
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            });
+
+        } catch (parseError) {
+            FileParser.cleanupFile(filePath);
+            throw parseError;
+        }
+        
+    } catch (error) {
+        console.error('❌ Jack026: Members upload failed:', error.message);
+        
+        res.status(500).json({
+            success: false,
+            error: 'Upload failed',
+            message: error.message,
+            timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+        });
+    }
 });
 
-adminRouter.post('/upload/projects', upload.single('file'), (req, res) => {
+adminRouter.post('/upload/projects', upload.single('file'), async (req, res) => {
     console.log('💻 Jack026: Uploading projects file...');
     
-    res.json({
-        success: true,
-        message: 'Projects data uploaded successfully',
-        data: {
-            filename: req.file?.originalname || 'projects.json',
-            records: Math.floor(Math.random() * 20) + 5,
-            processed: true
-        },
-        timestamp: '2025-08-06 20:26:47'
-    });
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                error: 'No file uploaded',
+                message: 'Please select a file to upload',
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            });
+        }
+
+        const filePath = req.file.path;
+        const filename = req.file.originalname;
+        let parsedData = [];
+
+        try {
+            // Parse file based on extension
+            if (filename.toLowerCase().endsWith('.csv')) {
+                parsedData = await FileParser.parseCSV(filePath, ['title', 'Title']);
+            } else if (filename.toLowerCase().endsWith('.json')) {
+                parsedData = await FileParser.parseJSON(filePath);
+            } else {
+                throw new Error('Unsupported file format. Please upload CSV or JSON files.');
+            }
+
+            if (parsedData.length === 0) {
+                throw new Error('No valid data found in the uploaded file');
+            }
+
+            // Validate and clean data
+            const validProjects = [];
+            const errors = [];
+            
+            for (let i = 0; i < parsedData.length; i++) {
+                try {
+                    const cleanedProject = FileParser.validateProjectData(parsedData[i]);
+                    
+                    // Check required fields
+                    if (!cleanedProject.title || !cleanedProject.description || cleanedProject.technologies.length === 0) {
+                        errors.push(`Row ${i + 1}: Missing required fields (title, description, technologies)`);
+                        continue;
+                    }
+                    
+                    validProjects.push(cleanedProject);
+                } catch (error) {
+                    errors.push(`Row ${i + 1}: ${error.message}`);
+                }
+            }
+
+            if (validProjects.length === 0) {
+                throw new Error(`No valid projects found. Errors: ${errors.join(', ')}`);
+            }
+
+            // Insert projects into database
+            let insertedCount = 0;
+            let duplicateCount = 0;
+            
+            for (const projectData of validProjects) {
+                try {
+                    // Check for existing project with same title
+                    const existingProject = await Project.findOne({
+                        title: projectData.title
+                    });
+                    
+                    if (existingProject) {
+                        duplicateCount++;
+                        console.log(`⚠️ Duplicate project skipped: ${projectData.title}`);
+                        continue;
+                    }
+                    
+                    const newProject = new Project(projectData);
+                    await newProject.save();
+                    insertedCount++;
+                    
+                } catch (dbError) {
+                    console.error(`❌ Error inserting project ${projectData.title}:`, dbError.message);
+                    errors.push(`Database error for ${projectData.title}: ${dbError.message}`);
+                }
+            }
+
+            // Clean up uploaded file
+            FileParser.cleanupFile(filePath);
+            
+            console.log(`✅ Jack026: Projects upload completed - ${insertedCount} inserted, ${duplicateCount} duplicates skipped`);
+            
+            res.json({
+                success: true,
+                message: `Projects data uploaded successfully`,
+                data: {
+                    filename: filename,
+                    records: insertedCount,
+                    duplicates: duplicateCount,
+                    processed: true,
+                    totalProcessed: validProjects.length,
+                    errors: errors.length > 0 ? errors : undefined
+                },
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            });
+
+        } catch (parseError) {
+            FileParser.cleanupFile(filePath);
+            throw parseError;
+        }
+        
+    } catch (error) {
+        console.error('❌ Jack026: Projects upload failed:', error.message);
+        
+        res.status(500).json({
+            success: false,
+            error: 'Upload failed',
+            message: error.message,
+            timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+        });
+    }
 });
 
-adminRouter.post('/upload/events', upload.single('file'), (req, res) => {
+adminRouter.post('/upload/events', upload.single('file'), async (req, res) => {
     console.log('📅 Jack026: Uploading events file...');
     
-    res.json({
-        success: true,
-        message: 'Events data uploaded successfully',
-        data: {
-            filename: req.file?.originalname || 'events.csv',
-            records: Math.floor(Math.random() * 15) + 3,
-            processed: true
-        },
-        timestamp: '2025-08-06 20:26:47'
-    });
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                error: 'No file uploaded',
+                message: 'Please select a file to upload',
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            });
+        }
+
+        const filePath = req.file.path;
+        const filename = req.file.originalname;
+        let parsedData = [];
+
+        try {
+            // Parse file based on extension
+            if (filename.toLowerCase().endsWith('.csv')) {
+                parsedData = await FileParser.parseCSV(filePath, ['title', 'Title']);
+            } else if (filename.toLowerCase().endsWith('.json')) {
+                parsedData = await FileParser.parseJSON(filePath);
+            } else {
+                throw new Error('Unsupported file format. Please upload CSV or JSON files.');
+            }
+
+            if (parsedData.length === 0) {
+                throw new Error('No valid data found in the uploaded file');
+            }
+
+            // Validate and clean data
+            const validEvents = [];
+            const errors = [];
+            
+            for (let i = 0; i < parsedData.length; i++) {
+                try {
+                    const cleanedEvent = FileParser.validateEventData(parsedData[i]);
+                    
+                    // Check required fields
+                    if (!cleanedEvent.title || !cleanedEvent.description || !cleanedEvent.venue) {
+                        errors.push(`Row ${i + 1}: Missing required fields (title, description, venue)`);
+                        continue;
+                    }
+                    
+                    validEvents.push(cleanedEvent);
+                } catch (error) {
+                    errors.push(`Row ${i + 1}: ${error.message}`);
+                }
+            }
+
+            if (validEvents.length === 0) {
+                throw new Error(`No valid events found. Errors: ${errors.join(', ')}`);
+            }
+
+            // Insert events into database
+            let insertedCount = 0;
+            let duplicateCount = 0;
+            
+            for (const eventData of validEvents) {
+                try {
+                    // Check for existing event with same title and date
+                    const existingEvent = await Event.findOne({
+                        title: eventData.title,
+                        date: eventData.date
+                    });
+                    
+                    if (existingEvent) {
+                        duplicateCount++;
+                        console.log(`⚠️ Duplicate event skipped: ${eventData.title} on ${eventData.date}`);
+                        continue;
+                    }
+                    
+                    const newEvent = new Event(eventData);
+                    await newEvent.save();
+                    insertedCount++;
+                    
+                } catch (dbError) {
+                    console.error(`❌ Error inserting event ${eventData.title}:`, dbError.message);
+                    errors.push(`Database error for ${eventData.title}: ${dbError.message}`);
+                }
+            }
+
+            // Clean up uploaded file
+            FileParser.cleanupFile(filePath);
+            
+            console.log(`✅ Jack026: Events upload completed - ${insertedCount} inserted, ${duplicateCount} duplicates skipped`);
+            
+            res.json({
+                success: true,
+                message: `Events data uploaded successfully`,
+                data: {
+                    filename: filename,
+                    records: insertedCount,
+                    duplicates: duplicateCount,
+                    processed: true,
+                    totalProcessed: validEvents.length,
+                    errors: errors.length > 0 ? errors : undefined
+                },
+                timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+            });
+
+        } catch (parseError) {
+            FileParser.cleanupFile(filePath);
+            throw parseError;
+        }
+        
+    } catch (error) {
+        console.error('❌ Jack026: Events upload failed:', error.message);
+        
+        res.status(500).json({
+            success: false,
+            error: 'Upload failed',
+            message: error.message,
+            timestamp: new Date().toISOString().replace('T', ' ').substring(0, 19)
+        });
+    }
 });
 // Add this route to server.js
 app.get('/admin/team-upload', (req, res) => {
